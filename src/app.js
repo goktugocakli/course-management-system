@@ -1,12 +1,12 @@
 import React from "react";
-import { LoginContainer } from "./containers";
-import { Login } from "./components";
+import { SignUpContainer } from "./containers";
+// import { LoginContainer } from "./containers";
 
 export default function App() {
   return (
     <>
-      <LoginContainer />
-      <Login.Button>Login Button</Login.Button>
+      <SignUpContainer />
+      {/* <LoginContainer /> */}
     </>
   );
 }
