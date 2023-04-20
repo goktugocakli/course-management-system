@@ -1,12 +1,6 @@
 import React from "react";
-import { LoginContainer } from "./containers";
-import { Login } from "./components";
+import { NavContainer } from "./containers";
 
 export default function App() {
-  return (
-    <>
-      <LoginContainer />
-      <Login.Button>Login Button</Login.Button>
-    </>
-  );
+  return <NavContainer />;
 }
