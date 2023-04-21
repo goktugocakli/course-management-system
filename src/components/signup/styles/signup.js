@@ -45,6 +45,3 @@ export const Text = styled.p`
   margin-left:5px;
   font-size:16px;
 `;
-
-
-

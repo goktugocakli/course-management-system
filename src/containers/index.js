@@ -1,1 +1,4 @@
-export {default as LoginContainer} from './logincontainer/logincontainer';
+export {default as LoginContainer} from './logincontainer';
+export {default as SignUpContainer} from './signupcontainer';
+export {default as ProfileContainer} from './profilecontainer';
+export {default as EditContainer} from './editcontainer';
