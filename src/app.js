@@ -7,6 +7,10 @@ import {ThemeState} from './features/theme';
 
 
 import { NavContainer } from "./containers";
+// import { SignUpContainer } from "./containers";
+// import { LoginContainer } from "./containers";
+import { ProfileContainer } from "./containers";
+// import { EditContainer } from "./containers";
 
 export default function App() {
 
@@ -19,6 +23,10 @@ export default function App() {
       <GlobalStyle white={whiteTheme}/>
       <NavContainer />
       
+      {/* <SignUpContainer /> */}
+      {/* <LoginContainer /> */}
+      <ProfileContainer />
+      {/* <EditContainer /> */}
     </>
   );
 }
