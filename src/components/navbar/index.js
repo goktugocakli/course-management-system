@@ -1,3 +1,7 @@
+import React from "react";
+import { useSelector } from "react-redux";
+import { ThemeState } from "../../features/theme";
+
 import {
   Container,
   Logo,
@@ -12,8 +16,17 @@ import {
   Dark,
 } from "./styles/navbar";
 
+let Theme;
+
 export default function NavBar({ children, ...restProps }) {
-  return <Container {...restProps}>{children}</Container>;
+
+  //useSelector used to get the current theme option from the redux
+  Theme = useSelector(ThemeState).theme;
+  return (
+    <Container white={Theme} {...restProps}>
+      {children}
+    </Container>
+  );
 }
 
 NavBar.Logo = function NavBarLogo({ children, ...restProps }) {
@@ -26,7 +39,7 @@ NavBar.NavLinkContainer = function NavBarLinkContainer({
   ...restProps
 }) {
   return (
-    <LinkContainer expanded={expanded} {...restProps}>
+    <LinkContainer white={Theme} expanded={expanded} {...restProps}>
       {children}
     </LinkContainer>
   );
@@ -40,34 +53,28 @@ NavBar.Link = function NavBarLink({ href, children, ...restProps }) {
   );
 };
 
-NavBar.Hamburger = function NavBarHamburger({ expanded, ...restProps }) {
-  return (
-    <Hamburger expanded={expanded} {...restProps}>
-      <svg>
-        <path
-          d="m 10 25 l 30 0 a 1 1 0 0 1 0 10 l -30 0 a 1 1 0 0 1 0 -20 l 15 0 l 0 40"
-          strokeWidth={6}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        ></path>
-      </svg>
-    </Hamburger>
-  );
-};
+NavBar.Hamburger = React.forwardRef((props, ref) => (
+  <Hamburger white={Theme} expanded={props.expanded} onClick={props.onClick}>
+    <svg ref={ref}>
+      <path
+        d="m 10 25 l 30 0 a 1 1 0 0 1 0 10 l -30 0 a 1 1 0 0 1 0 -20 l 15 0 l 0 40"
+        strokeWidth={6}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></path>
+    </svg>
+  </Hamburger>
+));
 
-NavBar.ChangeTheme = function NavBarChangeTheme({
-  whiteTheme,
-  children,
-  ...restProps
-}) {
+NavBar.ChangeTheme = function NavBarChangeTheme({ children, ...restProps }) {
   return (
-    <ChangeThemeContainer white={whiteTheme} {...restProps}>
-      <ThemeSelector white={whiteTheme} bg={whiteTheme ? "black": "white"} />
+    <ChangeThemeContainer white={Theme} {...restProps}>
+      <ThemeSelector white={Theme} />
       <DarkTheme>
-        <Dark white={whiteTheme} />
+        <Dark white={Theme} />
       </DarkTheme>
       <WhiteTheme>
-        <White white={whiteTheme} />
+        <White white={Theme} />
       </WhiteTheme>
     </ChangeThemeContainer>
   );
