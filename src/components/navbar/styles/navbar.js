@@ -82,7 +82,12 @@ export const LinkContainer = styled.div.attrs((props) => ({
   animation-duration: 500ms;
 `;
 
-export const Link = styled.div``;
+export const Link = styled.div`
+  & a {
+    text-decoration: none;
+    color: inherit;
+  }
+`;
 
 export const Hamburger = styled.div.attrs((props) => ({
   "aria-expanded": props.expanded,
