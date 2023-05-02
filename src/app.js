@@ -6,11 +6,12 @@ import { useSelector } from "react-redux";
 import {ThemeState} from './features/theme';
 
 
-import { NavContainer } from "./containers";
+import { NavContainer} from "./containers";
 // import { SignUpContainer } from "./containers";
-import { LoginContainer } from "./containers";
+// import { LoginContainer } from "./containers";
 // import { ProfileContainer } from "./containers";
 // import { EditContainer } from "./containers";
+import { SeeEvaResContainer } from "./containers";
 
 export default function App() {
 
@@ -24,9 +25,10 @@ export default function App() {
       <NavContainer />
       
       {/* <SignUpContainer /> */}
-      <LoginContainer />
+      {/*<LoginContainer /> */}
       {/* <ProfileContainer /> */}
       {/* <EditContainer /> */}
+      <SeeEvaResContainer></SeeEvaResContainer>
     </>
   );
 }
