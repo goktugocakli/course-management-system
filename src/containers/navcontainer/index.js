@@ -11,6 +11,7 @@ export default function NavBarContainer() {
   const whiteTheme = useSelector(ThemeState).theme;
   const [expanded, setExpanded] = useState(false);
 
+
   //This useEffect used to implement a feature which is when navigation is open
   // and we click any plce but close button. The navigation will close
 
@@ -42,11 +43,10 @@ export default function NavBarContainer() {
       ></NavBar.Hamburger>
 
       <NavBar.NavLinkContainer id="navlinks" expanded={expanded}>
-        <NavBar.Link href={"/"}>Home</NavBar.Link>
+        <NavBar.Link>Home</NavBar.Link>
         <NavBar.Link>About</NavBar.Link>
         <NavBar.Link>Account</NavBar.Link>
         <NavBar.Link>Edit Account</NavBar.Link>
-        <NavBar.Link href={"/createEva"}>Create Evaluation Form</NavBar.Link>
         <NavBar.ChangeTheme
           onClick={() => {
             //dispacth is for set the theme for redux state to change the theme of the app
