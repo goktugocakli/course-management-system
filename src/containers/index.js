@@ -3,3 +3,4 @@ export {default as SignUpContainer} from './signupcontainer';
 export {default as ProfileContainer} from './profilecontainer';
 export {default as EditContainer} from './editcontainer';
 export {default as NavContainer} from './navcontainer';
+export {default as SeeEvaResContainer} from "./seeEvaResContainer";
