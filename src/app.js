@@ -16,14 +16,14 @@ export default function App() {
   return (
     <>
       <GlobalStyle white={whiteTheme}/>
+      <RouterProvider router={MainRouter} />
       <NavContainer />
       
       {/* <SignUpContainer /> */}
       <LoginContainer />
       {/* <ProfileContainer /> */}
       {/* <EditContainer /> */}
-      <GlobalStyle white={whiteTheme} />
-      <RouterProvider router={MainRouter} />
+      
     </>
   );
 }
