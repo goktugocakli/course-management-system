@@ -8,8 +8,8 @@ import {ThemeState} from './features/theme';
 
 import { NavContainer } from "./containers";
 // import { SignUpContainer } from "./containers";
-// import { LoginContainer } from "./containers";
-import { ProfileContainer } from "./containers";
+import { LoginContainer } from "./containers";
+// import { ProfileContainer } from "./containers";
 // import { EditContainer } from "./containers";
 
 export default function App() {
@@ -24,8 +24,8 @@ export default function App() {
       <NavContainer />
       
       {/* <SignUpContainer /> */}
-      {/* <LoginContainer /> */}
-      <ProfileContainer />
+      <LoginContainer />
+      {/* <ProfileContainer /> */}
       {/* <EditContainer /> */}
     </>
   );

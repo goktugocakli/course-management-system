@@ -5,6 +5,7 @@ export const Row = styled.div`
   display:flex;
   flex-direction: row;
   align-items: center;
+  position:relative;
 
 
   @media(max-width: 600px) {
@@ -17,6 +18,7 @@ export const Row = styled.div`
 export const Column = styled.div`
   display:flex;
   flex-direction: column;
+  position:relative;
 
 
   @media(max-width: 600px) {

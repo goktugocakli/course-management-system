@@ -23,12 +23,15 @@ export const InputLabel = styled.label`
   font-size:24px;
 `;
 
-export const Input = styled.input`
+export const Input = styled.input.attrs((props) => ({type:props.type}))`
   width: 250px;
   height:40px;
+  font-size: 16px;
+  font-family: Verdana;
   margin-left: auto; 
   margin-right: 0;
   margin-top:20px;
+  padding-left:10px;
   border-radius: 10px;
 `;
 
@@ -44,6 +47,12 @@ export const Text = styled.p`
   margin-top:10px;
   margin-left:5px;
   font-size:16px;
+`;
+
+export const Icon = styled.i`
+    position: absolute;
+    top:50%;
+    right:8px;
 `;
 
 
