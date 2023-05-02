@@ -17,28 +17,41 @@ export const Button = styled.button`
 
 `;
 
+export const PhotoButton = styled.button`
+
+  margin-top:30px;
+  margin-left:110px;
+  border-radius:10px;
+  width: 120px;
+  height:45px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size:14px;
+  
+  &:hover {
+      outline: 2px solid green;
+  }
+
+`;
+
 export const InputLabel = styled.label`
   margin-top:10px;
   margin-right:15px;
   font-size:24px;
 `;
 
-export const Input = styled.input.attrs((props) => ({type:props.type}))`
+export const Input = styled.input`
   width: 250px;
   height:40px;
-  font-size: 16px;
-  font-family: Verdana;
   margin-left: auto; 
   margin-right: 0;
   margin-top:20px;
-  padding-left:10px;
   border-radius: 10px;
 `;
 
 
 export const Form = styled.form`
   display:flex;
-  background-color: #f4f4f4;
   padding: 100px;
   border-radius: 5px;
 `;
@@ -49,11 +62,18 @@ export const Text = styled.p`
   font-size:16px;
 `;
 
-export const Icon = styled.i`
-    position: absolute;
-    top:50%;
-    right:8px;
+export const Photo = styled.img.attrs((props) => ({
+  src:props.src
+}))`
+  width:150px;
+  height:150px;
+  margin-left:100px;
+  margin-right:100px;
+  margin-top:20px;
+  margin-bottom:auto;
 `;
+
+
 
 
 
