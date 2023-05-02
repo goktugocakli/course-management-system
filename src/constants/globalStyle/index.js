@@ -20,11 +20,6 @@ export const Themes = {
 //TODO: implement a json object that is {"true": {whiteTheme Options}, "false":{DarkTheme Options}}
 
 const GlobalStyle = createGlobalStyle`
-
-  * {
-    margin: 0;
-    padding: 0;
-  }
   body {
     margin: 0;
     padding: 0;
