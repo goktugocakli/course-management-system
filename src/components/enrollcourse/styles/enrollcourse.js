@@ -12,6 +12,8 @@ export const Container = styled.div`
     justify-content: space-between;
     padding: 2rem;
 
+    height: 100vh;
+
 `;
 
 export const SearchContainer = styled.div`
