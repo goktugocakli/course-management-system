@@ -7,3 +7,4 @@ export {default as Edit} from './edit';
 export {default as SeeEvaRes} from './seeEvaRes'
 export {default as CreateEvaluationForm} from './createevaluationform';
 export {default as Home} from './home';
+export {default as EnrollCourse} from './enrollcourse';
