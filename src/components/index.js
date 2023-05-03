@@ -6,3 +6,4 @@ export {default as Profile} from './profile';
 export {default as Edit} from './edit';
 export {default as SeeEvaRes} from './seeEvaRes'
 export {default as CreateEvaluationForm} from './createevaluationform';
+export {default as Home} from './home';
