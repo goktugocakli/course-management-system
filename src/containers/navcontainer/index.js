@@ -43,10 +43,10 @@ export default function NavBarContainer() {
       ></NavBar.Hamburger>
 
       <NavBar.NavLinkContainer id="navlinks" expanded={expanded}>
-        <NavBar.Link>Home</NavBar.Link>
+        <NavBar.Link href={"/"}>Home</NavBar.Link>
         <NavBar.Link>About</NavBar.Link>
         <NavBar.Link>Account</NavBar.Link>
-        <NavBar.Link>Edit Account</NavBar.Link>
+        <NavBar.Link href={'createEva'}>Edit Account</NavBar.Link>
         <NavBar.ChangeTheme
           onClick={() => {
             //dispacth is for set the theme for redux state to change the theme of the app
