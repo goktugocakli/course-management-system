@@ -1,5 +1,57 @@
 import { EnrollCourse } from "../../components";
 
+const courses = [
+  {
+    id: 0,
+    code: "BBM382",
+    name: "Bilmem ne Bilmem ne",
+    instructors: [
+      {
+        id: 0,
+        name: "bla bla bla",
+      },
+    ],
+  },
+
+  {
+    id: 1,
+    code: "BBM406",
+    name: "Makine Öğrenmesi bla bla",
+    instructors: [
+      {
+        id: 0,
+        name: "Hacerr Yalım Keleş",
+      },
+    ],
+  },
+];
+
+const renderCourses = () => {
+  return (
+    <>
+      {courses.map((course) => {
+        return (
+          <EnrollCourse.ListItem key={course.id}>
+            <EnrollCourse.ItemInfo>
+              <EnrollCourse.Name>{course.name}</EnrollCourse.Name>
+
+              {course.instructors.map((ins) => {
+                return (
+                  <EnrollCourse.Instructors key={ins.id}>
+                    {ins.name}
+                  </EnrollCourse.Instructors>
+                );
+              })}
+            </EnrollCourse.ItemInfo>
+
+            <EnrollCourse.EnrollButton>Enroll</EnrollCourse.EnrollButton>
+          </EnrollCourse.ListItem>
+        );
+      })}
+    </>
+  );
+};
+
 export default function EnrollContainer() {
   return (
     <EnrollCourse>
@@ -7,17 +59,7 @@ export default function EnrollContainer() {
         <EnrollCourse.SearchInput />
         <EnrollCourse.SearchButton>Search</EnrollCourse.SearchButton>
       </EnrollCourse.SearchContainer>
-      <EnrollCourse.ListContainer>
-        <EnrollCourse.ListItem>
-          <EnrollCourse.ItemInfo>
-            <EnrollCourse.Name>Name</EnrollCourse.Name>
-
-            <EnrollCourse.Instructors>Ins</EnrollCourse.Instructors>
-          </EnrollCourse.ItemInfo>
-
-          <EnrollCourse.EnrollButton>Enroll</EnrollCourse.EnrollButton>
-        </EnrollCourse.ListItem>
-      </EnrollCourse.ListContainer>
+      <EnrollCourse.ListContainer>{renderCourses()}</EnrollCourse.ListContainer>
     </EnrollCourse>
   );
 }

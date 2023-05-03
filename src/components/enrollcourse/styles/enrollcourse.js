@@ -8,10 +8,11 @@ export const Container = styled.div`
 
     display: flex;
     flex-direction: column;
+    gap:3rem;
+    padding-top: 3rem;
     align-items: center;
-    padding: 2rem;
-
-    height: 100vh;
+    width: 100vw;
+    height: 70vh;
 
 `;
 
@@ -19,12 +20,20 @@ export const SearchContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  width: 40%;
+
+  justify-content: space-around;
+  position: relative;
 `;
 
-export const SearchInput = styled.input``;
+export const SearchInput = styled.input`
+  width: 100%;
+  height: 120%;
+`;
 
 export const SearchButton = styled.div`
+  position: absolute;
+  right: 1rem;
   cursor: pointer;
 
   &:hover {
@@ -36,24 +45,41 @@ export const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: 40%;
+
 `;
 
 export const ListItem = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+
+  border-radius: 1rem;
+  background: #ddd;
 `;
 
 export const ItemInfo = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
-export const Name = styled.p``;
+export const Name = styled.p`
+  font-size: 1.25rem;
+`;
 
-export const Instructors = styled.p``;
+export const Instructors = styled.p`
+  font-size: 0.75rem;
+`;
 
 export const EnrollButton = styled.div`
   cursor: pointer;
+  padding: 1rem;
+  border-radius: 1rem;
+
+  background-color: #AD7BE9;
+  color: white;
 
   &:hover {
     background: green;
