@@ -1,7 +1,26 @@
-import { Container } from "./styles/enrollcourse";
+import { useSelector } from "react-redux";
+import { ThemeState } from "../../features/theme";
 
+import {
+  Container,
+  SearchContainer,
+  SearchInput,
+  SearchButton,
+  ListContainer,
+  ListItem,
+  ItemInfo,
+  Name,
+  Instructors,
+  EnrollButton,
+} from "./styles/enrollcourse";
 export default function EnrollCourse({ children, ...restProps }) {
-  return <Container {...restProps}>{children}</Container>;
+  const Theme = useSelector(ThemeState).theme;
+
+  return (
+    <Container white={Theme} {...restProps}>
+      {children}
+    </Container>
+  );
 }
 
 EnrollCourse.SearchContainer = function EnrollCourseSearchContainer({
