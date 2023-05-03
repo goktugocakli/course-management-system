@@ -3,10 +3,12 @@ import React from "react";
 import GlobalStyle from "./constants/globalStyle";
 
 import { useSelector } from "react-redux";
-import {ThemeState} from './features/theme';
+import { ThemeState } from "./features/theme";
 
+import { MainRouter } from "./constants/routers";
+import { RouterProvider } from "react-router-dom";
 
-import { NavContainer} from "./containers";
+import { NavContainer } from "./containers";
 // import { SignUpContainer } from "./containers";
 // import { LoginContainer } from "./containers";
 // import { ProfileContainer } from "./containers";
@@ -14,16 +16,14 @@ import { NavContainer} from "./containers";
 import { SeeEvaResContainer } from "./containers";
 
 export default function App() {
-
   const whiteTheme = useSelector(ThemeState).theme;
-  
-
 
   return (
     <>
-      <GlobalStyle white={whiteTheme}/>
+      <GlobalStyle white={whiteTheme} />
+      <RouterProvider router={MainRouter} />
       <NavContainer />
-      
+
       {/* <SignUpContainer /> */}
       {/*<LoginContainer /> */}
       {/* <ProfileContainer /> */}
