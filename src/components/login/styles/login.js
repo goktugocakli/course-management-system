@@ -36,7 +36,7 @@ export const Input = styled.input.attrs((props) => ({type:props.type}))`
 `;
 
 
-export const Form = styled.form`
+export const Div = styled.div`
   display:flex;
   background-color: #f4f4f4;
   padding: 100px;

@@ -30,10 +30,13 @@ export const Input = styled.input`
   margin-right: 0;
   margin-top:20px;
   border-radius: 10px;
+  font-size: 16px;
+  font-family: Verdana;
+  padding-left:10px;
 `;
 
 
-export const Form = styled.form`
+export const Div = styled.div`
   display:flex;
   background-color: #f4f4f4;
   padding: 100px;
