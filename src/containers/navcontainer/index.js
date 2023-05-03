@@ -2,15 +2,46 @@ import { useState, useRef, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { changeTheme, ThemeState } from "../../features/theme";
+import { user } from "../../features/user";
 
 import { NavBar } from "../../components";
+import { render } from "@testing-library/react";
+
+const renderLinks = (user) => {
+  if (user.userType === "admin") {
+    return (
+      <>
+        <NavBar.Link href={"/"}>Home</NavBar.Link>
+        <NavBar.Link>Edit Account</NavBar.Link>
+      </>
+    );
+  }
+  if (user.userType === "instructor") {
+    return (
+      <>
+        <NavBar.Link href={"/"}>Home</NavBar.Link>
+        <NavBar.Link href={"createEva"}>Create Evaluation Form</NavBar.Link>
+      </>
+    );
+  }
+
+  if (user.userType === "student") {
+    return (
+      <>
+        <NavBar.Link href={"/"}>Home</NavBar.Link>
+      </>
+    );
+  } else {
+    return null;
+  }
+};
 
 export default function NavBarContainer() {
   const hamburger = useRef(null);
   const dispatch = useDispatch();
   const whiteTheme = useSelector(ThemeState).theme;
+  const userState = useSelector(user).user;
   const [expanded, setExpanded] = useState(false);
-
 
   //This useEffect used to implement a feature which is when navigation is open
   // and we click any plce but close button. The navigation will close
@@ -43,10 +74,9 @@ export default function NavBarContainer() {
       ></NavBar.Hamburger>
 
       <NavBar.NavLinkContainer id="navlinks" expanded={expanded}>
-        <NavBar.Link href={"/"}>Home</NavBar.Link>
-        <NavBar.Link>About</NavBar.Link>
-        <NavBar.Link>Account</NavBar.Link>
-        <NavBar.Link href={'createEva'}>Edit Account</NavBar.Link>
+        {userState === null
+          ? renderLinks({ userType: "instructor" })
+          : renderLinks(userState)}
         <NavBar.ChangeTheme
           onClick={() => {
             //dispacth is for set the theme for redux state to change the theme of the app

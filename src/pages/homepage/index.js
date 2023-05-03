@@ -2,7 +2,7 @@ import { NavContainer, HomeContainer } from "../../containers";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { user, login } from "../../features/user";
+import { user } from "../../features/user";
 import { useEffect } from "react";
 
 export default function HomePage() {
@@ -29,14 +29,6 @@ export default function HomePage() {
             : userState.user
         }
       />
-      <button
-        onClick={() => {
-          dispatch(login({ userType: "admin", fullName: "girdik dhee" }));
-          console.log(userState);
-        }}
-      >
-        Login
-      </button>
 
     </>
   );
