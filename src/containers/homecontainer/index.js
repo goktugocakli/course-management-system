@@ -53,7 +53,7 @@ export default function HomeContainer({ user }) {
         <Home.Role>{user.userType}</Home.Role>
         <Home.Picture alt={"User Pic"} src={"#"} />
       </Home.InformationContainer>
-      {renderEvents(user)}
+      {/*renderEvents(user)*/}
     </Home>
   );
 }
