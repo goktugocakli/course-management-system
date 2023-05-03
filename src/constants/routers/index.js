@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { CreateEvaluationPage, HomePage, SignInOut } from "../../pages";
+import EnrollPage from "../../pages/enrollpage";
 
 export const MainRouter = createBrowserRouter([
   {
@@ -20,6 +21,11 @@ export const MainRouter = createBrowserRouter([
   {
     path: "/createEva",
     element: <CreateEvaluationPage />,
+    errorElement: <h1>404</h1>,
+  },
+  {
+    path: "/enrollCourse",
+    element: <EnrollPage />,
     errorElement: <h1>404</h1>,
   },
 ]);

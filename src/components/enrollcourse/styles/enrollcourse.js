@@ -12,7 +12,8 @@ export const Container = styled.div`
     padding-top: 3rem;
     align-items: center;
     width: 100vw;
-    height: 70vh;
+    height: 80vh;
+    background: #146C94;
 
 `;
 
@@ -53,10 +54,10 @@ export const ListItem = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
-
+  justify-content: space-between;
+  padding: 1rem;
   border-radius: 1rem;
-  background: #ddd;
+  background: #F6F1F1;
 `;
 
 export const ItemInfo = styled.div`
