@@ -21,6 +21,7 @@ const renderLinks = (user) => {
       <>
         <NavBar.Link href={"/"}>Home</NavBar.Link>
         <NavBar.Link href={"createEva"}>Create Evaluation Form</NavBar.Link>
+        <NavBar.Link href={"/seeEvares"}>See Evaluation Result</NavBar.Link>
       </>
     );
   }
@@ -29,6 +30,7 @@ const renderLinks = (user) => {
     return (
       <>
         <NavBar.Link href={"/"}>Home</NavBar.Link>
+        <NavBar.Link href={"enrollCourse"}>Enroll Course</NavBar.Link>
       </>
     );
   } else {
