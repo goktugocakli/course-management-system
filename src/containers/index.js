@@ -5,3 +5,4 @@ export {default as EditContainer} from './editcontainer';
 export {default as NavContainer} from './navcontainer';
 export {default as SeeEvaResContainer} from "./seeEvaResContainer";
 export {default as CreateEvaluationFormContainer} from './createevaluationformcontainer';
+export {default as HomeContainer} from './homecontainer';
