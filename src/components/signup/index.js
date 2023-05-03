@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, InputLabel, Input, Form, Text} from "./styles/signup";
+import {Button, InputLabel, Input, Div, Text} from "./styles/signup";
 
 
 export default function SignUp({children, ...restPorps}) {
@@ -18,8 +18,8 @@ SignUp.Input = function signUpInput({children,...restPorps}){
     return <Input>{children}</Input>
 }
 
-SignUp.Form = function signUpForm({children,...restPorps}){
-    return <Form>{children}</Form>
+SignUp.Div = function signUpDiv({children,...restPorps}){
+    return <Div>{children}</Div>
 }
 
 SignUp.Text = function signUpText({children,...restPorps}){

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, InputLabel, Input, Form, Text, Icon } from "./styles/login";
+import { Button, InputLabel, Input, Div, Text, Icon } from "./styles/login";
 
 export default function Login({ children, ...restPorps }) {
   return;
@@ -17,16 +17,16 @@ Login.Input = function loginInput({ ...restPorps }) {
   return <Input {...restPorps} />;
 };
 
-//TODO: change this to div
-Login.Form = function loginForm({ children, ...restPorps }) {
+
+Login.Div = function loginDiv({ children, ...restPorps }) {
   return (
-    <Form
+    <Div
       onSubmit={() => {
         return false;
       }}
     >
       {children}
-    </Form>
+    </Div>
   );
 };
 

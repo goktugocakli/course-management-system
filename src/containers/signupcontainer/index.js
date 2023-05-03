@@ -12,7 +12,7 @@ export default function SignUpContainer() {
         <Global.HeaderNormal>Information System</Global.HeaderNormal>
       </Global.Header>
       
-      <SignUp.Form>
+      <SignUp.Div>
         <Global.Column>
             <Global.Row>
             <SignUp.InputLabel>Name</SignUp.InputLabel>
@@ -33,7 +33,7 @@ export default function SignUpContainer() {
             
         </Global.Column>
         
-      </SignUp.Form>
+      </SignUp.Div>
 
     </Global.Column>
   );

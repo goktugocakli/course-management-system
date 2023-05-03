@@ -47,7 +47,7 @@ export default function LoginContainer() {
         <Global.HeaderNormal>Information System</Global.HeaderNormal>
       </Global.Header>
 
-      <Login.Form>
+      <Login.Div>
         <Global.Column>
           <Global.Row>
             <Login.InputLabel>Username</Login.InputLabel>
@@ -98,7 +98,7 @@ export default function LoginContainer() {
             <Login.Text>Sign up</Login.Text>
           </Global.Row>
         </Global.Column>
-      </Login.Form>
+      </Login.Div>
     </Global.Column>
   );
 }
