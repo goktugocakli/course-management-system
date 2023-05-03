@@ -7,7 +7,6 @@ import { ThemeState } from "./features/theme";
 
 import { MainRouter } from "./constants/routers";
 import { RouterProvider } from "react-router-dom";
-import { EnrollContainer } from "./containers";
 
 export default function App() {
   const whiteTheme = useSelector(ThemeState).theme;
@@ -16,8 +15,6 @@ export default function App() {
     <>
       <GlobalStyle white={whiteTheme} />
       <RouterProvider router={MainRouter} />
-
-      <EnrollContainer />
     </>
   );
 }
