@@ -84,6 +84,7 @@ const UserSlice = createSlice({
         };
 
         state.user = userr;
+        navigate("/");
         //TODO: fetch user
       })
       .addCase(fetchUser.rejected, (state, action) => {
