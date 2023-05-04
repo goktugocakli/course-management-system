@@ -6,6 +6,7 @@ import { user } from "../../features/user";
 
 import { NavBar } from "../../components";
 import { render } from "@testing-library/react";
+import { logout } from "../../features/user";
 
 const renderLinks = (user) => {
   if (user.userType === "admin") {
@@ -77,8 +78,10 @@ export default function NavBarContainer() {
 
       <NavBar.NavLinkContainer id="navlinks" expanded={expanded}>
         {userState === null
-          ? renderLinks({ userType: "instructor" })
+          ? renderLinks({ userType: "student" })
           : renderLinks(userState)}
+          <NavBar.Link onClick={()=>{dispatch(logout())
+          console.log(userState)}}>Logout</NavBar.Link>
         <NavBar.ChangeTheme
           onClick={() => {
             //dispacth is for set the theme for redux state to change the theme of the app
