@@ -7,12 +7,12 @@ const initialState = {
   error: null,
 };
 
-const BASE_URL = "";
+const BASE_URL = "http://localhost:8080";
 
 export const fetchUser = createAsyncThunk("/users", async (data) => {
   try {
-    const response = await axios.post(BASE_URL + "/users", data);
-    return [...response.data];
+    const response = await axios.post(BASE_URL + "/login", data);
+    return response.data;
   } catch (err) {
     return err.message;
   }
@@ -28,9 +28,14 @@ const UserSlice = createSlice({
         return (state = action.payload);
       },
       prepare: (user) => {
+        const userr = {
+          userType: "instructor",
+          data: {},
+        };
+
         return {
           payload: {
-            user: user,
+            user: userr,
             status: "done",
             error: null,
           },
@@ -53,6 +58,17 @@ const UserSlice = createSlice({
         };
       },
     },
+
+    //Temporary
+    enroll: {
+      reducer: (state, action) => {
+        return (state = action.payload);
+      },
+
+      prepare: () => {
+        return {};
+      },
+    },
   },
 
   extraReducers(builder) {
@@ -62,8 +78,12 @@ const UserSlice = createSlice({
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.status = "done";
+        var userr = {
+          userType: action.payload.type,
+          data: action.payload.data,
+        };
 
-        state.user = action.payload;
+        state.user = userr;
         //TODO: fetch user
       })
       .addCase(fetchUser.rejected, (state, action) => {

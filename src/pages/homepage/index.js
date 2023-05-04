@@ -10,14 +10,11 @@ export default function HomePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
-  useEffect(() => {
+  /*useEffect(() => {
     if (userState.user === null) {
-      navigate("/login", {
-        replace: true,
-      });
+      navigate("/login");
     }
-  }, [userState.user]);
+  });*/
 
   return (
     <>
@@ -25,11 +22,15 @@ export default function HomePage() {
       <HomeContainer
         user={
           userState.user === null
-            ? { userType: "admin", fullName: "admin dedik ya la" }
+            ? {
+                userType: "admin",
+                data: {
+                  user_name: "admin iste",
+                },
+              }
             : userState.user
         }
       />
-
     </>
   );
 }

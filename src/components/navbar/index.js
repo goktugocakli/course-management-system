@@ -19,7 +19,6 @@ import {
 let Theme;
 
 export default function NavBar({ children, ...restProps }) {
-
   //useSelector used to get the current theme option from the redux
   Theme = useSelector(ThemeState).theme;
   return (
@@ -46,11 +45,7 @@ NavBar.NavLinkContainer = function NavBarLinkContainer({
 };
 
 NavBar.Link = function NavBarLink({ href, children, ...restProps }) {
-  return (
-    <Link {...restProps}>
-      <a href={href}>{children}</a>
-    </Link>
-  );
+  return <Link {...restProps}>{children}</Link>;
 };
 
 NavBar.Hamburger = React.forwardRef((props, ref) => (
