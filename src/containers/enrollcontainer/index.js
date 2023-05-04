@@ -44,7 +44,9 @@ const renderCourses = () => {
               })}
             </EnrollCourse.ItemInfo>
 
-            <EnrollCourse.EnrollButton>Enroll</EnrollCourse.EnrollButton>
+            <EnrollCourse.EnrollButton onClick={() => {}}>
+              Enroll
+            </EnrollCourse.EnrollButton>
           </EnrollCourse.ListItem>
         );
       })}

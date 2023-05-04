@@ -5,11 +5,15 @@ import { Global } from "../../components";
 
 import { useDispatch } from "react-redux";
 import { fetchUser } from "../../features/user";
+import { useNavigate } from "react-router-dom";
+//import { fetchUser } from "../../features/user";
 
 export default function LoginContainer() {
   // This variable determines whether password is visible or not
   const [isVisible, setIsVisible] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
+
+  const navigate = useNavigate();
 
   const [userData, setUserData] = useState({
     username: "",
@@ -86,6 +90,7 @@ export default function LoginContainer() {
             onClick={() => {
               if (!isEmpty) {
                 dispacth(fetchUser(userData));
+                navigate("/");
               }
             }}
           >

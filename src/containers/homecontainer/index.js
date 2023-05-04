@@ -49,7 +49,7 @@ export default function HomeContainer({ user }) {
   return (
     <Home>
       <Home.InformationContainer>
-        <Home.Name>{user.fullName}</Home.Name>
+        <Home.Name>{user.data.user_name}</Home.Name>
         <Home.Role>{user.userType}</Home.Role>
         <Home.Picture alt={"User Pic"} src={"#"} />
       </Home.InformationContainer>

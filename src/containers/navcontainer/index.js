@@ -5,7 +5,9 @@ import { changeTheme, ThemeState } from "../../features/theme";
 import { user } from "../../features/user";
 
 import { NavBar } from "../../components";
-import { render } from "@testing-library/react";
+import { logout } from "../../features/user";
+
+import { Link, useNavigate } from "react-router-dom";
 
 const renderLinks = (user) => {
   if (user.userType === "admin") {
@@ -19,9 +21,15 @@ const renderLinks = (user) => {
   if (user.userType === "instructor") {
     return (
       <>
-        <NavBar.Link href={"/"}>Home</NavBar.Link>
-        <NavBar.Link href={"createEva"}>Create Evaluation Form</NavBar.Link>
-        <NavBar.Link href={"/seeEvares"}>See Evaluation Result</NavBar.Link>
+        <NavBar.Link>
+          <Link to={"/"}>Home</Link>
+        </NavBar.Link>
+        <NavBar.Link>
+          <Link to={"createEva"}>Create Evaluation Form</Link>
+        </NavBar.Link>
+        <NavBar.Link>
+          <Link to={"/seeEvares"}>See Evaluation Result</Link>
+        </NavBar.Link>
       </>
     );
   }
@@ -41,6 +49,7 @@ const renderLinks = (user) => {
 export default function NavBarContainer() {
   const hamburger = useRef(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const whiteTheme = useSelector(ThemeState).theme;
   const userState = useSelector(user).user;
   const [expanded, setExpanded] = useState(false);
@@ -77,8 +86,16 @@ export default function NavBarContainer() {
 
       <NavBar.NavLinkContainer id="navlinks" expanded={expanded}>
         {userState === null
-          ? renderLinks({ userType: "instructor" })
+          ? renderLinks({ userType: "student" })
           : renderLinks(userState)}
+        <NavBar.Link
+          onClick={() => {
+            dispatch(logout());
+            navigate("/login");
+          }}
+        >
+          Logout
+        </NavBar.Link>
         <NavBar.ChangeTheme
           onClick={() => {
             //dispacth is for set the theme for redux state to change the theme of the app
