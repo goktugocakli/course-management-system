@@ -90,7 +90,7 @@ export default function LoginContainer() {
             onClick={() => {
               if (!isEmpty) {
                 dispacth(fetchUser(userData));
-                navigate("/");
+                
               }
             }}
           >
