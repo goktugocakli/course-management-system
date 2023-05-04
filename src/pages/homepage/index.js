@@ -11,13 +11,13 @@ export default function HomePage() {
   const navigate = useNavigate();
 
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (userState.user === null) {
       navigate("/login", {
         replace: true,
       });
     }
-  }, [userState.user]);*/
+  }, [userState.user]);
 
   return (
     <>
