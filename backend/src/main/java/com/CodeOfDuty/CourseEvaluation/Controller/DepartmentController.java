@@ -31,11 +31,6 @@ public class DepartmentController {
         departmentService.update(department);
     }
 
-    @PostMapping("/departments/update2")
-    public void update2(@RequestBody String dept_name, String manager){
-        System.out.println(dept_name);
-        departmentService.update2(dept_name, manager);
-    }
 
     @DeleteMapping("/departments/delete")
     public void delete(@RequestBody Department department){
