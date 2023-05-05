@@ -1,12 +1,20 @@
 import React from "react";
-import { LoginContainer } from "./containers";
-import { Login } from "./components";
+
+import GlobalStyle from "./constants/globalStyle";
+
+import { useSelector } from "react-redux";
+import { ThemeState } from "./features/theme";
+
+import { MainRouter } from "./constants/routers";
+import { RouterProvider } from "react-router-dom";
 
 export default function App() {
+  const whiteTheme = useSelector(ThemeState).theme;
+
   return (
     <>
-      <LoginContainer />
-      <Login.Button>Login Button</Login.Button>
+      <GlobalStyle white={whiteTheme} />
+      <RouterProvider router={MainRouter} />
     </>
   );
 }

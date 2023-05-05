@@ -17,12 +17,19 @@ export const Label = styled.div`
 `;
 
 export const Button = styled.button`
-
-
 outline: 2px solid blue;
 &:hover {
     outline: 2px solid green;
 }
 
 `;
+
+
+export const Div = styled.div`
+  display:flex;
+  background-color: #f4f4f4;
+  padding: 100px;
+  border-radius: 5px;
+`;
+
 
