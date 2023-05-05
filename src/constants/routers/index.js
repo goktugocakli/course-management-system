@@ -1,6 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
-import { CreateEvaluationPage, HomePage, SignInOut } from "../../pages";
-import EnrollPage from "../../pages/enrollpage";
+import {
+  CreateEvaluationPage,
+  HomePage,
+  SignInOut,
+  EnrollPage,
+  SeeEvaResPage,
+} from "../../pages";
 
 export const MainRouter = createBrowserRouter([
   {
@@ -26,6 +31,11 @@ export const MainRouter = createBrowserRouter([
   {
     path: "/enrollCourse",
     element: <EnrollPage />,
+    errorElement: <h1>404</h1>,
+  },
+  {
+    path: "/seeEvares",
+    element: <SeeEvaResPage />,
     errorElement: <h1>404</h1>,
   },
 ]);
