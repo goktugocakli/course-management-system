@@ -2,7 +2,6 @@ package com.CodeOfDuty.CourseEvaluation.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -34,13 +33,13 @@ public class Student {
 
     @ManyToOne()
     @JoinColumn(name = "department", referencedColumnName = "department_name")
-    @JsonIncludeProperties({"name"})
+    @JsonManagedReference
+    //@JsonIncludeProperties({"name"})
     private Department department;
 
 
-    //@JsonBackReference("courses")
+    @JsonBackReference
     @ManyToMany
-    @JsonIncludeProperties({"code","year","semester"})
     @JoinTable(
             name = "course_student",
             joinColumns = @JoinColumn(name = "student_no"),
