@@ -2,7 +2,6 @@ package com.CodeOfDuty.CourseEvaluation.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.engine.internal.Cascade;
@@ -34,12 +33,12 @@ public class Instructor {
 
     @ManyToOne()
     @JoinColumn(name = "department", referencedColumnName = "department_name")
-    @JsonIgnoreProperties("manager")
+    @JsonManagedReference
+    //@JsonIgnoreProperties("manager")
     private Department department;
 
-    //@JsonBackReference
+    @JsonBackReference
     @ManyToMany
-    @JsonIncludeProperties({"code","year","semester"})
     @JoinTable(
             name = "course_instructor",
             joinColumns = @JoinColumn(name = "user_name"),
