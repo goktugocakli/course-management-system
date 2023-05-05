@@ -27,14 +27,12 @@ public class Course {
     @Column(nullable = true)
     private int course_type;
 
-    //@JsonManagedReference("student")
+    @JsonManagedReference
     @ManyToMany(mappedBy = "courses")
-    @JsonIncludeProperties({"student_no"})
     List<Student> student;
 
-    //@JsonManagedReference
+    @JsonManagedReference
     @ManyToMany(mappedBy = "courses")
-    @JsonIncludeProperties({"user_name"})
     List<Instructor> instructors;
 
 
