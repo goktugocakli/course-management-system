@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Login } from "../../components";
 import { Global } from "../../components";
 
-import { useDispatch } from "react-redux";
-import { fetchUser } from "../../features/user";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUser, user } from "../../features/user";
 import { useNavigate } from "react-router-dom";
 //import { fetchUser } from "../../features/user";
 
@@ -22,6 +22,20 @@ export default function LoginContainer() {
 
   const dispacth = useDispatch();
 
+  const stateStatus = useSelector(user).status;
+
+  //This will navigate to home if user credentials are correct
+  useEffect(() => {
+    if (stateStatus === "done") {
+      navigate("/");
+    } else if (stateStatus === "error") {
+      //ERROR with user
+      console.log("error LO");
+
+      // react-toastify, use this to show toast
+    }
+  }, [stateStatus]);
+
   const togglePassword = () => {
     setIsVisible(!isVisible);
   };
@@ -36,10 +50,8 @@ export default function LoginContainer() {
 
     if (event.target.value.length === 0) {
       setIsEmpty(true);
-      console.log(true);
     } else {
       setIsEmpty(false);
-      console.log(false);
     }
   };
 
@@ -90,7 +102,6 @@ export default function LoginContainer() {
             onClick={() => {
               if (!isEmpty) {
                 dispacth(fetchUser(userData));
-                navigate("/");
               }
             }}
           >
