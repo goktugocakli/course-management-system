@@ -7,4 +7,5 @@ export { default as SeeEvaResContainer } from "./seeEvaResContainer";
 export { default as CreateEvaluationFormContainer } from "./createevaluationformcontainer";
 export { default as HomeContainer } from "./homecontainer";
 export { default as EnrollContainer } from "./enrollcontainer";
-export {default as SeeCoursesContainer} from './seecoursecontainer'; 
+export {default as SeeCoursesContainer} from './seecoursecontainer';
+export { default as SemestersContainer } from "./semestersContainer"; 
