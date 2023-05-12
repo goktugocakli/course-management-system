@@ -9,3 +9,4 @@ export { default as CreateEvaluationForm } from "./createevaluationform";
 export { default as Home } from "./home";
 export { default as EnrollCourse } from "./enrollcourse";
 export { default as SeeCourses } from "./seecourses";
+export {default as Semesters} from './semesters';
