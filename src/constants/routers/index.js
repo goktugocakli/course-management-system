@@ -6,6 +6,7 @@ import {
   EnrollPage,
   SeeEvaResPage,
   SeeCoursesPage,
+  SemestersPage
 } from "../../pages";
 
 export const MainRouter = createBrowserRouter([
