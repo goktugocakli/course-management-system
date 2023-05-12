@@ -6,7 +6,8 @@ import {
   EnrollPage,
   SeeEvaResPage,
   SeeCoursesPage,
-  SemestersPage
+  SemestersPage,
+  AddSemesterPage
 } from "../../pages";
 
 export const MainRouter = createBrowserRouter([
@@ -48,6 +49,11 @@ export const MainRouter = createBrowserRouter([
   {
     path: "/semesters",
     element: <SemestersPage/>,
+    errorElement: <h1>404</h1>,
+  },
+  {
+    path: "/addsemester",
+    element: <AddSemesterPage/>,
     errorElement: <h1>404</h1>,
   },
 ]);
