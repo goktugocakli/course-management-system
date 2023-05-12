@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
-
 const initialState = {
   user: null,
   status: "idle", //idle, loading, error, done
@@ -11,13 +9,10 @@ const initialState = {
 
 const BASE_URL = "http://localhost:8080";
 
-
-
 export const fetchUser = createAsyncThunk("/users", async (data) => {
-  
   try {
     const response = await axios.post(BASE_URL + "/login", data);
-  
+
     return response.data;
   } catch (err) {
     return err.message;
@@ -64,21 +59,9 @@ const UserSlice = createSlice({
         };
       },
     },
-
-    //Temporary
-    enroll: {
-      reducer: (state, action) => {
-        return (state = action.payload);
-      },
-
-      prepare: () => {
-        return {};
-      },
-    },
   },
 
   extraReducers(builder) {
-    
     builder
       .addCase(fetchUser.pending, (state, action) => {
         state.status = "loading";
@@ -91,7 +74,6 @@ const UserSlice = createSlice({
         };
 
         state.user = userr;
-       
         //TODO: fetch user
       })
       .addCase(fetchUser.rejected, (state, action) => {
