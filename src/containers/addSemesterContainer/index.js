@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import {AddSemester} from '../../components';
-import {AddCourse} from '../../components';
+import {AddCourseContainer} from '../../containers';
 
 
 
@@ -28,15 +28,7 @@ export default function AddSemesterContainer() {
   // this state used to show/hide add new course window                    
   const [courseDiv, setCourseDiv] = useState([]);
   
-  //states for course addition inputs
-  const [courseType, setCourseType] = useState("M");
-  const [courseName, setCourseName] = useState();
-  const [courseCode, setCourseCode] = useState();
-  const [courseCredit, setCourseCredit] = useState();
-
   
-
-
   // this function used to check if dates picked correctly
   const checkDates = (start, end) => {
     let date1 = new Date(start).getTime();
@@ -71,51 +63,11 @@ export default function AddSemesterContainer() {
       }
   }
 
-
-  // this function used to cancel add new course window
-  const handleCancel = function cancelCourseDiv(){
-    setCourseDiv([])
-  }
-
   // this function used to open add new course window
   const handleClick = function addNewCourse() {
     return(
       setCourseDiv(courseDiv.concat(
-        <>
-          <AddCourse.Background/>
-          <AddCourse.Div>
-              <AddCourse.Label>Add New Course</AddCourse.Label>
-
-              <AddCourse.InputRow>
-                <AddCourse.InputLabel>Name</AddCourse.InputLabel>
-                <AddCourse.Input onChange={evn => setCourseName(evn.target.value)}/>
-              </AddCourse.InputRow>
-
-              <AddCourse.InputRow>
-                <AddCourse.InputLabel>Code</AddCourse.InputLabel>
-                <AddCourse.Input onChange={evn => setCourseCode(evn.target.value)}/>
-              </AddCourse.InputRow>
-
-              <AddCourse.InputRow>
-                <AddCourse.InputLabel>Credit</AddCourse.InputLabel>
-                <AddCourse.Input onChange={evn => setCourseCredit(evn.target.value)}/>
-              </AddCourse.InputRow>
-
-              <AddCourse.InputRow>
-                <AddCourse.InputLabel>Type</AddCourse.InputLabel>
-
-                <AddCourse.Select onChange={evn => setCourseType(evn.target.value)}>
-                    <AddCourse.Option value={"M"} >Mandatory</AddCourse.Option>
-                    <AddCourse.Option value={"E"} >Elective</AddCourse.Option>
-                </AddCourse.Select>
-
-              </AddCourse.InputRow>
-
-              <AddCourse.SaveButton>Save Course</AddCourse.SaveButton>
-
-              <AddCourse.CancelButton onClick={handleCancel}>Cancel</AddCourse.CancelButton>
-          </AddCourse.Div>
-        </>
+            <AddCourseContainer/>
         )
       )
     )

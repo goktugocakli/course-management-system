@@ -2,7 +2,7 @@ import React from "react";
 import {Label, SaveButton, CancelButton, Background, InputRow, Div, Input, InputLabel, Select, Option} from "./styles/addCourse"
 
 export default function AddCourse({children, ...restProps}) {
-    return
+    return 
 }
 
 AddCourse.Background = function coursesBackground({ children, ...restPorps }) {
