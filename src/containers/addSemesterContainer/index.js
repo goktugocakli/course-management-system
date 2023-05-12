@@ -15,6 +15,7 @@ export default function AddSemesterContainer() {
                       {name:"Fall", code:"131231", credit:"3", type:"M"}
                       ]
 
+
   
 
   // states for semester addition inputs
@@ -33,7 +34,6 @@ export default function AddSemesterContainer() {
   const [courseCode, setCourseCode] = useState();
   const [courseCredit, setCourseCredit] = useState();
 
-
   
 
 
@@ -44,6 +44,7 @@ export default function AddSemesterContainer() {
   
     if (date1 < date2) {
       console.log(`${start} is less than ${end}`);
+      return true;
     } else if (date1 > date2) {
       console.log(`${start} is greater than ${end}`);
     } else if (start === undefined ) {
@@ -52,10 +53,24 @@ export default function AddSemesterContainer() {
       console.log(`Please pick an end date.`);
     } else if (date1 === date2 ) {
       console.log(`${start} is equal to ${end}`);
-    } else {
-      console.log(`Continue`);
-    }
+    } 
   };
+
+  const saveSemester = () => {
+      console.log("Semester saved.")
+  }
+
+  // this function checks all test cases for semester addition
+  const checkSemesterInputs = (start,end) => {
+      if(courses.length === 0){
+        console.log("You haven't added any course yet.")
+      } else if(semesterName === undefined){
+        console.log("Please enter a name for semester.")
+      } else if(checkDates(start,end)) {
+        saveSemester();
+      }
+  }
+
 
   // this function used to cancel add new course window
   const handleCancel = function cancelCourseDiv(){
@@ -115,7 +130,7 @@ export default function AddSemesterContainer() {
         <AddSemester.InputRow>
             <AddSemester.InputColumn>
               <AddSemester.InputLabel>Name</AddSemester.InputLabel>
-              <AddSemester.Input/>
+              <AddSemester.Input onChange={evn => setSemesterName(evn.target.value)}/>
             </AddSemester.InputColumn>
             <AddSemester.DateRow>
                 <AddSemester.InputColumn>
@@ -147,7 +162,7 @@ export default function AddSemesterContainer() {
             </AddSemester.ListItem>)}
         </AddSemester.List>
         <AddSemester.AddButton onClick={handleClick}>Add new course</AddSemester.AddButton>
-        <AddSemester.StartButton onClick={() => checkDates(startDate,endDate)}>Start semester</AddSemester.StartButton> 
+        <AddSemester.StartButton onClick={() => checkSemesterInputs(startDate,endDate)}>Start semester</AddSemester.StartButton> 
       </AddSemester.Div>
       {courseDiv}
       </>
@@ -156,13 +171,36 @@ export default function AddSemesterContainer() {
     ); 
   } else {
     return (
+      <>
+        <AddSemester.Div>
+          <AddSemester.InputRow>
+              <AddSemester.InputColumn>
+                <AddSemester.InputLabel>Name</AddSemester.InputLabel>
+                <AddSemester.Input onChange={evn => setSemesterName(evn.target.value)}/>
+              </AddSemester.InputColumn>
+              <AddSemester.DateRow>
+                  <AddSemester.InputColumn>
+                    <AddSemester.InputLabel>Start Date</AddSemester.InputLabel>
+                    <AddSemester.Input type={"date"} onChange={evn => setStartDate(evn.target.value)}/>
+                  </AddSemester.InputColumn>
+                  <AddSemester.InputColumn>
+                    <AddSemester.InputLabel>End Date</AddSemester.InputLabel>
+                    <AddSemester.Input type={"date"} onChange={evn => setEndDate(evn.target.value)}/>
+                  </AddSemester.InputColumn>
+              </AddSemester.DateRow>
+              
+          </AddSemester.InputRow>
+
+          <AddSemester.Label>Courses</AddSemester.Label>
+          <AddSemester.Icon/> 
+          <AddSemester.AlertText>You haven't added any course yet</AddSemester.AlertText>
+          <AddSemester.AddButton onClick={handleClick}>Add new course</AddSemester.AddButton>
+          <AddSemester.StartButton onClick={() => checkSemesterInputs(startDate,endDate)}>Start semester</AddSemester.StartButton>       
+        </AddSemester.Div>
+        {courseDiv}
+      </>
       
-      <AddSemester.Div>
-        <AddSemester.Label>Courses</AddSemester.Label>
-        <AddSemester.Icon/> 
-        <AddSemester.AlertText>You haven't added any course yet</AddSemester.AlertText>
-        <AddSemester.AddButton>Add new course</AddSemester.AddButton>       
-      </AddSemester.Div>
+
     ); 
 
   }

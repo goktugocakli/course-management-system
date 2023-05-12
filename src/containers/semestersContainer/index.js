@@ -1,5 +1,6 @@
 import React from "react";
 import {Semesters} from '../../components';
+import { Link } from "react-router-dom";
 
 
 export default function SemestersContainer() {
@@ -31,7 +32,7 @@ export default function SemestersContainer() {
               <Semesters.Text>{semester.endDate}</Semesters.Text>
             </Semesters.ListItem>)}
         </Semesters.List>
-        <Semesters.Button>Add new semester</Semesters.Button> 
+        <Link to={"/addsemester"}><Semesters.Button>Add new semester</Semesters.Button></Link>
       </Semesters.Div>
     ); 
   } else {
@@ -41,7 +42,7 @@ export default function SemestersContainer() {
         <Semesters.Label>Semesters</Semesters.Label>
         <Semesters.Icon/> 
         <Semesters.AlertText>You haven't added any semester yet</Semesters.AlertText>
-        <Semesters.Button>Add new semester</Semesters.Button>       
+        <Link to={"/addsemester"}><Semesters.Button>Add new semester</Semesters.Button></Link>       
       </Semesters.Div>
     ); 
 

@@ -41,8 +41,8 @@ AddCourse.InputLabel = function inputLabel({ children, ...restPorps }) {
 };
   
 
-AddCourse.SaveButton = function saveButton({children,...restPorps}){
-    return <SaveButton>{children}</SaveButton>
+AddCourse.SaveButton = function saveButton({children, onClick}){
+    return <SaveButton onClick={onClick}>{children}</SaveButton>
 }
 
 AddCourse.CancelButton = function cancelButton({children,onClick}){
