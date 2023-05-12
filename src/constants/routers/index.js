@@ -44,4 +44,9 @@ export const MainRouter = createBrowserRouter([
     element: <SeeCoursesPage />,
     errorElement: <h1>404</h1>,
   },
+  {
+    path: "/semesters",
+    element: <SemestersPage/>,
+    errorElement: <h1>404</h1>,
+  },
 ]);

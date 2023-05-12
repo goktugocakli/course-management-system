@@ -4,3 +4,4 @@ export { default as CreateEvaluationPage } from "./createevaluationpage";
 export { default as EnrollPage } from "./enrollpage";
 export { default as SeeEvaResPage } from "./seeevarespage";
 export { default as SeeCoursesPage } from "./seecourses";
+export {default as SemestersPage} from './semesterspage';
