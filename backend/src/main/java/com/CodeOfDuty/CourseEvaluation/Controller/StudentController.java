@@ -51,7 +51,7 @@ public class StudentController {
     }
 
 
-    @PostMapping("students/enrollcourse")
+    @PostMapping("/students/enrollcourse")
     public void enrollCourse(@RequestParam String student_no, @RequestParam String course_id, @RequestParam String semester, @RequestParam int year){
         Student student=studentService.getByNo(student_no);
         Course course = courseService.getByCourse(course_id,semester,year);

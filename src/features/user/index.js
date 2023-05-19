@@ -1,17 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { Login } from "../../constants/api";
 
 const initialState = {
-  user: null,
-  status: "idle", //idle, loading, error, done
+  user:
+    sessionStorage.getItem("user") === null
+      ? null
+      : JSON.parse(sessionStorage.getItem("user")), // TODO: add user details to localStorage and fetch them when app refreshes
+  status: sessionStorage.getItem("user") === null ? "idle" : "done", //idle, loading, error, done // Also fetch the state of the app it is usually be 'done'
   error: null,
 };
 
-const BASE_URL = "http://localhost:8080";
-
 export const fetchUser = createAsyncThunk("/users", async (data) => {
   try {
-    const response = await axios.post(BASE_URL + "/login", data);
+    const response = await Login(data);
 
     return response.data;
   } catch (err) {
@@ -74,7 +75,7 @@ const UserSlice = createSlice({
         };
 
         state.user = userr;
-        //TODO: fetch user
+        sessionStorage.setItem("user", JSON.stringify(userr));
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.status = "error";
