@@ -1,5 +1,6 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { SeeCourses } from "../../components";
+
 
 const courses = [
   {
@@ -46,6 +47,7 @@ export default function SeeCoursesContainer() {
     courseId: 0,
     course: null,
   });
+
 
   return (
     <SeeCourses>

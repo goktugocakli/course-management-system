@@ -10,11 +10,11 @@ export default function HomePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (userState.user === null) {
       navigate("/login");
     }
-  });*/
+  });
 
   return (
     <>
