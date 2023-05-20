@@ -107,6 +107,8 @@ export const useFetchOnGoingEvaluation = (options, user) => {
 export const useFetchPendingRequests = (options) => {
   const [data, setData] = useState([]);
 
+  //TODO: add users an attribute called active and banned so we can easily filter pending requests and banned users etc.
+
   axios.get(BASE_URL + "/api/admin/pendingRequests").then(
     (response) => {
       options?.onSuccess?.();
@@ -125,6 +127,8 @@ export const useFetchPendingRequests = (options) => {
 export const useFetchInstructorEvaluation = (options) => {
   const [data, setData] = useState([]);
 
+  //TODO: every instructor has its course and we can join evaluations with course ids of the instructor so we can get instructors 
+  // created forms
   axios.get(BASE_URL + "/api/instructor/evaluationForms").then(
     (response) => {
       setData({ ...response.data, success: true });
