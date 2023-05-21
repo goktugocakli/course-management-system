@@ -37,14 +37,19 @@ public class Instructor {
     @JsonIgnoreProperties("manager")
     private Department department;
 
-    //@JsonBackReference
     @ManyToMany
     @JsonIncludeProperties({"code","year","semester"})
     @JoinTable(
             name = "course_instructor",
             joinColumns = @JoinColumn(name = "user_name"),
             inverseJoinColumns = {@JoinColumn(name = "code"), @JoinColumn(name = "semester"), @JoinColumn(name = "year")})
-    List<Course> courses;
+    private List<Course> courses;
+
+    @OneToMany(mappedBy = "addedBy")
+    private List<Question> questions;
+
+    @OneToMany(mappedBy = "createdBy")
+    private List<Survey> surveys;
 
     public Instructor(String user_name, String first_name, String second_name, String surname, String e_mail, String password) {
         this.user_name = user_name;
@@ -125,5 +130,21 @@ public class Instructor {
 
     public void addCourse(Course course){
         this.courses.add(course);
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
+    public List<Survey> getSurveys() {
+        return surveys;
+    }
+
+    public void setSurveys(List<Survey> surveys) {
+        this.surveys = surveys;
     }
 }
