@@ -15,12 +15,7 @@ export default function ForgetPasswordContainer() {
       <ForgetPassword.Div>
         <Global.Column>
             <Global.Row>
-            <ForgetPassword.InputLabel>Name</ForgetPassword.InputLabel>
-            <ForgetPassword.Input type="text"/>
-            </Global.Row>
-
-            <Global.Row>
-            <ForgetPassword.InputLabel>Surname</ForgetPassword.InputLabel>
+            <ForgetPassword.InputLabel>Username</ForgetPassword.InputLabel>
             <ForgetPassword.Input type="text"/>
             </Global.Row>
 
@@ -29,7 +24,7 @@ export default function ForgetPasswordContainer() {
             <ForgetPassword.Input type="text"/>
             </Global.Row>
             
-            <ForgetPassword.Button>Sign up</ForgetPassword.Button>
+            <ForgetPassword.Button>Send Request</ForgetPassword.Button>
             
         </Global.Column>
         
