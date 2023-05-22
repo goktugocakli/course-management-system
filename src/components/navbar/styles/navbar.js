@@ -24,8 +24,12 @@ export const Container = styled.div`
 
 export const Logo = styled.div`
   font-size: 3rem;
-  font-weight: 900;
+  font-weight: 800;
   user-select: none;
+  position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
 
   @media (max-width: 600px) {
     font-size: 2rem;
@@ -188,3 +192,26 @@ export const Dark = ({ white = true }) => {
     </svg>
   );
 };
+
+
+export const Name = styled.p`
+  margin:10px;
+`;
+
+export const Role = styled.p`
+  margin:10px;
+`;
+
+export const Picture = styled.img`
+  margin:10px;
+  width:30px;
+  src: ${({ src }) => src};
+  alt: ${({ alt }) => alt};
+`;
+
+export const InformationContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+`;

@@ -1,4 +1,5 @@
 import { Home } from "../../components";
+import { user } from "../../features/user";
 
 const renderEvents = (user) => {
   if (user.userType === "admin") {
@@ -44,15 +45,10 @@ const renderEvents = (user) => {
   }
 };
 
-export default function HomeContainer({ user }) {
+export default function HomeContainer() {
   //user is a json obj that contains userType and upcoming events
   return (
     <Home>
-      <Home.InformationContainer>
-        <Home.Name>{user.data.user_name}</Home.Name>
-        <Home.Role>{user.userType}</Home.Role>
-        <Home.Picture alt={"User Pic"} src={"#"} />
-      </Home.InformationContainer>
       {/*renderEvents(user)*/}
     </Home>
   );

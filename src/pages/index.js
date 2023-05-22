@@ -6,3 +6,4 @@ export { default as SeeEvaResPage } from "./seeevarespage";
 export { default as SeeCoursesPage } from "./seecourses";
 export {default as SemestersPage} from './semesterspage';
 export {default as AddSemesterPage} from './addsemesterpage';
+export {default as ForgetPasswordPage} from './forgetpasswordpage';

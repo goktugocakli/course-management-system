@@ -3,10 +3,6 @@ import { ThemeState } from "../../features/theme";
 
 import {
   Container,
-  InformationContainer,
-  Name,
-  Role,
-  Picture,
   Events,
   EventTitle,
   EventInner,
@@ -22,21 +18,6 @@ export default function Home({ children, ...restProps }) {
     </Container>
   );
 }
-Home.InformationContainer = function HomeInfo({ children, ...restProps }) {
-  return <InformationContainer {...restProps}>{children}</InformationContainer>;
-};
-
-Home.Name = function HomeName({ children, ...restProps }) {
-  return <Name {...restProps}>{children}</Name>;
-};
-
-Home.Role = function HomeRole({ children, ...restProps }) {
-  return <Role {...restProps}>{children}</Role>;
-};
-
-Home.Picture = function HomePicture({ src, alt, ...restProps }) {
-  return <Picture src={src} alt={alt} {...restProps}></Picture>;
-};
 
 Home.Events = function HomeEvents({ children, ...restProps }) {
   return <Events {...restProps}>{children}</Events>;
