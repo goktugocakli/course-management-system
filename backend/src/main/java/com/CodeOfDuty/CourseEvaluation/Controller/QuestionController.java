@@ -27,7 +27,7 @@ public class QuestionController {
     }
 
     @GetMapping("/{questionId}")
-    public ResponseEntity<Optional<Question>> getById(@PathVariable String questionId){
+    public ResponseEntity<Question> getById(@PathVariable String questionId){
         return ResponseEntity.ok(questionManager.findById(Integer.valueOf(questionId)));
     }
 
@@ -38,5 +38,11 @@ public class QuestionController {
         List<AnswerChoice> answerChoices = questionRequest.getAnswers();
         Question question = questionManager.createQuestion(questionText,instructor,answerChoices);
         return ResponseEntity.ok(question);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable Integer id){
+        questionManager.deleteQuestion(id);
+        return ResponseEntity.ok("Soru başarı ile silindi");
     }
 }

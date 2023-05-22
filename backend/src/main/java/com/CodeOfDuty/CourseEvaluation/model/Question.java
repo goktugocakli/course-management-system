@@ -1,6 +1,7 @@
 package com.CodeOfDuty.CourseEvaluation.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table
+@JsonIgnoreProperties({"surveys"})
 public class Question {
 
     @Id
@@ -30,8 +32,12 @@ public class Question {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<AnswerChoice> answers;
 
-    @ManyToMany(mappedBy = "questions")
+
+    @ManyToMany(mappedBy = "questions", fetch = FetchType.LAZY)
     private List<Survey> surveys;
+/*
+    @OneToMany(mappedBy = "question")
+    List<QuestionSurvey> questionSurveys;*/
 
     public void addAnswer(AnswerChoice answer){
         answers.add(answer);

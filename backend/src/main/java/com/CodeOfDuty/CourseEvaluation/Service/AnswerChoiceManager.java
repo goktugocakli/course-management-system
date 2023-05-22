@@ -23,8 +23,8 @@ public class AnswerChoiceManager {
         return answerChoiceRepository.findAll();
     }
 
-    public Optional<AnswerChoice> findAnswerChoiceById(Integer id){
-        return answerChoiceRepository.findById(id);
+    public AnswerChoice findAnswerChoiceById(Integer id){
+        return answerChoiceRepository.findById(id).orElse(null);
     }
 
 

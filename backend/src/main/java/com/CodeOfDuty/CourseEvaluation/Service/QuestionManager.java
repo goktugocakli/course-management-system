@@ -41,21 +41,17 @@ public class QuestionManager {
                             .build();
             question.addAnswer(answerChoice);
         }
+        questionRepository.save(question);
 
         return question;
-/*
-        List<AnswerChoice> answerList=new ArrayList<>();
-
-        for(AnswerChoice choice: answers){
-            AnswerChoice answerChoice=answerChoiceManager.createChoice(question, choice.getAnswerText());
-            answerList.add(answerChoice);
-        }
-        question.setAnswers(answerList);
-        return question;*/
     }
 
-    public Optional<Question> findById(Integer id){
-        return questionRepository.findById(id);
+    public Question findById(Integer id){
+        return questionRepository.findById(id).orElse(null);
+    }
+
+    public void deleteQuestion(Integer id){
+        questionRepository.deleteById(id);
     }
 
 

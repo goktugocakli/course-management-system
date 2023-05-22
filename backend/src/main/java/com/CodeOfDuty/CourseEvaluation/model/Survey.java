@@ -1,9 +1,14 @@
 package com.CodeOfDuty.CourseEvaluation.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -22,16 +27,21 @@ public class Survey {
 
     private String description;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date submitDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dueDate;
+    @Column(columnDefinition = "TIMESTAMP")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime submitDate;
 
+    @Column(columnDefinition = "TIMESTAMP")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime dueDate;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "createdBy")
     private Instructor createdBy;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumns({
             @JoinColumn(name="course_code", referencedColumnName = "code"),
@@ -40,12 +50,18 @@ public class Survey {
     })
     private Course course;
 
-    @ManyToMany
+
+
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "survey_question",
             joinColumns = @JoinColumn(name = "surveyId"),
             inverseJoinColumns = @JoinColumn(name = "question")
     )
     private List<Question> questions;
+
+    /*
+    @OneToMany(mappedBy = "survey")
+    private List<QuestionSurvey> questionSurveys;*/
 
 
 }

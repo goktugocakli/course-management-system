@@ -38,14 +38,13 @@ public class Student {
     private Department department;
 
 
-    //@JsonBackReference("courses")
     @ManyToMany
     @JsonIncludeProperties({"code","year","semester"})
     @JoinTable(
             name = "course_student",
             joinColumns = @JoinColumn(name = "student_no"),
             inverseJoinColumns = {@JoinColumn(name = "code"), @JoinColumn(name = "semester"), @JoinColumn(name = "year")})
-    List<Course> courses;
+    private List<Course> courses;
 
     public Student(String student_no, String first_name, String second_name, String surname, String e_mail, String password) {
         this.student_no = student_no;
