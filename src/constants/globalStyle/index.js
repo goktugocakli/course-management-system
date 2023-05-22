@@ -17,6 +17,15 @@ export const Themes = {
   },
 };
 
+export const Colors = {
+    light: {
+      primarycolor: "rgba(72, 12, 168, 1)",
+      backgroundcolor: "rgba(243, 243, 243, 1)",
+      successcolor: "rgba(87, 204, 153, 1)",
+      errorcolor: "rgba(255, 0, 0, 1)"
+    }
+}
+
 //TODO: implement a json object that is {"true": {whiteTheme Options}, "false":{DarkTheme Options}}
 
 const GlobalStyle = createGlobalStyle`
