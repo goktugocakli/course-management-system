@@ -11,22 +11,6 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
-export const InformationContainer = styled.div`
-  background: green;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-direction: row;
-`;
-
-export const Name = styled.p``;
-
-export const Role = styled.p``;
-
-export const Picture = styled.img`
-  src: ${({ src }) => src};
-  alt: ${({ alt }) => alt};
-`;
 
 export const Events = styled.div`
   display: flex;

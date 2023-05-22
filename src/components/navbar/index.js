@@ -5,6 +5,10 @@ import { ThemeState } from "../../features/theme";
 import {
   Container,
   Logo,
+  Name,
+  Role,
+  Picture,
+  InformationContainer,
   LinkContainer,
   Link,
   Hamburger,
@@ -31,6 +35,7 @@ export default function NavBar({ children, ...restProps }) {
 NavBar.Logo = function NavBarLogo({ children, ...restProps }) {
   return <Logo {...restProps}>{children}</Logo>;
 };
+
 
 NavBar.NavLinkContainer = function NavBarLinkContainer({
   expanded,
@@ -73,4 +78,21 @@ NavBar.ChangeTheme = function NavBarChangeTheme({ children, ...restProps }) {
       </WhiteTheme>
     </ChangeThemeContainer>
   );
+};
+
+
+NavBar.Name = function NavbarName({ children, ...restProps }) {
+  return <Name {...restProps}>{children}</Name>;
+};
+
+NavBar.Role = function NavbarRole({ children, ...restProps }) {
+  return <Role {...restProps}>{children}</Role>;
+};
+
+NavBar.Picture = function NavbarPicture({ src, alt, ...restProps }) {
+  return <Picture src={src} alt={alt} {...restProps}></Picture>;
+};
+
+NavBar.InformationContainer = function NavbarInfo({ children, ...restProps }) {
+  return <InformationContainer {...restProps}>{children}</InformationContainer>;
 };

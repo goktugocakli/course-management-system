@@ -107,6 +107,12 @@ export default function NavBarContainer() {
       </NavBar.NavLinkContainer>
 
       <NavBar.Logo>3B</NavBar.Logo>
+
+      <NavBar.InformationContainer>
+        <NavBar.Name>Username{/*user.data.user_name*/}</NavBar.Name>
+        <NavBar.Role>UserType{/*user.userType*/}</NavBar.Role>
+        <NavBar.Picture src={"https://www.citypng.com/public/uploads/preview/profile-user-round-white-icon-symbol-png-11639594348fn8rlcxrqo.png"} />
+      </NavBar.InformationContainer>
     </NavBar>
   );
 }
