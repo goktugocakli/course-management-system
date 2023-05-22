@@ -1,5 +1,6 @@
 package com.CodeOfDuty.CourseEvaluation.Controller;
 
+import com.CodeOfDuty.CourseEvaluation.DTO.QuestionCreateRequest;
 import com.CodeOfDuty.CourseEvaluation.Service.QuestionManager;
 import com.CodeOfDuty.CourseEvaluation.model.AnswerChoice;
 import com.CodeOfDuty.CourseEvaluation.model.Instructor;
@@ -26,15 +27,21 @@ public class QuestionController {
         return ResponseEntity.ok(questionManager.getAllQuestions());
     }
 
+
+    @GetMapping("/instructor/{username}")
+    public ResponseEntity<List<Question>> gelAllQuestionAddedBy(@PathVariable String username){
+        return ResponseEntity.ok(questionManager.findAllAddedBy(username));
+    }
+
     @GetMapping("/{questionId}")
     public ResponseEntity<Question> getById(@PathVariable String questionId){
         return ResponseEntity.ok(questionManager.findById(Integer.valueOf(questionId)));
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Question> add(@RequestBody Question questionRequest){
+    public ResponseEntity<Question> add(@RequestBody QuestionCreateRequest questionRequest){
         String questionText = questionRequest.getText();
-        Instructor instructor=questionRequest.getAddedBy();
+        String instructor=questionRequest.getAddedBy();
         List<AnswerChoice> answerChoices = questionRequest.getAnswers();
         Question question = questionManager.createQuestion(questionText,instructor,answerChoices);
         return ResponseEntity.ok(question);
