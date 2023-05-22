@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class QuestionManager {
@@ -16,17 +15,21 @@ public class QuestionManager {
     private final IQuestionDao questionRepository;
     private final AnswerChoiceManager answerChoiceManager;
 
+    private final InstructorManager instructorManager;
 
-    public QuestionManager(IQuestionDao questionRepository, AnswerChoiceManager answerChoiceManager){
+
+    public QuestionManager(IQuestionDao questionRepository, AnswerChoiceManager answerChoiceManager, InstructorManager instructorManager){
         this.questionRepository = questionRepository;
         this.answerChoiceManager = answerChoiceManager;
+        this.instructorManager = instructorManager;
     }
 
     public List<Question> getAllQuestions(){
         return questionRepository.findAll();
     }
 
-    public Question createQuestion(String text, Instructor instructor, List<AnswerChoice> answers){
+    public Question createQuestion(String text, String username, List<AnswerChoice> answers){
+        Instructor instructor = instructorManager.getByUserName(username);
         Question question = Question.builder()
                 .text(text)
                 .addedBy(instructor)
@@ -48,6 +51,11 @@ public class QuestionManager {
 
     public Question findById(Integer id){
         return questionRepository.findById(id).orElse(null);
+    }
+
+    public List<Question> findAllAddedBy(String username){
+        Instructor instructor = instructorManager.getByUserName(username);
+        return questionRepository.findAllByAddedBy(instructor);
     }
 
     public void deleteQuestion(Integer id){

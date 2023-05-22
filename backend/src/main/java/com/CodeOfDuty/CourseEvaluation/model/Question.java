@@ -2,6 +2,7 @@ package com.CodeOfDuty.CourseEvaluation.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +26,7 @@ public class Question {
     @Column(nullable = false)
     private String text;
 
+    @JsonIncludeProperties({"user_name"})
     @ManyToOne
     @JoinColumn(name = "addedBy")
     private Instructor addedBy;
@@ -33,8 +35,11 @@ public class Question {
     private List<AnswerChoice> answers;
 
 
-    @ManyToMany(mappedBy = "questions", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "questions")
     private List<Survey> surveys;
+
+    @OneToMany(mappedBy = "question")
+    private List<StudentAnswer> studentAnswers;
 /*
     @OneToMany(mappedBy = "question")
     List<QuestionSurvey> questionSurveys;*/

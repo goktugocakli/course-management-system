@@ -49,4 +49,10 @@ public class StudentAnswerManager {
 
         return studentAnswerRepository.save(studentAnswer);
     }
+
+    public StudentAnswer findStudentAnswerBySurveyAndStudent(Integer surveyId, String studentNo){
+        Student student=studentManager.getByNo(studentNo);
+        Survey survey=surveyManager.findById(surveyId);
+        return studentAnswerRepository.findStudentAnswerBySurveyAndStudent(survey,student);
+    }
 }

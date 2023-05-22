@@ -52,12 +52,15 @@ public class Survey {
 
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany()
     @JoinTable(name = "survey_question",
             joinColumns = @JoinColumn(name = "surveyId"),
             inverseJoinColumns = @JoinColumn(name = "question")
     )
     private List<Question> questions;
+
+    @OneToMany(mappedBy = "survey")
+    private List<StudentAnswer> studentAnswers;
 
     /*
     @OneToMany(mappedBy = "survey")

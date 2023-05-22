@@ -4,9 +4,7 @@ import com.CodeOfDuty.CourseEvaluation.Service.StudentAnswerManager;
 import com.CodeOfDuty.CourseEvaluation.model.StudentAnswer;
 import com.CodeOfDuty.CourseEvaluation.model.StudentAnswerKey;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("v1/answer")
@@ -28,5 +26,11 @@ public class StudentAnswerController {
                                             answerRequest.getQuestionId(),
                                             answerRequest.getAnswerId());
         return ResponseEntity.ok(answer);
+    }
+
+    @GetMapping("/{surveyId}/{studentNo}")
+    public ResponseEntity<StudentAnswer> findStudentAnswerBySurveyAndStudent(@PathVariable String surveyId, @PathVariable String studentNo){
+        StudentAnswer answers=studentAnswerManager.findStudentAnswerBySurveyAndStudent(Integer.valueOf(surveyId), studentNo);
+        return ResponseEntity.ok(answers);
     }
 }
