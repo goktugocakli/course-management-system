@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +46,19 @@ public class QuestionController {
         List<AnswerChoice> answerChoices = questionRequest.getAnswers();
         Question question = questionManager.createQuestion(questionText,instructor,answerChoices);
         return ResponseEntity.ok(question);
+    }
+
+    @PostMapping("/addFromList")
+    public ResponseEntity<List<Integer>> addFromList(@RequestBody List<QuestionCreateRequest> questionCreateRequestList){
+        List<Integer> questionIdList=new ArrayList<>();
+        for(QuestionCreateRequest questionRequest: questionCreateRequestList){
+            String questionText = questionRequest.getText();
+            String instructor=questionRequest.getAddedBy();
+            List<AnswerChoice> answerChoices = questionRequest.getAnswers();
+            Question question = questionManager.createQuestion(questionText,instructor,answerChoices);
+            questionIdList.add(question.getId());
+        }
+        return ResponseEntity.ok(questionIdList);
     }
 
     @DeleteMapping("/{id}")
