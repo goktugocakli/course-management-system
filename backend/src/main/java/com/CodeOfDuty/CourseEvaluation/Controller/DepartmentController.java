@@ -1,50 +1,45 @@
 package com.CodeOfDuty.CourseEvaluation.Controller;
 
-import com.CodeOfDuty.CourseEvaluation.Service.IDepartmentService;
+import com.CodeOfDuty.CourseEvaluation.Service.DepartmentService;
 import com.CodeOfDuty.CourseEvaluation.model.Department;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/v1/departments")
 public class DepartmentController {
 
-    private IDepartmentService departmentService;
+    private final DepartmentService departmentService;
 
-    public DepartmentController(IDepartmentService departmentService) {
+    public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
 
-    @GetMapping("/departments")
+    @GetMapping()
     public List<Department> getAll(){
         return departmentService.getAll();
     }
 
-    @PostMapping("/departments/add")
-    public void add(@RequestBody Department department){
-        departmentService.add(department);
+    @PostMapping("/add")
+    public Department add(@RequestBody Department department){
+        return departmentService.add(department);
     }
 
-    @PostMapping("/departments/update")
-    public void update(@RequestBody Department department){
-        departmentService.update(department);
+    @PostMapping("/changeInstructor")
+    public Department changeManager(@RequestParam String dept_name, @RequestParam String username){
+        return departmentService.changeManager(dept_name,username);
     }
 
-    @PostMapping("/departments/update2")
-    public void update2(@RequestBody String dept_name, String manager){
-        System.out.println(dept_name);
-        departmentService.update2(dept_name, manager);
+
+    @DeleteMapping("/delete/{dept_name}")
+    public void delete(@PathVariable String dept_name){
+        departmentService.delete(dept_name);
     }
 
-    @DeleteMapping("/departments/delete")
-    public void delete(@RequestBody Department department){
-        departmentService.delete(department);
-    }
-
-    @GetMapping("/departments/{dept_name}")
+    @GetMapping("/{dept_name}")
     public Department getByDepartmentName(@PathVariable String dept_name){
-        return departmentService.getByDepartmentName(dept_name);
+        return departmentService.findById(dept_name);
     }
 
 

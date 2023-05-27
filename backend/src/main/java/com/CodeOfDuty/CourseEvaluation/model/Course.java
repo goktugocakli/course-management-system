@@ -1,14 +1,18 @@
 package com.CodeOfDuty.CourseEvaluation.model;
 
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
 
+@Builder
+@AllArgsConstructor
 @Entity
-@IdClass(CourseID.class)
+@IdClass(CourseKey.class)
 public class Course {
 
     @Id
@@ -124,29 +128,3 @@ public class Course {
 }
 
 
-class CourseID implements Serializable {
-    public CourseID() {
-    }
-
-    private String code;
-
-    private String semester;
-
-    private int year;
-
-    public CourseID(String courseId, String semester, int year) {
-        this.code = courseId;
-        this.semester = semester;
-        this.year = year;
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-}

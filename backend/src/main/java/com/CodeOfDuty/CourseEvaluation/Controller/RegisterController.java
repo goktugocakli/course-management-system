@@ -1,6 +1,6 @@
 package com.CodeOfDuty.CourseEvaluation.Controller;
 
-import com.CodeOfDuty.CourseEvaluation.Service.IStudentService;
+import com.CodeOfDuty.CourseEvaluation.Service.StudentService;
 import com.CodeOfDuty.CourseEvaluation.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -11,10 +11,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/register")
 public class RegisterController {
 
-    private IStudentService studentService;
+    private final StudentService studentService;
 
-    @Autowired
-    public RegisterController(IStudentService studentService) {
+    public RegisterController(StudentService studentService) {
         this.studentService = studentService;
     }
 
@@ -26,7 +25,7 @@ public class RegisterController {
     @PostMapping()
     public String registerStudent(@RequestBody Student student){
         try{
-            studentService.add(student);
+            studentService.addStudent(student);
         }catch (DataIntegrityViolationException e) {
             return e.getLocalizedMessage();
         }

@@ -1,6 +1,6 @@
 package com.CodeOfDuty.CourseEvaluation.Controller;
 
-import com.CodeOfDuty.CourseEvaluation.Service.IInstructorService;
+import com.CodeOfDuty.CourseEvaluation.Service.InstructorService;
 import com.CodeOfDuty.CourseEvaluation.model.Instructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,42 +8,43 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping()
+@RequestMapping("/v1/instructors")
 public class InstructorController {
-    private IInstructorService instructorService;
+    private final InstructorService instructorService;
 
     @Autowired
-    public InstructorController(IInstructorService instructorService) {
+    public InstructorController(InstructorService instructorService) {
         this.instructorService = instructorService;
     }
 
 
-    @GetMapping("/instructors")
-    public List<Instructor> get(){
-        return instructorService.getAll();
+    @GetMapping()
+    public List<Instructor> findAll(){
+        return instructorService.findAll();
     }
 
-    @PostMapping("/instructors/add")
+    @PostMapping("/add")
     public void add(@RequestBody Instructor instructor){
-        instructorService.add(instructor);
+        instructorService.createInstructor(instructor);
     }
 
+    /*
     @PostMapping("/instructors/update")
     public void update(@RequestBody Instructor instructor){
         instructorService.update(instructor);
+    }*/
+
+    @DeleteMapping("delete/{username}")
+    public void delete(@PathVariable String username){
+        instructorService.delete(username);
     }
 
-    @DeleteMapping("instructors/delete")
-    public void delete(@RequestBody Instructor instructor){
-        instructorService.delete(instructor);
-    }
-
-    @GetMapping("instructors/{user_name}")
+    @GetMapping("/{user_name}")
     public Instructor getByUserName(@PathVariable String user_name){
-        return instructorService.getByUserName(user_name);
+        return instructorService.findById(user_name);
     }
 
-    @PostMapping("/instructors/teach")
+    @PostMapping("/teach")
     public void teachCourse(@RequestParam String user_name,
                             @RequestParam String course_id,
                             @RequestParam String semester,

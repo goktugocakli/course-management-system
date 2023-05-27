@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class StudentAnswerManager {
 
     private final IStudentAnswerDao studentAnswerRepository;
-    private final StudentManager studentManager;
+    private final StudentService studentService;
     private final SurveyManager surveyManager;
 
     private final QuestionManager questionManager;
@@ -16,9 +16,9 @@ public class StudentAnswerManager {
     private final AnswerChoiceManager answerChoiceManager;
 
 
-    public StudentAnswerManager(IStudentAnswerDao studentAnswerRepository, StudentManager studentManager, SurveyManager surveyManager, QuestionManager questionManager, AnswerChoiceManager answerChoiceManager) {
+    public StudentAnswerManager(IStudentAnswerDao studentAnswerRepository, StudentService studentService, SurveyManager surveyManager, QuestionManager questionManager, AnswerChoiceManager answerChoiceManager) {
         this.studentAnswerRepository = studentAnswerRepository;
-        this.studentManager = studentManager;
+        this.studentService = studentService;
         this.surveyManager = surveyManager;
         this.questionManager = questionManager;
         this.answerChoiceManager = answerChoiceManager;
@@ -29,7 +29,7 @@ public class StudentAnswerManager {
                                       Integer questionId,
                                       Integer answerId){
 
-        Student student = studentManager.getByNo(studentNo);
+        Student student = studentService.findById(studentNo);
         Survey survey = surveyManager.findById(surveyId);
         Question question = questionManager.findById(questionId);
         AnswerChoice answer= answerChoiceManager.findAnswerChoiceById(answerId);
@@ -51,7 +51,7 @@ public class StudentAnswerManager {
     }
 
     public StudentAnswer findStudentAnswerBySurveyAndStudent(Integer surveyId, String studentNo){
-        Student student=studentManager.getByNo(studentNo);
+        Student student=studentService.findById(studentNo);
         Survey survey=surveyManager.findById(surveyId);
         return studentAnswerRepository.findStudentAnswerBySurveyAndStudent(survey,student);
     }
