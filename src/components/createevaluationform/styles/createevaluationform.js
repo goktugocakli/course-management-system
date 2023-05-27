@@ -96,3 +96,57 @@ export const EvaluationAddAnswer = styled.div`
     stroke: black;
   }
 `;
+
+export const FloatingContainer = styled.div`
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  height: 4rem;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const DropDownCourse = styled.div`
+  position: relative;
+  cursor: pointer;
+`;
+
+export const DropDownContainer = styled.div`
+  position: absolute;
+  bottom: 3rem;
+  left: 0;
+  width: 200px;
+  gap: 1rem;
+  padding: 1rem;
+  align-items: center;
+  flex-direction: column;
+  outline: 1px solid #d0d4e4;
+  max-height: 500px;
+  overflow-y: scroll;
+`;
+
+export const UploadButton = styled.div`
+  cursor: pointer;
+`;
+
+export const AddExistingQuestion = styled.div`
+  position: relative;
+  cursor: pointer;
+`;
+
+export const ExistingQContainer = styled.div`
+  position: absolute;
+  bottom: 3rem;
+  right: 0;
+  width: 400px;
+  max-height: 500px;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  align-items: center;
+  outline: 1px solid #d0d4e4;
+  background: var(--bg-color);
+  overflow-y: scroll;
+`;

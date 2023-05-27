@@ -1,24 +1,33 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { Login } from "../../constants/api";
+import axios from "axios";
+
+const BASE_URL = "http://localhost:8080";
 
 const initialState = {
   user:
-    sessionStorage.getItem("user") === null
+    sessionStorage.getItem("user") === null ||
+    sessionStorage.getItem("user") === "null"
       ? null
       : JSON.parse(sessionStorage.getItem("user")), // TODO: add user details to localStorage and fetch them when app refreshes
-  status: sessionStorage.getItem("user") === null ? "idle" : "done", //idle, loading, error, done // Also fetch the state of the app it is usually be 'done'
+  status:
+    sessionStorage.getItem("user") === null ||
+    sessionStorage.getItem("user") === "null"
+      ? "idle"
+      : "done", //idle, loading, error, done // Also fetch the state of the app it is usually be 'done'
   error: null,
 };
 
-export const fetchUser = createAsyncThunk("/users", async (data) => {
-  try {
-    const response = await Login(data);
-
-    return response.data;
-  } catch (err) {
-    return err.message;
+export const fetchUser = createAsyncThunk(
+  "/users",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(BASE_URL + "/login", data);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
   }
-});
+);
 
 const UserSlice = createSlice({
   name: "user",
@@ -47,6 +56,7 @@ const UserSlice = createSlice({
 
     logout: {
       reducer: (state, action) => {
+        sessionStorage.setItem("user", null);
         return (state = action.payload);
       },
 

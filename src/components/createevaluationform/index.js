@@ -10,6 +10,12 @@ import {
   EvaluationAnswerContainer,
   EvaluationAddAnswer,
   EvaluationAnswer,
+  FloatingContainer,
+  DropDownCourse,
+  UploadButton,
+  AddExistingQuestion,
+  ExistingQContainer,
+  DropDownContainer,
 } from "./styles/createevaluationform";
 import { ThemeState } from "../../features/theme";
 
@@ -103,4 +109,35 @@ CreateEvaluationForm.EvaluationAddAnswer =
         </svg>
       </EvaluationAddAnswer>
     );
+  };
+
+CreateEvaluationForm.FloatingContainer =
+  function CreateEvaluationFormFloatingContainer({ children, ...restProps }) {
+    return <FloatingContainer {...restProps}>{children}</FloatingContainer>;
+  };
+
+CreateEvaluationForm.DropDownCourse =
+  function CreateEvaluationFormDropDownCourse({ children, ...restProps }) {
+    return <DropDownCourse {...restProps}>{children}</DropDownCourse>;
+  };
+
+CreateEvaluationForm.DropDownContainer =
+  function CreateEvaluationFormDropDownContainer({ children, ...restProps }) {
+    return <DropDownContainer {...restProps}>{children}</DropDownContainer>;
+  };
+CreateEvaluationForm.UploadButton = function CreateEvaluationFormUploadButton({
+  children,
+  ...restProps
+}) {
+  return <UploadButton {...restProps}>{children}</UploadButton>;
+};
+
+CreateEvaluationForm.AddExistingQuestion =
+  function CreateEvaluationFormAddExistingQ({ children, ...restProps }) {
+    return <AddExistingQuestion {...restProps}>{children}</AddExistingQuestion>;
+  };
+
+CreateEvaluationForm.ExistingQuestionContainer =
+  function CreateEvaluationFormExistingQContainer({ children, ...restProps }) {
+    return <ExistingQContainer {...restProps}>{children}</ExistingQContainer>;
   };
