@@ -1,85 +1,50 @@
 package com.CodeOfDuty.CourseEvaluation.Controller;
 
-import com.CodeOfDuty.CourseEvaluation.Service.ICourseService;
-import com.CodeOfDuty.CourseEvaluation.Service.IStudentService;
-import com.CodeOfDuty.CourseEvaluation.model.Course;
+import com.CodeOfDuty.CourseEvaluation.Service.StudentService;
 import com.CodeOfDuty.CourseEvaluation.model.Student;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+@RequestMapping("/api/students")
 @RestController
-@RequestMapping("/api")
 public class StudentController {
 
-    private IStudentService studentService;
-    private ICourseService courseService;
+    private final StudentService studentService;
 
-    @Autowired
-    public StudentController(IStudentService studentService, ICourseService courseService) {
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
-        this.courseService=courseService;
-    }
-
-    @GetMapping("/students")
-    public List<Student> get(){
-        return studentService.getAll();
-    }
-
-    @PostMapping("/students/add")
-    public void add(@RequestBody Student student){
-        this.studentService.add(student);
-    }
-
-    @PostMapping("/students/update")
-    public void update(@RequestBody Student student){
-        this.studentService.update(student);
     }
 
 
-    @DeleteMapping("/students/delete")
-    public void delete(@RequestBody Student student){
-        this.studentService.delete(student);
+    @GetMapping()
+    public List<Student> findAll(){
+        return studentService.findAll();
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Student> add(@RequestBody Student student){
+        return ResponseEntity.ok(studentService.addStudent(student));
+    }
+
+    @DeleteMapping("/delete/{studentNo}")
+    public void delete(@PathVariable String studentNo){
+        studentService.deleteStudent(studentNo);
     }
 
 
-    @GetMapping("/students/{student_no}")
+    @GetMapping("/{student_no}")
     public Student getbyNo(@PathVariable String student_no){
-        return this.studentService.getByNo(student_no);
+        return this.studentService.findById(student_no);
     }
 
 
-    @PostMapping("/students/enrollcourse")
+    @PostMapping("/enrollcourse")
     public void enrollCourse(@RequestParam String student_no, @RequestParam String course_id, @RequestParam String semester, @RequestParam int year){
-        Student student=studentService.getByNo(student_no);
-        Course course = courseService.getByCourse(course_id,semester,year);
-        studentService.enrollCourse(course,student);
+        studentService.enrollCourse(course_id,semester,year,student_no);
     }
-
-    @GetMapping("/register")
-    public String showRegisterationPage() {
-        return "register page";
-    }
-
-    @PostMapping("/register/submit")
-    public String registerStudent(@RequestBody Student student){
-        try{
-            studentService.add(student);
-        }catch (DataIntegrityViolationException e) {
-            return e.getLocalizedMessage();
-        }
-        return student.toString();
-    }
-
-
-
-
-
-
-
-
 
 
 

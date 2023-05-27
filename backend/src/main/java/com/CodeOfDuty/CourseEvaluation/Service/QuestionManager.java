@@ -15,13 +15,13 @@ public class QuestionManager {
     private final IQuestionDao questionRepository;
     private final AnswerChoiceManager answerChoiceManager;
 
-    private final InstructorManager instructorManager;
+    private final InstructorService instructorService;
 
 
-    public QuestionManager(IQuestionDao questionRepository, AnswerChoiceManager answerChoiceManager, InstructorManager instructorManager){
+    public QuestionManager(IQuestionDao questionRepository, AnswerChoiceManager answerChoiceManager,  InstructorService instructorService){
         this.questionRepository = questionRepository;
         this.answerChoiceManager = answerChoiceManager;
-        this.instructorManager = instructorManager;
+        this.instructorService = instructorService;
     }
 
     public List<Question> getAllQuestions(){
@@ -29,7 +29,7 @@ public class QuestionManager {
     }
 
     public Question createQuestion(String text, String username, List<AnswerChoice> answers){
-        Instructor instructor = instructorManager.getByUserName(username);
+        Instructor instructor = instructorService.findById(username);
         Question question = Question.builder()
                 .text(text)
                 .addedBy(instructor)
@@ -54,7 +54,7 @@ public class QuestionManager {
     }
 
     public List<Question> findAllAddedBy(String username){
-        Instructor instructor = instructorManager.getByUserName(username);
+        Instructor instructor = instructorService.findById(username);
         return questionRepository.findAllByAddedBy(instructor);
     }
 
