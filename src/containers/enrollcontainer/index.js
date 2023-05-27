@@ -45,7 +45,7 @@ export default function EnrollContainer() {
       setS(true);
     },
     onError: (err) => {
-      console.log(err.message);
+      console.log(err.message + " :D");
       setS(false);
     },
   };
@@ -59,7 +59,7 @@ export default function EnrollContainer() {
       <EnrollCourse.ListContainer>
         {renderCourses([])}
       </EnrollCourse.ListContainer>
-      {succ ? <p>asdhkasjdaskdl</p> : <p>yanlis</p>}
+      {succ ? <p>okay</p> : <p>olmadı</p>}
       <button
         onClick={() => {
           /*FetchAssignIntructorToCourse(

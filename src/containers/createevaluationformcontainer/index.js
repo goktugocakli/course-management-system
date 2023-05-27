@@ -1,16 +1,146 @@
 import { CreateEvaluationForm } from "../../components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { useSelector } from "react-redux";
+import { user } from "../../features/user";
+
+import {
+  FetchQuestionAddedByInstructor,
+  UploadEvaluationForm,
+  UploadEvaluationFormQuestions,
+  FetchGetCourseOfInstructor,
+} from "../../constants/api";
+
+const AddAutomaticQuestion = function (
+  questionAndAnswerJson,
+  questions,
+  setQuestions
+) {
+  if (questions.columns.length >= questionAndAnswerJson.answers.length) {
+    let ans = [];
+    for (let i = 0; i < questions.columns.length; i++) {
+      if (
+        questionAndAnswerJson.answers[i]?.answerText.length >
+        questions.columns[i].width
+      ) {
+        questions.columns[i].width =
+          questionAndAnswerJson.answers[i]?.answerText.length;
+      }
+      ans.push({
+        ...column,
+        id: i,
+        // title is content of the answer
+        title:
+          questionAndAnswerJson.answers[i] === undefined
+            ? ""
+            : questionAndAnswerJson.answers[i].answerText,
+      });
+    }
+
+    let newQ = {
+      width: questions.width,
+      columns: questions.columns,
+      items: questions.items.concat([
+        {
+          id: questions.items.length,
+          question: questionAndAnswerJson.text,
+          column: ans,
+          modified: false,
+          questionOwnId: questionAndAnswerJson.id,
+        },
+      ]),
+    };
+
+    setQuestions(newQ);
+  } else {
+    //TODO: add new columns to all questions based on the length of the answers of that paticular question
+
+    let diff = questionAndAnswerJson.answers.length - questions.columns.length;
+    let items = questions.items.map((item) => {
+      for (let i = 0; i < diff; i++) {
+        item.column.push({
+          //answers
+          ...column,
+          id: item.column.length,
+        });
+      }
+      return item;
+    });
+
+    let columns = questions.columns;
+
+    for (let i = 0; i < diff; i++) {
+      columns = columns.concat([
+        {
+          ...column,
+          title: "Column",
+          id: columns.length,
+        },
+      ]);
+    }
+
+    let newQ = {
+      width: questions.width + input_grow * diff,
+      columns: columns,
+      items: items,
+    };
+
+    let ans = [];
+    for (let i = 0; i < newQ.columns.length; i++) {
+      if (
+        questionAndAnswerJson.answers[i]?.answerText.length >
+        newQ.columns[i].width
+      ) {
+        newQ.columns[i].width =
+          questionAndAnswerJson.answers[i]?.answerText.length;
+      }
+      ans.push({
+        ...column,
+        id: i,
+        // title is content of the answer
+        title:
+          questionAndAnswerJson.answers[i] === undefined
+            ? ""
+            : questionAndAnswerJson.answers[i].answerText,
+      });
+    }
+
+    newQ = {
+      width: newQ.width,
+      columns: newQ.columns,
+      items: questions.items.concat([
+        {
+          id: questions.items.length,
+          question: questionAndAnswerJson.text,
+          column: ans,
+          modified: false,
+          questionOwnId: questionAndAnswerJson.id,
+        },
+      ]),
+    };
+
+    setQuestions(newQ);
+  }
+};
 
 const AddAnswer = function (questionId, answerId, questions, setQuestions) {
-
   return (
     <CreateEvaluationForm.EvaluationAnswer
+      style={{ width: questions.columns[answerId].width + "ch" }}
       value={questions.items.at(questionId).column.at(answerId).title}
       key={answerId}
       onChange={(e) => {
+        var widthofValue = e.target.value.length;
+
+        if (widthofValue > questions.columns[answerId].width) {
+          questions.columns[answerId].width = widthofValue;
+        }
+
         var a = questions.items.at(questionId).column.at(answerId);
         a.title = e.target.value;
         questions.items[questionId].column[answerId] = a;
+        questions.items[questionId].modified = true;
+
         var newQ = {
           width: questions.width,
           columns: questions.columns,
@@ -34,6 +164,7 @@ const AddQuestion = function (id, questions, setQuestions) {
           onChange={(e) => {
             var q = questions.items.at(id);
             q.question = e.target.value;
+            q.modified = true;
             questions.items[id] = q;
 
             var newQ = {
@@ -76,6 +207,8 @@ questions = {
     {
         id: 0,
         question: "asdas",
+        modified: true,
+        questionOwnId: "id from backend"
         column: [
             {
                 id: 0,
@@ -110,7 +243,7 @@ questions = {
 const column = {
   id: 0,
   title: "",
-  width: "",
+  width: 20,
   max_width: "",
   min_width: "",
 };
@@ -118,15 +251,108 @@ const column = {
 const input_grow = 140; // this is a ridiculus thing to have
 //TODO: change this stupid thing in the future
 
+var courses;
+var data;
+
+/*
+
+content of course
+
+courses = [
+  {
+    code:"asdas",
+    year: 2023,
+    semester: "Spring",
+    "name": "asdas",
+    credit: 0
+  }
+]
+
+*/
+
+// content of data
+
+/*
+
+
+data = {
+  [
+    {
+      id: 0,
+      text: "Question text"
+      addedBy: {"user_name": "ins"},
+      answers: [
+        {id: 0,
+        "answerText": "text of answer"},
+        {
+          id: 1,
+          "answerText" : "asdasda",
+        }
+      ],
+      studentAnswers: [],
+    }
+  ]
+}
+
+*/
+
+const options = {
+  onSuccess: (response) => {
+    data = { data: response.data, success: true };
+  },
+
+  onError: (err) => {
+    data = { data: err.message, success: false };
+  },
+};
+
+const options2 = {
+  onSuccess: (response) => {
+    courses = { data: response.data, success: true };
+  },
+  onError: (err) => {
+    courses = { data: err.message, success: false };
+  },
+};
 export default function CreateEvaluationFormContainer() {
+  //to be able to get the relevant data only once when page loaded we need to use this mechanic
+  // using useEffect inside api makes things a lot easier but for this paticular case
+  // useEffect inside api runs every time this component state changes and that makes a lot of requests to backend
+
+  const userState = useSelector(user).user;
+  useEffect(() => {
+      FetchQuestionAddedByInstructor(userState.data.user_name, options);
+      //FetchGetCourseOfInstructor(userState.data.user_name,options2);
+  }, []);
+
+  
+  /*
+userState = {
+  userType: asdasda,
+  data: (user datas)
+}
+*/
+
   const [questions, setQuestions] = useState({
     width: 600, // TODO: because of the input_grow thing this doenst make sense
     columns: [],
     items: [],
   });
 
+  const [exitingQExpanded, setExistingExpanded] = useState(false);
+
+  const [dropDown, setDropDown] = useState({
+    expanded: false,
+    content: "courses",
+    course: null, // this course is selected course
+  });
+
   return (
-    <CreateEvaluationForm>
+    <CreateEvaluationForm
+      onContextMenu={(e) => {
+        //e.preventDefault();
+      }}
+    >
       <CreateEvaluationForm.EvaluationItem>
         <CreateEvaluationForm.EvaluationQuestionContainer>
           <CreateEvaluationForm.EvaluationQuestion
@@ -140,6 +366,7 @@ export default function CreateEvaluationFormContainer() {
           questions.columns.map((col) => {
             return (
               <CreateEvaluationForm.EvaluationColumn
+                style={{ width: col.width + "ch" }}
                 key={col.id}
                 value={col.title}
                 onChange={(e) => {
@@ -154,6 +381,9 @@ export default function CreateEvaluationFormContainer() {
 
                   setQuestions(newQ);
                 }}
+                onContextMenu={() => {
+                  //TODO:: add functionality to delete
+                }}
               ></CreateEvaluationForm.EvaluationColumn>
             );
           })
@@ -166,6 +396,7 @@ export default function CreateEvaluationFormContainer() {
             // adding newly added columns to all items => DONE
             var items = questions.items.map((item) => {
               item.column.push({
+                //answers
                 ...column,
                 id: item.column.length,
               });
@@ -174,6 +405,7 @@ export default function CreateEvaluationFormContainer() {
 
             var newQ = {
               width: questions.width + input_grow,
+
               columns: questions.columns.concat([
                 {
                   //adding new column to our data
@@ -219,6 +451,8 @@ export default function CreateEvaluationFormContainer() {
                       id: questions.items.length,
                       question: val,
                       column: ans,
+                      modified: true,
+                      questionOwnId: 0,
                     },
                   ]),
                 };
@@ -250,6 +484,8 @@ export default function CreateEvaluationFormContainer() {
                         id: questions.items.length,
                         question: val,
                         column: ans,
+                        modified: true,
+                        questionOwnId: 0,
                       },
                     ]),
                   };
@@ -261,6 +497,119 @@ export default function CreateEvaluationFormContainer() {
           />
         </CreateEvaluationForm.EvaluationQuestionContainer>
       </CreateEvaluationForm.EvaluationItem>
+
+      <CreateEvaluationForm.FloatingContainer>
+        <CreateEvaluationForm.DropDownCourse
+          onClick={() => {
+            setDropDown({ ...dropDown, expanded: !dropDown.expanded });
+            setExistingExpanded(false);
+          }}
+        >
+          {dropDown.content}
+          <CreateEvaluationForm.DropDownContainer
+            style={{ display: dropDown.expanded ? "flex" : "none" }}
+          >
+            {
+              //TODO:: render courses and add onclick to them to set the course
+            }
+            {courses?.data.map((c) => {
+              return (
+                <p
+                  key={c.code}
+                  onClick={() => {
+                    setDropDown({ ...dropDown, expanded: false, courses: c });
+                  }}
+                >
+                  {c.name}
+                </p>
+              );
+            })}
+          </CreateEvaluationForm.DropDownContainer>
+        </CreateEvaluationForm.DropDownCourse>
+
+        <CreateEvaluationForm.UploadButton
+          onClick={async () => {
+            let course = {
+              course_code: dropDown.course?.code,
+              year: dropDown.course?.year,
+              semester: dropDown.course?.semester,
+            };
+
+            let due_date = "2023-06-15 23:59:59";
+
+            //TODO: get todays date and add 7 days to it
+
+            ////////////////////////////////////////////// Here is a little bit complicated
+            if (dropDown.course !== null) {
+              let res = await Promise.all(
+                //TODOO: very important here understand this
+                UploadEvaluationFormQuestions(
+                  questions,
+                  userState.data.user_name
+                )
+              );
+
+              UploadEvaluationForm(
+                res,
+                userState.data.user_name,
+                course,
+                due_date
+              );
+            }
+          }}
+        >
+          Upload
+        </CreateEvaluationForm.UploadButton>
+
+        <CreateEvaluationForm.AddExistingQuestion
+          onClick={() => {
+            setExistingExpanded(!exitingQExpanded);
+            setDropDown({ ...dropDown, expanded: false });
+          }}
+        >
+          Add Existing Question
+          <CreateEvaluationForm.ExistingQuestionContainer
+            style={{ display: exitingQExpanded ? "flex" : "none" }}
+          >
+            {data?.data.map((ques) => {
+              return (
+                <p
+                  key={ques.id}
+                  onClick={() => {
+                    AddAutomaticQuestion(
+                      /* {
+                      id: 100,
+                      text: "asdasda",
+                      answers: [
+                        {
+                          id: 0,
+                          answerText: "adasd0",
+                        },
+                        {
+                          id: 1,
+                          answerText: "adasd1",
+                        },
+                        {
+                          id: 2,
+                          answerText: "adasd2",
+                        },
+                      ],
+                    },*/
+                      ques,
+                      questions,
+                      setQuestions
+                    );
+
+                    setExistingExpanded(false);
+                  }}
+                >
+                  {ques.text}
+                </p>
+              );
+            })}
+          </CreateEvaluationForm.ExistingQuestionContainer>
+        </CreateEvaluationForm.AddExistingQuestion>
+      </CreateEvaluationForm.FloatingContainer>
     </CreateEvaluationForm>
   );
 }

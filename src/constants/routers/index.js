@@ -8,7 +8,8 @@ import {
   SeeCoursesPage,
   SemestersPage,
   AddSemesterPage,
-  ForgetPasswordPage
+  ForgetPasswordPage,
+  EditPage,
 } from "../../pages";
 
 export const MainRouter = createBrowserRouter([
@@ -49,17 +50,22 @@ export const MainRouter = createBrowserRouter([
   },
   {
     path: "/semesters",
-    element: <SemestersPage/>,
+    element: <SemestersPage />,
     errorElement: <h1>404</h1>,
   },
   {
     path: "/addsemester",
-    element: <AddSemesterPage/>,
+    element: <AddSemesterPage />,
     errorElement: <h1>404</h1>,
   },
   {
     path: "/forgotpassword",
-    element: <ForgetPasswordPage/>,
+    element: <ForgetPasswordPage />,
+    errorElement: <h1>404</h1>,
+  },
+  {
+    path: "/editUser",
+    element: <EditPage />,
     errorElement: <h1>404</h1>,
   },
 ]);
