@@ -1,5 +1,6 @@
 package com.CodeOfDuty.CourseEvaluation.Controller;
 
+import com.CodeOfDuty.CourseEvaluation.DTO.StudentCreateRequest;
 import com.CodeOfDuty.CourseEvaluation.Service.StudentService;
 import com.CodeOfDuty.CourseEvaluation.model.Student;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@RequestMapping("/api/students")
+@RequestMapping("/students")
 @RestController
 public class StudentController {
 
@@ -29,6 +30,21 @@ public class StudentController {
         return ResponseEntity.ok(studentService.addStudent(student));
     }
 
+    @PostMapping("/register")
+    public ResponseEntity<Student> createStudent(@RequestBody StudentCreateRequest studentRequest){
+        Student student=studentService.createStudent(
+                studentRequest.getStudent_no(),
+                studentRequest.getFirst_name(),
+                studentRequest.getSecond_name(),
+                studentRequest.getSurname(),
+                studentRequest.getE_mail(),
+                studentRequest.getPassword(),
+                studentRequest.getDepartment()
+        );
+
+        return ResponseEntity.ok(student);
+    }
+
     @DeleteMapping("/delete/{studentNo}")
     public void delete(@PathVariable String studentNo){
         studentService.deleteStudent(studentNo);
@@ -46,6 +62,23 @@ public class StudentController {
         studentService.enrollCourse(course_id,semester,year,student_no);
     }
 
+    @GetMapping("/inActives")
+    public ResponseEntity<List<Student>> findAllInActiveStudents(){
+        List<Student> students = studentService.findAllInActiveStudents();
+        return ResponseEntity.ok(students);
+    }
+
+    @GetMapping("/confirmStudent")
+    public ResponseEntity<String> confirmStudent(@RequestParam String studentNo){
+        studentService.confirmStudent(studentNo);
+        return ResponseEntity.ok("Öğrenci başarı ile sisteme kaydedildi");
+    }
+
+    @GetMapping("/banStudent")
+    public ResponseEntity<String> banStudent(@RequestParam String studentNo){
+        studentService.banStudent(studentNo);
+        return ResponseEntity.ok("Öğrenci banlandı. Artık anketlere cevap veremez.");
+    }
 
 
 }

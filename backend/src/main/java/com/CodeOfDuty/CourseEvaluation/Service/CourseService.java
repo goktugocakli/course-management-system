@@ -3,6 +3,7 @@ package com.CodeOfDuty.CourseEvaluation.Service;
 import com.CodeOfDuty.CourseEvaluation.DAO.CourseRepository;
 import com.CodeOfDuty.CourseEvaluation.model.Course;
 import com.CodeOfDuty.CourseEvaluation.model.CourseKey;
+import com.CodeOfDuty.CourseEvaluation.model.Student;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
