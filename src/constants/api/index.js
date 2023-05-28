@@ -1,7 +1,34 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const BASE_URL = "http://localhost:8080";
+
+/*
+options = {success: true or false}
+
+*/
+export const ShowToast = (message, options) => {
+  options?.success
+    ? toast.success(message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+    : toast.error(message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+};
 
 /*
 
@@ -253,24 +280,28 @@ export const useFetchOnGoingEvaluation = (user, options) => {
   }, []);
 };
 
-export const useFetchPendingRequests = (options) => {
-  const [data, setData] = useState([]);
-
+export const FetchPendingRequests = (options) => {
   //TODO: add users an attribute called active and banned so we can easily filter pending requests and banned users etc.
 
-  axios.get(BASE_URL + "/api/admin/pendingRequests").then(
+  axios.get(BASE_URL + "/students/inActives").then(
     (response) => {
-      options?.onSuccess?.();
-      setData({ ...response.data, success: true });
+      options?.onSuccess?.(response);
     },
     (err) => {
-      setData({ ...err, success: false });
+      options?.onError?.(err);
     }
   );
+};
 
-  return {
-    data,
-  };
+export const GrantRequestToStudent = (student_no, options) => {
+  axios.get(BASE_URL + `/students/confirmStudent?studentNo=${student_no}`).then(
+    (response) => {
+      options?.onSuccess?.(response);
+    },
+    (err) => {
+      options?.onError?.(err);
+    }
+  );
 };
 
 export const FetchAssignIntructorToCourse = (
