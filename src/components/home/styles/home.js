@@ -2,6 +2,8 @@ import styled from "styled-components/macro";
 
 import { Themes } from "../../../constants/globalStyle";
 
+import { ToastContainer } from "react-toastify";
+
 export const Container = styled.div`
   --bg-color: ${({ white }) => Themes[white].background};
   --c-color: ${({ white }) => Themes[white].color};
@@ -10,7 +12,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
 
 export const Events = styled.div`
   display: flex;
@@ -26,8 +27,13 @@ export const EventInner = styled.div`
   flex: 1;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
 `;
 
 export const EventItem = styled.div`
-  background: red;
+  display: flex;
+  flex-direction: row;
+  width: 700px;
+  align-items: center;
+  justify-content: space-between;
 `;
