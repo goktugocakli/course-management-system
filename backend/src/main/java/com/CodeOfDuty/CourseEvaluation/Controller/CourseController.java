@@ -2,12 +2,13 @@ package com.CodeOfDuty.CourseEvaluation.Controller;
 
 import com.CodeOfDuty.CourseEvaluation.Service.CourseService;
 import com.CodeOfDuty.CourseEvaluation.model.Course;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/v2/course")
+@RequestMapping("/v1/course")
 public class CourseController {
     private final CourseService courseService;
 
@@ -40,4 +41,5 @@ public class CourseController {
     public Course findById(@PathVariable String course_code, @PathVariable String semester, @PathVariable String year){
         return courseService.findById(course_code, semester, Integer.valueOf(year));
     }
+
 }

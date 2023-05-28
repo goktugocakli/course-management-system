@@ -6,9 +6,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name="student")
 public class Student {
@@ -37,6 +42,12 @@ public class Student {
     @JsonIncludeProperties({"name"})
     private Department department;
 
+    @Column(name="isActive", nullable = false)
+    private boolean isActive = false;
+
+    @Column(name="isBanned", nullable = false)
+    private boolean isBanned = false;
+
 
     @ManyToMany
     @JsonIncludeProperties({"code","year","semester"})
@@ -45,84 +56,6 @@ public class Student {
             joinColumns = @JoinColumn(name = "student_no"),
             inverseJoinColumns = {@JoinColumn(name = "code"), @JoinColumn(name = "semester"), @JoinColumn(name = "year")})
     private List<Course> courses;
-
-    public Student(String student_no, String first_name, String second_name, String surname, String e_mail, String password) {
-        this.student_no = student_no;
-        this.first_name = first_name;
-        this.second_name = second_name;
-        this.surname = surname;
-        this.e_mail = e_mail;
-        this.password = password;
-    }
-
-    public Student() {
-
-    }
-
-
-    public String getStudent_no() {
-        return student_no;
-    }
-
-    public void setStudent_no(String student_no) {
-        this.student_no = student_no;
-    }
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getSecond_name() {
-        return second_name;
-    }
-
-    public void setSecond_name(String second_name) {
-        this.second_name = second_name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getE_mail() {
-        return e_mail;
-    }
-
-    public void setE_mail(String e_mail) {
-        this.e_mail = e_mail;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
 
     public void addCourses(Course course){this.courses.add(course);}
 }

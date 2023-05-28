@@ -4,11 +4,16 @@ import com.CodeOfDuty.CourseEvaluation.DTO.SurveyDTO;
 import com.CodeOfDuty.CourseEvaluation.DTO.SurveyRequest;
 import com.CodeOfDuty.CourseEvaluation.Service.SurveyManager;
 import com.CodeOfDuty.CourseEvaluation.model.Survey;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/survey")
@@ -57,4 +62,20 @@ public class SurveyController {
     public ResponseEntity<List<Object[]>> deneme2(@PathVariable String surveyId){
         return ResponseEntity.ok(surveyManager.deneme2(Integer.valueOf(surveyId)));
     }
+
+    @GetMapping("/findByCourseAndInstructor")
+    public ResponseEntity<Survey> findByCourseAndInstructor(@RequestParam(value = "course_code") String course_code,
+                                               @RequestParam(value = "semester") String semester,
+                                               @RequestParam(value = "year") Integer year,
+                                               @RequestParam(value = "instructor_username") String instructor_username){
+        Survey survey = surveyManager.findByCourseAndInstructor(
+                course_code,
+                semester,
+                year,
+                instructor_username
+        );
+        return ResponseEntity.ok(survey);
+
+    }
+
 }
