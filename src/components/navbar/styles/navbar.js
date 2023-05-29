@@ -86,7 +86,9 @@ export const LinkContainer = styled.div.attrs((props) => ({
   animation-duration: 500ms;
 `;
 
-export const Link = styled.div``;
+export const Link = styled.div`
+  cursor: pointer;
+`;
 
 export const Hamburger = styled.div.attrs((props) => ({
   "aria-expanded": props.expanded,

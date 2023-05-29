@@ -6,14 +6,17 @@ import com.CodeOfDuty.CourseEvaluation.model.Student;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+
 import java.util.List;
 
 
-@RequestMapping("/students")
+@RequestMapping("/api/students")
 @RestController
 public class StudentController {
 
     private final StudentService studentService;
+
 
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
@@ -54,6 +57,11 @@ public class StudentController {
     @GetMapping("/{student_no}")
     public Student getbyNo(@PathVariable String student_no){
         return this.studentService.findById(student_no);
+    }
+
+    @GetMapping("/forgetPass")
+    public boolean forgetPassword(@RequestParam String studentNo){
+        return this.studentService.forgetPass(studentNo);
     }
 
 

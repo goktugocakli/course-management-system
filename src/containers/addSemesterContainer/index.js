@@ -1,160 +1,266 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import {AddSemester} from '../../components';
-import {AddCourseContainer} from '../../containers';
+import { AddSemester } from "../../components";
+import { AddCourseContainer } from "../../containers";
 
-
+import { GetAllCoursesWithSemester, ShowToast } from "../../constants/api";
+import { useNavigate } from "react-router-dom";
 
 export default function AddSemesterContainer() {
-  const courses = [{name:"Fall", code:"131231", credit:"3", type:"M"},
-                      {name:"Fall", code:"131231", credit:"3", type:"M"},
-                      {name:"Fall", code:"131231", credit:"3", type:"M"},
-                      {name:"Fall", code:"131231", credit:"3", type:"M"},
-                      {name:"Fall", code:"131231", credit:"3", type:"M"},
-                      {name:"Fall", code:"131231", credit:"3", type:"M"},
-                      {name:"Fall", code:"131231", credit:"3", type:"M"}
-                      ]
+  const [courses, setCourses] = useState([]);
 
-
-  
-
+  const navigate = useNavigate();
   // states for semester addition inputs
-  const [semesterName, setSemesterName] = useState();
+  const [semesterName, setSemesterName] = useState({
+    expanded: false,
+    semester: "Fall",
+  });
   // these states used to pick start and end dates
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
-  
 
-  // this state used to show/hide add new course window                    
-  const [courseDiv, setCourseDiv] = useState([]);
-  
-  
+  // this state used to show/hide add new course window
+  const [courseDiv, setCourseDiv] = useState(false);
+
   // this function used to check if dates picked correctly
   const checkDates = (start, end) => {
     let date1 = new Date(start).getTime();
     let date2 = new Date(end).getTime();
-  
+
     if (date1 < date2) {
-      console.log(`${start} is less than ${end}`);
       return true;
     } else if (date1 > date2) {
-      console.log(`${start} is greater than ${end}`);
-    } else if (start === undefined ) {
+    } else if (start === undefined) {
       console.log(`Please pick a start date.`);
-    } else if (end === undefined ) {
+    } else if (end === undefined) {
       console.log(`Please pick an end date.`);
-    } else if (date1 === date2 ) {
-      console.log(`${start} is equal to ${end}`);
-    } 
+    } else if (date1 === date2) {
+      ShowToast("Start and End Dates are equal!", { success: false });
+    }
   };
 
   const saveSemester = () => {
-      console.log("Semester saved.")
-  }
+    const options = {
+      onSuccess: (response) => {
+        setCourses(response);
+      },
+      onError: (err) => {},
+    };
+    GetAllCoursesWithSemester(
+      semesterName.semester,
+      +startDate.split("-")[0],
+      options
+    );
+  };
 
   // this function checks all test cases for semester addition
-  const checkSemesterInputs = (start,end) => {
-      if(courses.length === 0){
-        console.log("You haven't added any course yet.")
-      } else if(semesterName === undefined){
-        console.log("Please enter a name for semester.")
-      } else if(checkDates(start,end)) {
-        saveSemester();
-      }
-  }
+  const checkSemesterInputs = (start, end) => {
+    if (semesterName === undefined) {
+      console.log("Please enter a name for semester.");
+    } else if (checkDates(start, end)) {
+      saveSemester();
+    }
+  };
+
+  useEffect(() => {
+    checkSemesterInputs(startDate, endDate);
+  }, [startDate, endDate, semesterName, courseDiv]);
 
   // this function used to open add new course window
   const handleClick = function addNewCourse() {
-    return(
-      setCourseDiv(courseDiv.concat(
-            <AddCourseContainer/>
-        )
-      )
-    )
+    const today = new Date();
+    const start = new Date(startDate);
+    if (today.getTime() > start.getTime()) {
+      ShowToast("Start date must be present!", { success: false });
+    } else {
+      setCourseDiv(!courseDiv);
+    }
+  };
 
-  }                   
-  
-  if(courses.length > 0){
+  if (courses.length > 0) {
     return (
-
       <>
         <AddSemester.Div>
-        <AddSemester.InputRow>
+          <AddSemester.InputRow>
             <AddSemester.InputColumn>
-              <AddSemester.InputLabel>Name</AddSemester.InputLabel>
-              <AddSemester.Input onChange={evn => setSemesterName(evn.target.value)}/>
+              <AddSemester.InputLabel
+                onClick={() => {
+                  setSemesterName({
+                    ...semesterName,
+                    expanded: !semesterName.expanded,
+                  });
+                }}
+                style={{ fontWeight: 700 }}
+              >
+                {semesterName.semester}
+              </AddSemester.InputLabel>
+              <AddSemester.SemesterContainer
+                style={{ display: semesterName.expanded ? "flex" : "none" }}
+              >
+                <AddSemester.InputLabel
+                  onClick={() => {
+                    setSemesterName({
+                      ...semesterName,
+                      expanded: false,
+                      semester: "Fall",
+                    });
+                  }}
+                >
+                  Fall
+                </AddSemester.InputLabel>
+                <AddSemester.InputLabel
+                  onClick={() => {
+                    setSemesterName({
+                      ...semesterName,
+                      expanded: false,
+                      semester: "Spring",
+                    });
+                  }}
+                >
+                  Spring
+                </AddSemester.InputLabel>
+              </AddSemester.SemesterContainer>
             </AddSemester.InputColumn>
             <AddSemester.DateRow>
-                <AddSemester.InputColumn>
-                  <AddSemester.InputLabel>Start Date</AddSemester.InputLabel>
-                  <AddSemester.Input type={"date"} onChange={evn => setStartDate(evn.target.value)}/>
-                </AddSemester.InputColumn>
-                <AddSemester.InputColumn>
-                  <AddSemester.InputLabel>End Date</AddSemester.InputLabel>
-                  <AddSemester.Input type={"date"} onChange={evn => setEndDate(evn.target.value)}/>
-                </AddSemester.InputColumn>
+              <AddSemester.InputColumn>
+                <AddSemester.InputLabel>Start Date</AddSemester.InputLabel>
+                <AddSemester.Input
+                  type={"date"}
+                  onChange={(evn) => setStartDate(evn.target.value)}
+                />
+              </AddSemester.InputColumn>
+              <AddSemester.InputColumn>
+                <AddSemester.InputLabel>End Date</AddSemester.InputLabel>
+                <AddSemester.Input
+                  type={"date"}
+                  onChange={(evn) => setEndDate(evn.target.value)}
+                />
+              </AddSemester.InputColumn>
             </AddSemester.DateRow>
-            
-        </AddSemester.InputRow>
+          </AddSemester.InputRow>
 
-        <AddSemester.Label>Courses</AddSemester.Label>
-        <AddSemester.LabelDiv>
+          <AddSemester.Label>Courses</AddSemester.Label>
+          <AddSemester.LabelDiv>
             <AddSemester.Text>Course Name</AddSemester.Text>
             <AddSemester.Text>Code</AddSemester.Text>
             <AddSemester.Text>Credit</AddSemester.Text>
             <AddSemester.Text>Type</AddSemester.Text>
-        </AddSemester.LabelDiv>
-        <AddSemester.Line/>
-        <AddSemester.List>{courses.map((course) => 
-            <AddSemester.ListItem>
-              <AddSemester.Text>{course.name}</AddSemester.Text>
-              <AddSemester.Text>{course.code}</AddSemester.Text>
-              <AddSemester.Text>{course.credit}</AddSemester.Text>
-              <AddSemester.Text>{course.type}</AddSemester.Text>
-            </AddSemester.ListItem>)}
-        </AddSemester.List>
-        <AddSemester.AddButton onClick={handleClick}>Add new course</AddSemester.AddButton>
-        <AddSemester.StartButton onClick={() => checkSemesterInputs(startDate,endDate)}>Start semester</AddSemester.StartButton> 
-      </AddSemester.Div>
-      {courseDiv}
+          </AddSemester.LabelDiv>
+          <AddSemester.Line />
+          <AddSemester.List>
+            {courses.map((course) => (
+              <AddSemester.ListItem key={course.code}>
+                <AddSemester.Text>
+                  {course.name.slice(0, 15) + "..."}
+                </AddSemester.Text>
+                <AddSemester.Text>{course.code}</AddSemester.Text>
+                <AddSemester.Text>{course.credit}</AddSemester.Text>
+                <AddSemester.Text>
+                  {course.course_type === 0 ? "M" : "E"}
+                </AddSemester.Text>
+              </AddSemester.ListItem>
+            ))}
+          </AddSemester.List>
+          <AddSemester.AddButton onClick={handleClick}>
+            Add new course
+          </AddSemester.AddButton>
+          <AddSemester.StartButton onClick={() => navigate("/")}>
+            Close
+          </AddSemester.StartButton>
+        </AddSemester.Div>
+        {courseDiv ? (
+          <AddCourseContainer
+            key={0}
+            semester={semesterName.semester}
+            year={+startDate.split("-")[0]}
+            setIsVisible={setCourseDiv}
+          />
+        ) : null}
       </>
-
-      
-    ); 
+    );
   } else {
     return (
       <>
         <AddSemester.Div>
           <AddSemester.InputRow>
+            <AddSemester.InputColumn>
+              <AddSemester.InputLabel
+                onClick={() => {
+                  setSemesterName({
+                    ...semesterName,
+                    expanded: !semesterName.expanded,
+                  });
+                }}
+                style={{ fontWeight: 700 }}
+              >
+                {semesterName.semester}
+              </AddSemester.InputLabel>
+              <AddSemester.SemesterContainer
+                style={{ display: semesterName.expanded ? "flex" : "none" }}
+              >
+                <AddSemester.InputLabel
+                  onClick={() => {
+                    setSemesterName({
+                      ...semesterName,
+                      expanded: false,
+                      semester: "Fall",
+                    });
+                  }}
+                >
+                  Fall
+                </AddSemester.InputLabel>
+                <AddSemester.InputLabel
+                  onClick={() => {
+                    setSemesterName({
+                      ...semesterName,
+                      expanded: false,
+                      semester: "Spring",
+                    });
+                  }}
+                >
+                  Spring
+                </AddSemester.InputLabel>
+              </AddSemester.SemesterContainer>
+            </AddSemester.InputColumn>
+            <AddSemester.DateRow>
               <AddSemester.InputColumn>
-                <AddSemester.InputLabel>Name</AddSemester.InputLabel>
-                <AddSemester.Input onChange={evn => setSemesterName(evn.target.value)}/>
+                <AddSemester.InputLabel>Start Date</AddSemester.InputLabel>
+                <AddSemester.Input
+                  type={"date"}
+                  onChange={(evn) => setStartDate(evn.target.value)}
+                />
               </AddSemester.InputColumn>
-              <AddSemester.DateRow>
-                  <AddSemester.InputColumn>
-                    <AddSemester.InputLabel>Start Date</AddSemester.InputLabel>
-                    <AddSemester.Input type={"date"} onChange={evn => setStartDate(evn.target.value)}/>
-                  </AddSemester.InputColumn>
-                  <AddSemester.InputColumn>
-                    <AddSemester.InputLabel>End Date</AddSemester.InputLabel>
-                    <AddSemester.Input type={"date"} onChange={evn => setEndDate(evn.target.value)}/>
-                  </AddSemester.InputColumn>
-              </AddSemester.DateRow>
-              
+              <AddSemester.InputColumn>
+                <AddSemester.InputLabel>End Date</AddSemester.InputLabel>
+                <AddSemester.Input
+                  type={"date"}
+                  onChange={(evn) => setEndDate(evn.target.value)}
+                />
+              </AddSemester.InputColumn>
+            </AddSemester.DateRow>
           </AddSemester.InputRow>
 
           <AddSemester.Label>Courses</AddSemester.Label>
-          <AddSemester.Icon/> 
-          <AddSemester.AlertText>You haven't added any course yet</AddSemester.AlertText>
-          <AddSemester.AddButton onClick={handleClick}>Add new course</AddSemester.AddButton>
-          <AddSemester.StartButton onClick={() => checkSemesterInputs(startDate,endDate)}>Start semester</AddSemester.StartButton>       
+          <AddSemester.Icon />
+          <AddSemester.AlertText>
+            You haven't added any course yet
+          </AddSemester.AlertText>
+          <AddSemester.AddButton onClick={handleClick}>
+            Add new course
+          </AddSemester.AddButton>
+          <AddSemester.StartButton onClick={() => navigate("/")}>
+            Close
+          </AddSemester.StartButton>
         </AddSemester.Div>
-        {courseDiv}
+        {courseDiv ? (
+          <AddCourseContainer
+            key={0}
+            semester={semesterName?.semester}
+            year={+startDate?.split("-")[0]}
+            setIsVisible={setCourseDiv}
+          />
+        ) : null}
       </>
-      
-
-    ); 
-
+    );
   }
-    
 }

@@ -96,6 +96,30 @@ export const EditUser = async (user, dispatch, options) => {
 
 /*
 
+{
+    "student_no": "172378",
+    "first_name": "seyit",
+    "surname": "kcygt",
+    "e_mail": "asdasm",
+    "password": "123456",
+    "department":"Computer Engineering"
+
+}
+
+*/
+export const SignUpStudent = (student, options) => {
+  axios.post(BASE_URL + "/api/students/add", student).then(
+    (response) => {
+      options?.onSuccess?.(response);
+    },
+    (err) => {
+      options?.onError?.(err);
+    }
+  );
+};
+
+/*
+
 content of user 
 
 for student
@@ -153,10 +177,28 @@ data = {
     "name":"Computer and Network Security"
 }
 */
-export const AddCourse = (data, options) => {
-  axios.post(BASE_URL + "courses/add", data).then(
+export const FetchAddCourse = (data, options) => {
+  axios.post(BASE_URL + "/v1/course/add", data).then(
     (response) => {
       options?.onSuccess?.(response);
+    },
+    (err) => {
+      options?.onError?.(err);
+    }
+  );
+};
+
+export const GetAllCoursesWithSemester = (semester, year, options) => {
+  axios.get(BASE_URL + "/v1/course").then(
+    (response) => {
+      let courses = [];
+
+      response.data.map((course) => {
+        if (course.year === year && course.semester === semester) {
+          courses.push(course);
+        }
+      });
+      options?.onSuccess?.(courses);
     },
     (err) => {
       options?.onError?.(err);
@@ -181,6 +223,16 @@ export const AddDepartment = (data, options) => {
   );
 };
 
+export const GetAllDepartments = (options) => {
+  axios.get(BASE_URL + "/v1/departments").then(
+    (response) => {
+      options?.onSuccess?.(response.data);
+    },
+    (err) => {
+      options?.onError?.(err);
+    }
+  );
+};
 /*
 
   course = {
@@ -283,7 +335,7 @@ export const useFetchOnGoingEvaluation = (user, options) => {
 export const FetchPendingRequests = (options) => {
   //TODO: add users an attribute called active and banned so we can easily filter pending requests and banned users etc.
 
-  axios.get(BASE_URL + "/students/inActives").then(
+  axios.get(BASE_URL + "/api/students/inActives").then(
     (response) => {
       options?.onSuccess?.(response);
     },
@@ -294,14 +346,16 @@ export const FetchPendingRequests = (options) => {
 };
 
 export const GrantRequestToStudent = (student_no, options) => {
-  axios.get(BASE_URL + `/students/confirmStudent?studentNo=${student_no}`).then(
-    (response) => {
-      options?.onSuccess?.(response);
-    },
-    (err) => {
-      options?.onError?.(err);
-    }
-  );
+  axios
+    .get(BASE_URL + `/api/students/confirmStudent?studentNo=${student_no}`)
+    .then(
+      (response) => {
+        options?.onSuccess?.(response);
+      },
+      (err) => {
+        options?.onError?.(err);
+      }
+    );
 };
 
 export const FetchAssignIntructorToCourse = (
@@ -476,3 +530,16 @@ export const UploadEvaluationForm = (
       }
     );
 };
+
+export const FetchForgetPassword = (student_no, options) => {
+  axios.get(BASE_URL + `/api/students/forgetPass?studentNo=${student_no}`).then(
+    (response) => {
+      options?.onSuccess?.(response.data);
+    },
+    (err) => {
+      options?.onError?.(err);
+    }
+  );
+};
+
+export const FetchSignUp = () => {};
