@@ -6,6 +6,7 @@ import { Global } from "../../components";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser, user } from "../../features/user";
 import { useNavigate, Link } from "react-router-dom";
+import { ShowToast } from "../../constants/api";
 //import { fetchUser } from "../../features/user";
 
 export default function LoginContainer() {
@@ -30,7 +31,7 @@ export default function LoginContainer() {
       navigate("/");
     } else if (stateStatus === "error") {
       //ERROR with user
-      console.log("error LO");
+      ShowToast("User name or password invalid", { success: false });
 
       // react-toastify, use this to show toast
     }
@@ -95,7 +96,9 @@ export default function LoginContainer() {
 
           <Global.Row>
             <Global.Space />
-            <Link to={"/forgotpassword"}><Login.Text>Forgot Password</Login.Text></Link>
+            <Link to={"/forgotpassword"}>
+              <Login.Text>Forgot Password</Login.Text>
+            </Link>
           </Global.Row>
 
           <Login.Button
@@ -111,7 +114,9 @@ export default function LoginContainer() {
           <Global.Row>
             <Global.Space />
             <Login.Text>Don’t have an account?</Login.Text>
-            <Link to={"/signup"}><Login.Text>Sign up</Login.Text></Link>
+            <Link to={"/signup"}>
+              <Login.Text>Sign up</Login.Text>
+            </Link>
           </Global.Row>
         </Global.Column>
       </Login.Div>

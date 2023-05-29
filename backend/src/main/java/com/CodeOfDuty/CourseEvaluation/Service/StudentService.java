@@ -4,7 +4,12 @@ import com.CodeOfDuty.CourseEvaluation.DAO.StudentRepository;
 import com.CodeOfDuty.CourseEvaluation.model.Course;
 import com.CodeOfDuty.CourseEvaluation.model.Department;
 import com.CodeOfDuty.CourseEvaluation.model.Student;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.mail.SimpleMailMessage;
+
+
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +19,8 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
     private final CourseService courseService;
+    @Autowired
+    private JavaMailSender mailSender;
 
     private final DepartmentService departmentService;
 
@@ -58,6 +65,21 @@ public class StudentService {
 
     public Student addStudent(Student student){
         return studentRepository.save(student);
+    }
+
+    public boolean forgetPass(String studentNo){
+        Student student =  this.findById(studentNo);
+        String password = student.getPassword();
+        String email = student.getE_mail();
+        String subject = "Your 3B Password";
+        String body = "Your 3B Password is: " + password;
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        message.setSubject(subject);
+        message.setText(body);
+        mailSender.send(message);
+
+        return true;
     }
 
     public void deleteStudent(String studentNo){

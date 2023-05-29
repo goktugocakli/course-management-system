@@ -41,7 +41,7 @@ const renderEvents = (user, data) => {
                   {`Student No: ${student.student_no}   Student Name: ${student.first_name}`}
                   <button
                     onClick={() => {
-                      ShowToast("asasasd", { success: true });
+                      ShowToast("Access Granted Successfully", { success: true });
                     }}
                   >
                     Grant Request

@@ -13,8 +13,13 @@ const renderLinks = (user) => {
   if (user.userType === "admin") {
     return (
       <>
-        <NavBar.Link href={"/"}>Home</NavBar.Link>
-        <NavBar.Link>Edit Account</NavBar.Link>
+        <NavBar.Link>
+          <Link to={"/"}>Home</Link>
+        </NavBar.Link>
+
+        <NavBar.Link>
+          <Link to={"/addsemester"}>Add Semester</Link>
+        </NavBar.Link>
       </>
     );
   }
@@ -109,9 +114,17 @@ export default function NavBarContainer() {
       <NavBar.Logo>3B</NavBar.Logo>
 
       <NavBar.InformationContainer>
-        <NavBar.Name>Username{/*user.data.user_name*/}</NavBar.Name>
-        <NavBar.Role>UserType{/*user.userType*/}</NavBar.Role>
-        <NavBar.Picture src={"https://www.citypng.com/public/uploads/preview/profile-user-round-white-icon-symbol-png-11639594348fn8rlcxrqo.png"} />
+        <NavBar.Name>
+          {userState.userType === "admin"
+            ? "System " + userState.data.user_name
+            : userState.data.first_name}
+        </NavBar.Name>
+        <NavBar.Role>{userState.userType}</NavBar.Role>
+        {/*        <NavBar.Picture
+          src={
+            "https://www.citypng.com/public/uploads/preview/profile-user-round-white-icon-symbol-png-11639594348fn8rlcxrqo.png"
+          }
+        />*/}
       </NavBar.InformationContainer>
     </NavBar>
   );

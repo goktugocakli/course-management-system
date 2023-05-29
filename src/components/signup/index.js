@@ -1,27 +1,44 @@
 import React from "react";
-import {Button, InputLabel, Input, Div, Text} from "./styles/signup";
+import {
+  Button,
+  InputLabel,
+  Input,
+  Div,
+  Text,
+  DepartmentContainer,
+} from "./styles/signup";
 
-
-export default function SignUp({children, ...restPorps}) {
-    return ;
+export default function SignUp({ children, ...restPorps }) {
+  return;
 }
 
-SignUp.Button = function signUpButton({children,...restPorps}){
-    return <Button>{children}</Button>
-}
+SignUp.Button = function signUpButton({ children, ...restPorps }) {
+  return <Button {...restPorps}>{children}</Button>;
+};
 
-SignUp.InputLabel = function signUpLabel({children,...restPorps}){
-    return <InputLabel>{children}</InputLabel>
-}
+SignUp.InputLabel = function signUpLabel({ children, ...restPorps }) {
+  return <InputLabel {...restPorps}>{children}</InputLabel>;
+};
 
-SignUp.Input = function signUpInput({children,...restPorps}){
-    return <Input>{children}</Input>
-}
+SignUp.Input = function signUpInput({ children, ...restPorps }) {
+  return <Input {...restPorps}>{children}</Input>;
+};
 
-SignUp.Div = function signUpDiv({children,...restPorps}){
-    return <Div>{children}</Div>
-}
+SignUp.Div = function signUpDiv({ children, ...restPorps }) {
+  return <Div>{children}</Div>;
+};
 
-SignUp.Text = function signUpText({children,...restPorps}){
-    return <Text>{children}</Text>
-}
+SignUp.Text = function signUpText({ children, ...restPorps }) {
+  return <Text>{children}</Text>;
+};
+
+SignUp.Department = function signupDepartment({ children, ...restPorps }) {
+  return <p {...restPorps}>{children}</p>;
+};
+
+SignUp.DepartmentContainer = function signupDepartmentCont({
+  children,
+  ...restPorps
+}) {
+  return <DepartmentContainer {...restPorps}>{children}</DepartmentContainer>;
+};

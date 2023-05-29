@@ -52,7 +52,7 @@ export const Background = styled.div`
 
 export const Div = styled.div`
   position:absolute;
-    top:40%;
+    top:50%;
     left:50%;
     transform: translate(-50%, -50%);
   display:flex;
@@ -61,7 +61,7 @@ export const Div = styled.div`
   background-color: #f0f0f0;
   border-radius:40px;
   width: calc(30%);
-  height: calc(62%);
+  height: calc(75%);
 `;
 
 
@@ -96,10 +96,11 @@ export const InputLabel = styled.p`
   font-weight: 500;
   margin:4px;
   font-size:20px;
+  width: 60px;
 `;
 
 export const Select = styled.select`
-  width: 270px;
+  width: 370px;
   height:45px;
   border-radius: 10px;
   font-size: 16px;

@@ -21,10 +21,13 @@ public class AdminController {
         return adminService.findAll();
     }
 
+
     @PostMapping("/add")
     public void add(@RequestBody Admin admin){
         adminService.add(admin);
     }
+
+
 
     @PostMapping("/update")
     public void update(@RequestBody Admin admin){
