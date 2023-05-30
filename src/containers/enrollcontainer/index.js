@@ -2,29 +2,68 @@ import { useState } from "react";
 import { EnrollCourse } from "../../components";
 import {
   useFetchCourses,
-  FetchAssignIntructorToCourse,
   FetchEnrollCourse,
+  ShowToast,
 } from "../../constants/api";
+import { useSelector } from "react-redux";
+import { user } from "../../features/user";
 
-const renderCourses = (courses) => {
+const delay = (time) => {
+  return new Promise((resolve) => setTimeout(resolve, time));
+};
+
+const isInCourse = (student_no, course) => {
+  let res = false;
+  course.student.map((s) => {
+    if (s.student_no === student_no) {
+      res = true;
+      return res;
+    }
+  });
+
+  return res;
+};
+
+const renderCourses = (courses, student) => {
+  const options = {
+    onSuccess: (response) => {
+      ShowToast("Enroll is successful", { success: true });
+      delay(1000).then(() => window.location.reload(false));
+    },
+    onError: (err) => {
+      ShowToast("There is an error", { success: false });
+    },
+  };
   return (
     <>
-      {courses.map((course) => {
+      {courses?.map((course) => {
         return (
-          <EnrollCourse.ListItem key={course.id}>
+          <EnrollCourse.ListItem key={course.code}>
             <EnrollCourse.ItemInfo>
-              <EnrollCourse.Name>{course.name}</EnrollCourse.Name>
+              <EnrollCourse.Name>
+                {course.name + " " + course.code}
+              </EnrollCourse.Name>
 
               {course.instructors.map((ins) => {
                 return (
                   <EnrollCourse.Instructors key={ins.id}>
-                    {ins.name}
+                    {ins.user_name}
                   </EnrollCourse.Instructors>
                 );
               })}
             </EnrollCourse.ItemInfo>
 
-            <EnrollCourse.EnrollButton onClick={() => {}}>
+            <EnrollCourse.EnrollButton
+              onClick={() => {
+                if (isInCourse(student.student_no, course)) {
+                  ShowToast("This student already enrolled this course", {
+                    success: false,
+                  });
+                } else {
+                  FetchEnrollCourse(student.student_no, course, options);
+                }
+              }}
+            >
               Enroll
             </EnrollCourse.EnrollButton>
           </EnrollCourse.ListItem>
@@ -37,54 +76,17 @@ const renderCourses = (courses) => {
 export default function EnrollContainer() {
   const { data } = useFetchCourses();
 
-  const [succ, setS] = useState(false);
-
-  const options = {
-    onSuccess: (response) => {
-      console.log(response);
-      setS(true);
-    },
-    onError: (err) => {
-      console.log(err.message + " :D");
-      setS(false);
-    },
-  };
+  const userState = useSelector(user);
 
   return (
     <EnrollCourse>
-      <EnrollCourse.SearchContainer>
+      {/*<EnrollCourse.SearchContainer>
         <EnrollCourse.SearchInput />
         <EnrollCourse.SearchButton>Search</EnrollCourse.SearchButton>
-      </EnrollCourse.SearchContainer>
+      </EnrollCourse.SearchContainer> */}
       <EnrollCourse.ListContainer>
-        {renderCourses([])}
+        {renderCourses(data?.courses, userState.user.data)}
       </EnrollCourse.ListContainer>
-      {succ ? <p>okay</p> : <p>olmadı</p>}
-      <button
-        onClick={() => {
-          /*FetchAssignIntructorToCourse(
-            "ins",
-            {
-              id: "BBM-456",
-              semester: "Spring",
-              year: "2023",
-            },
-            options
-          );*/
-
-          FetchEnrollCourse(
-            "01",
-            {
-              id: "BBM-456",
-              semester: "Spring",
-              year: 2023,
-            },
-            options
-          );
-        }}
-      >
-        Assign ins
-      </button>
     </EnrollCourse>
   );
 }
