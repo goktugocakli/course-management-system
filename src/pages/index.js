@@ -8,3 +8,4 @@ export { default as SemestersPage } from "./semesterspage";
 export { default as AddSemesterPage } from "./addsemesterpage";
 export { default as ForgetPasswordPage } from "./forgetpasswordpage";
 export { default as EditPage } from "./editpage";
+export { default as AsnwerEvaluation } from "./answerevaluationpage";
