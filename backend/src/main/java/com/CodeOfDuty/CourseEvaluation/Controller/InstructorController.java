@@ -1,14 +1,16 @@
 package com.CodeOfDuty.CourseEvaluation.Controller;
 
 import com.CodeOfDuty.CourseEvaluation.Service.InstructorService;
+import com.CodeOfDuty.CourseEvaluation.model.Course;
 import com.CodeOfDuty.CourseEvaluation.model.Instructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/instructors")
+@RequestMapping("/instructors")
 public class InstructorController {
     private final InstructorService instructorService;
 
@@ -28,11 +30,11 @@ public class InstructorController {
         instructorService.createInstructor(instructor);
     }
 
-    /*
+
     @PostMapping("/instructors/update")
     public void update(@RequestBody Instructor instructor){
-        instructorService.update(instructor);
-    }*/
+        instructorService.updateInstructor(instructor);
+    }
 
     @DeleteMapping("delete/{username}")
     public void delete(@PathVariable String username){
@@ -50,6 +52,12 @@ public class InstructorController {
                             @RequestParam String semester,
                             @RequestParam int year){
         instructorService.teachCourse(user_name, course_id,semester,year);
+    }
+
+    @GetMapping("/courses/{username}")
+    public ResponseEntity<List<Course>> findAllCourseTeachByInstructor(@PathVariable String username){
+        List<Course> courses = instructorService.findAllCourseTeachByInstructor(username);
+        return ResponseEntity.ok(courses);
     }
 
 

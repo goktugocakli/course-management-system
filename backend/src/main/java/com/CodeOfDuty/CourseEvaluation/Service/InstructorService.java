@@ -25,6 +25,9 @@ public class InstructorService {
         return instructorRepository.save(instructor);
     }
 
+    public Instructor updateInstructor(Instructor instructor){
+        return instructorRepository.save(instructor);
+    }
     public void delete(String username) {
         instructorRepository.findById(username)
                 .ifPresentOrElse(
@@ -57,5 +60,9 @@ public class InstructorService {
     public boolean isValidDepartmentManager(String username, String password) {
         Instructor instructor = instructorRepository.findById(username).orElse(null);
         return instructor != null && instructor.getPassword().equals(password) && instructor.getDepartment().getManager() == instructor;
+    }
+
+    public List<Course> findAllCourseTeachByInstructor(String username){
+        return findById(username).getCourses();
     }
 }

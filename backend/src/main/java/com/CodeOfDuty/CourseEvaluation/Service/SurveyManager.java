@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SurveyManager {
@@ -21,12 +22,15 @@ public class SurveyManager {
     private final InstructorService instructorService;
     private final CourseService courseService;
 
+    private final StudentService studentService;
 
-    public SurveyManager(ISurveyDao surveyRepository, QuestionManager questionManager, InstructorService instructorService, CourseService courseService) {
+
+    public SurveyManager(ISurveyDao surveyRepository, QuestionManager questionManager, InstructorService instructorService, CourseService courseService, StudentService studentService) {
         this.surveyRepository = surveyRepository;
         this.questionManager = questionManager;
         this.instructorService = instructorService;
         this.courseService = courseService;
+        this.studentService = studentService;
     }
 
     public Survey createSurvey(String description, LocalDateTime dueDate, String username,
@@ -58,6 +62,11 @@ public class SurveyManager {
 
     public Survey findById(Integer id){return surveyRepository.findById(id).orElse(null);}
 
+
+    public Survey findByCourse(String course_code, String semester, Integer year){
+        Course course = courseService.findById(course_code,semester,year);
+        return surveyRepository.findByCourse(course).orElse(null);
+    }
     public Survey findByCourseAndInstructor(String course_code, String semester, Integer year, String instructor_username){
         Course course = courseService.findById(course_code,semester,year);
         Instructor instructor = instructorService.findById(instructor_username);
@@ -117,6 +126,19 @@ public class SurveyManager {
         return surveyRepository.deneme2(surveyId);
     }
 
+    public List<Survey> findAllByStudent(String studentNo){
+        List<Survey> surveys = studentService.findById(studentNo)
+                .getCourses()
+                .stream()
+                .map(course -> findByCourse(course.getCode(),course.getSemester(),course.getYear()))
+                .collect(Collectors.toList());
+        return surveys;
+    }
+
+    public void deleteSurveyById(Integer id){
+        Survey survey=findById(id);
+        surveyRepository.delete(survey);
+    }
 
 
 

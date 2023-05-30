@@ -36,12 +36,12 @@ public class Survey {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dueDate;
 
-    @JsonIgnore
+    @JsonIncludeProperties({"user_name"})
     @ManyToOne
     @JoinColumn(name = "createdBy")
     private Instructor createdBy;
 
-    @JsonIgnore
+    @JsonIncludeProperties({"code","semester","year","name"})
     @ManyToOne
     @JoinColumns({
             @JoinColumn(name="course_code", referencedColumnName = "code"),
@@ -52,6 +52,7 @@ public class Survey {
 
 
 
+    @JsonIgnoreProperties({"addedBy","studentAnswers"})
     @ManyToMany()
     @JoinTable(name = "survey_question",
             joinColumns = @JoinColumn(name = "surveyId"),
@@ -59,6 +60,7 @@ public class Survey {
     )
     private List<Question> questions;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "survey")
     private List<StudentAnswer> studentAnswers;
 
