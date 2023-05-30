@@ -1,11 +1,11 @@
 import React from "react";
-import {Label, AlertText, Text, Icon , Button, Div, LabelDiv, Line, List, ListItem} from "./styles/semesters"
+import {Label, AlertText, Text, Icon , Button, Div, LabelDiv, Line, List, ListItem} from "./styles/Accounts"
 
-export default function Semesters({children, ...restProps}) {
+export default function Accounts({children, ...restProps}) {
     return
 }
 
-Semesters.Div = function semestersDiv({ children, ...restPorps }) {
+Accounts.Div = function accountsDiv({ children, ...restPorps }) {
     return (
       <Div>
         {children}
@@ -13,7 +13,7 @@ Semesters.Div = function semestersDiv({ children, ...restPorps }) {
     );
 };
 
-Semesters.LabelDiv = function semestersLabelDiv({ children, ...restPorps }) {
+Accounts.LabelDiv = function accountsLabelDiv({ children, ...restPorps }) {
     return (
       <LabelDiv>
         {children}
@@ -21,23 +21,23 @@ Semesters.LabelDiv = function semestersLabelDiv({ children, ...restPorps }) {
     );
 };
 
-Semesters.Button = function semesterButton({children,...restPorps}){
+Accounts.Button = function accountsButton({children,...restPorps}){
     return <Button>{children}</Button>
 }
   
-Semesters.AlertText = function semestersAlertText({ children, ...restPorps }) {
+Accounts.AlertText = function accountsAlertText({ children, ...restPorps }) {
     return <AlertText>{children}</AlertText>;
 };
 
-Semesters.Text = function semestersText({ children, ...restPorps }) {
+Accounts.Text = function accountsText({ children, ...restPorps }) {
     return <Text>{children}</Text>;
 };
 
-Semesters.Label = function semestersLabel({ children, ...restPorps }) {
+Accounts.Label = function accountsLabel({ children, ...restPorps }) {
     return <Label>{children}</Label>;
 };
 
-Semesters.Icon = function semestersIcon({ children }) {
+Accounts.Icon = function accountsIcon({ children }) {
 
     return (
         <Icon>
@@ -53,19 +53,19 @@ Semesters.Icon = function semestersIcon({ children }) {
 
 };
 
-Semesters.Line = function line(){
+Accounts.Line = function line(){
     return(
         <Line/>
     )
 }
 
-Semesters.List = function list({children}) {
+Accounts.List = function list({children}) {
     return(
         <List>{children}</List>
     )
 }
 
-Semesters.ListItem = function semestersListItem({ children, ...restPorps }) {
+Accounts.ListItem = function accountsListItem({ children, ...restPorps }) {
     return (
       <ListItem>{children}</ListItem>
     );
