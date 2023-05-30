@@ -1,104 +1,82 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Accounts } from "../../components";
 import AddAccountContainer from "../addAccountContainer";
+import { GetUser } from "../../constants/api";
 
 export default function AccountsContainer() {
-  const accounts = [
-    {
-      name: "Ahmet Yildizzzzzzzzzzzzzzzzzzzzz",
-      id: "13123196",
-      email: "ahmetyildiz@email.com",
-      department: "Computer Engineering",
-      type:"Student"
-    },
-    {
-      name: "Ahmet Yildiz",
-      id: "13123196",
-      email: "ahmetyildiz@email.com",
-      department: "Computer Engineering",
-      type:"Student"
-    },
-    {
-      name: "Ahmet Yildiz",
-      id: "13123196",
-      email: "ahmetyildiz@email.com",
-      department: "Computer Engineering",
-      type:"Student"
-    },
-    {
-      name: "Ahmet Yildiz",
-      id: "13123196",
-      email: "ahmetyildiz@email.com",
-      department: "Computer Engineering",
-      type:"Student"
-    },
-    {
-      name: "Ahmet Yildiz",
-      id: "13123196",
-      email: "ahmetyildiz@email.com",
-      department: "Computer Engineering",
-      type:"Student"
-    },
-    {
-      name: "Ahmet Yildiz",
-      id: "13123196",
-      email: "ahmetyildiz@email.com",
-      department: "Computer Engineering",
-      type:"Student"
-    },
-    {
-      name: "Ahmet Yildiz",
-      id: "13123196",
-      email: "ahmetyildiz@email.com",
-      department: "Computer Engineering",
-      type:"Student Manager"
-    },
-  ];
+  const [accounts, setAccounts] = useState([]);
 
+  const options = {
+    onSuccess: (response) => {
+      let acc = accounts.concat(response);
+      setAccounts(acc);
+    },
+    onError: (err) => {},
+  };
+
+  useEffect(() => {
+    GetUser(options);
+  }, []);
 
   const [addAccountDiv, setAddAccountDiv] = useState(false);
 
   // this function used to open add new course window
   const openAddAccountDiv = function addNewAccount() {
-      setAddAccountDiv(!addAccountDiv)
+    setAddAccountDiv(!addAccountDiv);
   };
 
   if (accounts.length > 0) {
     return (
       <>
         <Accounts.Div>
-        <Accounts.Label>Accounts</Accounts.Label>
-        <Accounts.LabelDiv>
-          <Accounts.NameText>Name</Accounts.NameText>
-          <Accounts.IdText>Id</Accounts.IdText>
-          <Accounts.EmailText>Email</Accounts.EmailText>
-          <Accounts.DepartmentText>Department</Accounts.DepartmentText>
-          <Accounts.TypeText>Type</Accounts.TypeText>
-        </Accounts.LabelDiv>
-        <Accounts.Line />
-        <Accounts.List>
-          {accounts.map((account) => (
-            <Accounts.ListItem>
-              <Accounts.NameText title={account.name}>{account.name}</Accounts.NameText>
-              <Accounts.IdText title={account.id}>{account.id}</Accounts.IdText>
-              <Accounts.EmailText title={account.email}>{account.email}</Accounts.EmailText>
-              <Accounts.DepartmentText title={account.department}>{account.department}</Accounts.DepartmentText>
-              <Accounts.TypeText title={account.type}>{account.type}</Accounts.TypeText>
-            </Accounts.ListItem>
-          ))}
-        </Accounts.List>
-        
-        <Accounts.Button onClick={openAddAccountDiv}>Add new account</Accounts.Button>
-       
+          <Accounts.Label>Accounts</Accounts.Label>
+          <Accounts.LabelDiv>
+            <Accounts.NameText>Name</Accounts.NameText>
+            <Accounts.IdText>Id</Accounts.IdText>
+            <Accounts.EmailText>Email</Accounts.EmailText>
+            <Accounts.DepartmentText>Department</Accounts.DepartmentText>
+            <Accounts.TypeText>Type</Accounts.TypeText>
+          </Accounts.LabelDiv>
+          <Accounts.Line />
+          <Accounts.List>
+            {accounts.map((account) => (
+              <Accounts.ListItem key={account.id}>
+                <Accounts.NameText title={account.first_name}>
+                  {account.first_name}
+                </Accounts.NameText>
+                <Accounts.IdText
+                  title={
+                    account.type === "student"
+                      ? account.student_no
+                      : account.user_name
+                  }
+                >
+                  {account.type === "student"
+                    ? account.student_no
+                    : account.user_name}
+                </Accounts.IdText>
+                <Accounts.EmailText title={account.e_mail}>
+                  {account.e_mail}
+                </Accounts.EmailText>
+                <Accounts.DepartmentText title={account.department?.name}>
+                  {account.department?.name}
+                </Accounts.DepartmentText>
+                <Accounts.TypeText title={account.type}>
+                  {account.type}
+                </Accounts.TypeText>
+              </Accounts.ListItem>
+            ))}
+          </Accounts.List>
+
+          <Accounts.Button onClick={openAddAccountDiv}>
+            Add new account
+          </Accounts.Button>
         </Accounts.Div>
 
         {addAccountDiv ? (
-          <AddAccountContainer
-            setIsVisible={setAddAccountDiv}
-          />
+          <AddAccountContainer setIsVisible={setAddAccountDiv} />
         ) : null}
-      
       </>
     );
   } else {
@@ -109,9 +87,10 @@ export default function AccountsContainer() {
         <Accounts.AlertText>
           You haven't added any account yet
         </Accounts.AlertText>
-        
-        <Accounts.Button onClick={openAddAccountDiv}>Add new account</Accounts.Button>
-      
+
+        <Accounts.Button onClick={openAddAccountDiv}>
+          Add new account
+        </Accounts.Button>
       </Accounts.Div>
     );
   }

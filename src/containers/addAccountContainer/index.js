@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { AddAccount } from "../../components";
-import { ShowToast} from "../../constants/api";
+import { GetAllDepartments, ShowToast } from "../../constants/api";
 
 export default function AddAccountContainer({ setIsVisible }) {
-
   //states for account addition inputs
   const [accountName, setAccountName] = useState();
   const [accountId, setAccountId] = useState();
   const [accountEmail, setAccountEmail] = useState();
-  const [accountDepartment, setAccountDepartment] = useState("Computer Engineering");
-  const [accountType, setAccountType] = useState("Student");
+  const [accountDepartment, setAccountDepartment] = useState("");
+  const [accountType, setAccountType] = useState("student");
+  const [departments, setDepartments] = useState([]);
+
+  useEffect(() => {
+    const op = {
+      onSuccess: (response) => {
+        setDepartments(response);
+      },
+      onError: (err) => {},
+    };
+
+    GetAllDepartments(op);
+  }, []);
 
   const handleCancel = () => {
     setIsVisible(false);
@@ -48,14 +59,6 @@ export default function AddAccountContainer({ setIsVisible }) {
     }
   };
 
-  const departments = [
-    "Computer Engineering",
-    "Civil Engineering",
-    "Mechanical Engineering",
-    "Genetic Engineering",
-  ]
-
-  
   return (
     <>
       <AddAccount.Background />
@@ -90,9 +93,10 @@ export default function AddAccountContainer({ setIsVisible }) {
             onChange={(evn) => setAccountDepartment(evn.target.value)}
           >
             {departments.map((department) => (
-              <AddAccount.Option value={department}>{department}</AddAccount.Option>
+              <AddAccount.Option value={department.name} key={department.name}>
+                {department.name}
+              </AddAccount.Option>
             ))}
-        
           </AddAccount.Select>
         </AddAccount.InputRow>
 
@@ -102,9 +106,13 @@ export default function AddAccountContainer({ setIsVisible }) {
           <AddAccount.Select
             onChange={(evn) => setAccountType(evn.target.value)}
           >
-            <AddAccount.Option value={"Student"}>Student</AddAccount.Option>
-            <AddAccount.Option value={"Instructor"}>Instructor</AddAccount.Option>
-            <AddAccount.Option value={"Dept. Manager"}>Dept. Manager</AddAccount.Option>
+            <AddAccount.Option value={"student"}>Student</AddAccount.Option>
+            <AddAccount.Option value={"instructor"}>
+              Instructor
+            </AddAccount.Option>
+            <AddAccount.Option value={"department manager"}>
+              Dept. Manager
+            </AddAccount.Option>
           </AddAccount.Select>
         </AddAccount.InputRow>
 
@@ -118,5 +126,4 @@ export default function AddAccountContainer({ setIsVisible }) {
       </AddAccount.Div>
     </>
   );
-  
 }

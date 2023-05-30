@@ -61,7 +61,7 @@ export const Div = styled.div`
   background-color: #f0f0f0;
   border-radius:40px;
   width: calc(30%);
-  height: calc(75%);
+  height: calc(83%);
 `;
 
 

@@ -20,6 +20,10 @@ const renderLinks = (user) => {
         <NavBar.Link>
           <Link to={"/addsemester"}>Semesters</Link>
         </NavBar.Link>
+
+        <NavBar.Link>
+          <Link to={"/accounts"}>Accounts</Link>
+        </NavBar.Link>
       </>
     );
   }
