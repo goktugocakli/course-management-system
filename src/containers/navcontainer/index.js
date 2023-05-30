@@ -18,7 +18,7 @@ const renderLinks = (user) => {
         </NavBar.Link>
 
         <NavBar.Link>
-          <Link to={"/addsemester"}>Add Semester</Link>
+          <Link to={"/addsemester"}>Semesters</Link>
         </NavBar.Link>
       </>
     );
@@ -30,7 +30,7 @@ const renderLinks = (user) => {
           <Link to={"/"}>Home</Link>
         </NavBar.Link>
         <NavBar.Link>
-          <Link to={"createEva"}>Create Evaluation Form</Link>
+          <Link to={"/createEva"}>Create Evaluation Form</Link>
         </NavBar.Link>
         <NavBar.Link>
           <Link to={"/seeEvares"}>See Evaluation Result</Link>
@@ -43,7 +43,7 @@ const renderLinks = (user) => {
     return (
       <>
         <NavBar.Link href={"/"}>Home</NavBar.Link>
-        <NavBar.Link href={"enrollCourse"}>Enroll Course</NavBar.Link>
+        <NavBar.Link href={"/enrollCourse"}>Enroll Course</NavBar.Link>
       </>
     );
   } else {
@@ -93,6 +93,17 @@ export default function NavBarContainer() {
         {userState === null
           ? renderLinks({ userType: "student" })
           : renderLinks(userState)}
+
+        {userState?.userType !== "admin" ? (
+          <NavBar.Link
+            onClick={() => {
+              navigate("/editUser");
+            }}
+          >
+            Edit User
+          </NavBar.Link>
+        ) : null}
+
         <NavBar.Link
           onClick={() => {
             dispatch(logout());
@@ -101,6 +112,7 @@ export default function NavBarContainer() {
         >
           Logout
         </NavBar.Link>
+
         <NavBar.ChangeTheme
           onClick={() => {
             //dispacth is for set the theme for redux state to change the theme of the app
@@ -115,11 +127,11 @@ export default function NavBarContainer() {
 
       <NavBar.InformationContainer>
         <NavBar.Name>
-          {userState.userType === "admin"
-            ? "System " + userState.data.user_name
-            : userState.data.first_name}
+          {userState?.userType === "admin"
+            ? "System " + userState?.data.user_name
+            : userState?.data.first_name}
         </NavBar.Name>
-        <NavBar.Role>{userState.userType}</NavBar.Role>
+        <NavBar.Role>{userState?.userType}</NavBar.Role>
         {/*        <NavBar.Picture
           src={
             "https://www.citypng.com/public/uploads/preview/profile-user-round-white-icon-symbol-png-11639594348fn8rlcxrqo.png"

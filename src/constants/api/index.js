@@ -381,7 +381,6 @@ export const FetchAssignIntructorToCourse = (
   return res;
 };
 
-export const FetchGetCourseOfInstructor = (instructor_user_name, options) => {};
 
 /*
 
@@ -542,4 +541,4 @@ export const FetchForgetPassword = (student_no, options) => {
   );
 };
 
-export const FetchSignUp = () => {};
+  
