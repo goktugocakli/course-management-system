@@ -1,5 +1,7 @@
-import { SeeEvaResContainer } from "../../containers";
+import { NavContainer, SeeEvaResContainer } from "../../containers";
 
 export default function SeeEvaResPage() {
-  return <SeeEvaResContainer />;
+  return <>
+  <NavContainer/>
+  <SeeEvaResContainer /></>;
 }

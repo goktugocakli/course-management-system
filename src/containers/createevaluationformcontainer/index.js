@@ -8,7 +8,6 @@ import {
   FetchQuestionAddedByInstructor,
   UploadEvaluationForm,
   UploadEvaluationFormQuestions,
-  FetchGetCourseOfInstructor,
 } from "../../constants/api";
 
 const AddAutomaticQuestion = function (
@@ -319,13 +318,16 @@ export default function CreateEvaluationFormContainer() {
   // using useEffect inside api makes things a lot easier but for this paticular case
   // useEffect inside api runs every time this component state changes and that makes a lot of requests to backend
 
+
+
   const userState = useSelector(user).user;
   useEffect(() => {
-      FetchQuestionAddedByInstructor(userState.data.user_name, options);
-      //FetchGetCourseOfInstructor(userState.data.user_name,options2);
+    FetchQuestionAddedByInstructor(userState.data.user_name, options);
+    courses = userState.data.courses;
+
+    //FetchGetCourseOfInstructor(userState.data.user_name,options2);
   }, []);
 
-  
   /*
 userState = {
   userType: asdasda,
@@ -512,7 +514,7 @@ userState = {
             {
               //TODO:: render courses and add onclick to them to set the course
             }
-            {courses?.data.map((c) => {
+            {courses?.map((c) => {
               return (
                 <p
                   key={c.code}

@@ -1,5 +1,10 @@
-import { AddSemesterContainer} from "../../containers";
+import { AddSemesterContainer, NavContainer } from "../../containers";
 
-export default function AddSemesterPage({signin}) {
-  return <AddSemesterContainer/>;
+export default function AddSemesterPage({ signin }) {
+  return (
+    <>
+      <NavContainer/>
+      <AddSemesterContainer />
+    </>
+  );
 }
