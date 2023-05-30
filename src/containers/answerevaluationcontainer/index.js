@@ -6,6 +6,8 @@ import { user } from "../../features/user";
 
 import {
   FetchQuestionAddedByInstructor,
+  GetStudentAnswers,
+  GetSurveyWithId,
   UploadEvaluationForm,
   UploadEvaluationFormQuestions,
 } from "../../constants/api";
@@ -28,6 +30,8 @@ const AddAutomaticQuestion = function (
       ans.push({
         ...column,
         id: i,
+        selected: false,
+        answerOwnId: questionAndAnswerJson.answers[i].id,
         // title is content of the answer
         title:
           questionAndAnswerJson.answers[i] === undefined
@@ -96,6 +100,8 @@ const AddAutomaticQuestion = function (
       ans.push({
         ...column,
         id: i,
+        selected: false,
+        answerOwnId: questionAndAnswerJson.answers[i].id,
         // title is content of the answer
         title:
           questionAndAnswerJson.answers[i] === undefined
@@ -113,6 +119,7 @@ const AddAutomaticQuestion = function (
           question: questionAndAnswerJson.text,
           column: ans,
           modified: false,
+
           questionOwnId: questionAndAnswerJson.id,
         },
       ]),
@@ -125,23 +132,31 @@ const AddAutomaticQuestion = function (
 const AddAnswer = function (questionId, answerId, questions, setQuestions) {
   return (
     <CreateEvaluationForm.EvaluationAnswer
-      style={{ width: questions.columns[answerId].width + "ch" }}
+      background={
+        questions.items.at(questionId).column.at(answerId).selected
+          ? "green"
+          : "var(--bg-color)"
+      }
+      style={{
+        width: questions.columns[answerId].width + "ch",
+        background: questions.items.at(questionId).column.at(answerId).selected
+          ? "green"
+          : "var(--bg-color)",
+      }}
       value={questions.items.at(questionId).column.at(answerId).title}
       key={answerId}
       readOnly={true}
-      onChange={(e) => {
-        var widthofValue = e.target.value.length;
+      onClick={() => {
+        let columns = questions.items.at(questionId).column.map((ans) => {
+          ans.selected = false;
+          return { ...ans };
+        });
 
-        if (widthofValue > questions.columns[answerId].width) {
-          questions.columns[answerId].width = widthofValue;
-        }
+        columns.at(answerId).selected = true;
 
-        var a = questions.items.at(questionId).column.at(answerId);
-        a.title = e.target.value;
-        questions.items[questionId].column[answerId] = a;
-        questions.items[questionId].modified = true;
+        questions.items.at(questionId).column = columns;
 
-        var newQ = {
+        let newQ = {
           width: questions.width,
           columns: questions.columns,
           items: questions.items,
@@ -162,20 +177,6 @@ const AddQuestion = function (id, questions, setQuestions) {
         <CreateEvaluationForm.EvaluationQuestion
           value={questions.items.at(id).question}
           readOnly={true}
-          onChange={(e) => {
-            var q = questions.items.at(id);
-            q.question = e.target.value;
-            q.modified = true;
-            questions.items[id] = q;
-
-            var newQ = {
-              width: questions.width,
-              columns: questions.columns,
-              items: questions.items,
-            };
-
-            setQuestions(newQ);
-          }}
         ></CreateEvaluationForm.EvaluationQuestion>
       </CreateEvaluationForm.EvaluationQuestionContainer>
       <CreateEvaluationForm.EvaluationAsnwerContainer>
@@ -297,34 +298,31 @@ data = {
 
 */
 
-const options = {
-  onSuccess: (response) => {
-    data = { data: response.data, success: true };
-  },
-
-  onError: (err) => {
-    data = { data: err.message, success: false };
-  },
-};
-
-const options2 = {
-  onSuccess: (response) => {
-    courses = { data: response.data, success: true };
-  },
-  onError: (err) => {
-    courses = { data: err.message, success: false };
-  },
-};
 export default function AnswerEvaluationContainer({ surveyId }) {
   //to be able to get the relevant data only once when page loaded we need to use this mechanic
   // using useEffect inside api makes things a lot easier but for this paticular case
   // useEffect inside api runs every time this component state changes and that makes a lot of requests to backend
 
-  const [surver, setSurvey] = useState(null);
+  const [questions, setQuestions] = useState({
+    width: 600, // TODO: because of the input_grow thing this doenst make sense
+    columns: [],
+    items: [],
+  });
+
   const userState = useSelector(user).user;
   useEffect(() => {
-    setSurvey();
+    const options = {
+      onSuccess: (response) => {
+        const survey = response.data;
+        survey.questions.map((q) => {
+          AddAutomaticQuestion(q, questions, setQuestions);
+        });
+      },
+      onError: (err) => {},
+    };
 
+    GetSurveyWithId(surveyId, options);
+    GetStudentAnswers(surveyId, userState.data.student_no);
   }, []);
 
   /*
@@ -333,12 +331,6 @@ userState = {
   data: (user datas)
 }
 */
-
-  const [questions, setQuestions] = useState({
-    width: 600, // TODO: because of the input_grow thing this doenst make sense
-    columns: [],
-    items: [],
-  });
 
   const [exitingQExpanded, setExistingExpanded] = useState(false);
 

@@ -539,3 +539,25 @@ export const FetchForgetPassword = (student_no, options) => {
     }
   );
 };
+
+export const GetSurveyWithId = (surveyId, options) => {
+  axios.get(BASE_URL + `/v1/survey/${surveyId}`).then(
+    (response) => {
+      options?.onSuccess?.(response);
+    },
+    (err) => {
+      options?.onError?.(err);
+    }
+  );
+};
+
+export const GetStudentAnswers = (surveyId, student_no, options) => {
+  axios.get(BASE_URL + `/v1/answer/${surveyId}/${student_no}`).then(
+    (response) => {
+      console.log(response);
+    },
+    (err) => {}
+  );
+};
+
+

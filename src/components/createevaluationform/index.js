@@ -78,10 +78,11 @@ CreateEvaluationForm.EvaluationAsnwerContainer =
 CreateEvaluationForm.EvaluationAnswer = function CreateEvaluationFormAnswer({
   onChange,
   children,
+  background,
   ...restProps
 }) {
   return (
-    <Wrapper>
+    <Wrapper style={{ background: background }}>
       <EvaluationAnswer onChange={onChange} {...restProps}>
         {children}
       </EvaluationAnswer>
