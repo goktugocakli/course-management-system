@@ -2,7 +2,10 @@ import React from "react";
 import {
   Label,
   AlertText,
-  Text,
+  NameText,
+  CodeText,
+  CreditText,
+  TypeText,
   Icon,
   AddButton,
   StartButton,
@@ -68,8 +71,20 @@ AddSemester.AlertText = function semestersAlertText({
   return <AlertText>{children}</AlertText>;
 };
 
-AddSemester.Text = function semestersText({ children, ...restPorps }) {
-  return <Text>{children}</Text>;
+AddSemester.NameText = function courseNameText({ children, ...restPorps }) {
+  return <NameText {...restPorps}>{children}</NameText>;
+};
+
+AddSemester.CodeText = function courseCodeText({ children, ...restPorps }) {
+  return <CodeText {...restPorps}>{children}</CodeText>;
+};
+
+AddSemester.CreditText = function courseCreditText({ children, ...restPorps }) {
+  return <CreditText {...restPorps}>{children}</CreditText>;
+};
+
+AddSemester.TypeText = function courseTypeText({ children, ...restPorps }) {
+  return <TypeText {...restPorps}>{children}</TypeText>;
 };
 
 AddSemester.Label = function semestersLabel({ children, ...restPorps }) {

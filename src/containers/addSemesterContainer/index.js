@@ -106,23 +106,23 @@ export default function AddSemesterContainer() {
 
           <AddSemester.Label>Courses</AddSemester.Label>
           <AddSemester.LabelDiv>
-            <AddSemester.Text>Course Name</AddSemester.Text>
-            <AddSemester.Text>Code</AddSemester.Text>
-            <AddSemester.Text>Credit</AddSemester.Text>
-            <AddSemester.Text>Type</AddSemester.Text>
+            <AddSemester.NameText>Course Name</AddSemester.NameText>
+            <AddSemester.CodeText>Code</AddSemester.CodeText>
+            <AddSemester.CreditText>Credit</AddSemester.CreditText>
+            <AddSemester.TypeText>Type</AddSemester.TypeText>
           </AddSemester.LabelDiv>
           <AddSemester.Line />
           <AddSemester.List>
             {courses.map((course) => (
               <AddSemester.ListItem key={course.code}>
-                <AddSemester.Text>
-                  {course.name.slice(0, 15) + "..."}
-                </AddSemester.Text>
-                <AddSemester.Text>{course.code}</AddSemester.Text>
-                <AddSemester.Text>{course.credit}</AddSemester.Text>
-                <AddSemester.Text>
+                <AddSemester.NameText title={course.name}>
+                  {course.name}
+                </AddSemester.NameText>
+                <AddSemester.CodeText title={course.code}>{course.code}</AddSemester.CodeText>
+                <AddSemester.CreditText title={course.credit}>{course.credit}</AddSemester.CreditText>
+                <AddSemester.TypeText>
                   {course.course_type === 0 ? "M" : "E"}
-                </AddSemester.Text>
+                </AddSemester.TypeText>
               </AddSemester.ListItem>
             ))}
           </AddSemester.List>
