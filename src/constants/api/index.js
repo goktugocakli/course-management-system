@@ -147,7 +147,7 @@ user = {
 */
 
 export const AddUser = async (user, options) => {
-  if (user.userType === "student") {
+  if (user.type === "student") {
     axios.post(BASE_URL + "/api/students/add", user).then(
       (response) => {
         options?.onSuccess?.(response);
@@ -156,7 +156,7 @@ export const AddUser = async (user, options) => {
         options?.onError?.(err);
       }
     );
-  } else if (user.userType === "instructor") {
+  } else if (user.type === "instructor") {
     axios.post(BASE_URL + "/instructors/add", user).then(
       (response) => {
         options?.onSuccess?.(response);
@@ -166,6 +166,30 @@ export const AddUser = async (user, options) => {
       }
     );
   }
+};
+
+export const GetUser = (options) => {
+  axios.get(BASE_URL + "/api/students").then(
+    (response) => {
+      let user = [];
+
+      response.data.map((s) => {
+        return user.push({ ...s, type: "student", id: user.length });
+      });
+      axios.get(BASE_URL + "/instructors").then(
+        (res) => {
+          res.data.map((i) => {
+            return user.push({ ...i, type: "Instructor", id: user.length });
+          });
+          options?.onSuccess?.(user);
+        },
+        (err) => {}
+      );
+    },
+    (err) => {
+      options?.onError?.(err);
+    }
+  );
 };
 
 /*
@@ -559,5 +583,3 @@ export const GetStudentAnswers = (surveyId, student_no, options) => {
     (err) => {}
   );
 };
-
-
