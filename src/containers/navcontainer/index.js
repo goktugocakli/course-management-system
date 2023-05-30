@@ -42,8 +42,12 @@ const renderLinks = (user) => {
   if (user.userType === "student") {
     return (
       <>
-        <NavBar.Link href={"/"}>Home</NavBar.Link>
-        <NavBar.Link href={"/enrollCourse"}>Enroll Course</NavBar.Link>
+        <NavBar.Link>
+          <Link to={"/"}>Home</Link>
+        </NavBar.Link>
+        <NavBar.Link>
+          <Link to={"/enrollCourse"}>Enroll Course</Link>
+        </NavBar.Link>
       </>
     );
   } else {
