@@ -100,7 +100,7 @@ export const InputLabel = styled.p`
 `;
 
 export const Select = styled.select`
-  width: 370px;
+  width: 275px;
   height:45px;
   border-radius: 10px;
   font-size: 16px;

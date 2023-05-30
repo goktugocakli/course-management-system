@@ -49,10 +49,9 @@ export const Div = styled.div`
 `;
 
 export const LabelDiv = styled.div`
-  justify-content: space-around;
   display: flex;
   background-color: #f4f4f4;
-  width: 700px;
+  width: 800px;
 
   position: absolute;
   top: 15%;
@@ -64,7 +63,7 @@ export const InputRow = styled.div`
   display: flex;
   flex-direction: row;
   width: calc(95%);
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: #ffffff;
   position: absolute;
   top: -18%;
@@ -75,14 +74,6 @@ export const InputColumn = styled.div`
   flex-direction: column;
   background-color: #ffffff;
   margin-left: 15px;
-`;
-
-export const DateRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  background-color: #ffffff;
-  margin-left: auto;
 `;
 
 export const Input = styled.input`
@@ -118,9 +109,48 @@ export const AlertText = styled.p`
   transform: translate(-50%, -50%);
 `;
 
-export const Text = styled.p`
+export const NameText = styled.p`
+  width:300px;
   font-weight: 500;
-  font-size: 20px;
+  margin-left:50px;
+  font-size:20px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+`;
+
+export const CodeText = styled.p`
+  width:140px;
+  margin-left:40px;
+  font-weight: 500;
+  font-size:20px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+`;
+
+export const CreditText = styled.p`
+  width:80px;
+  margin-left:40px;
+  font-weight: 500;
+  font-size:20px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+`;
+
+export const TypeText = styled.p`
+  width:80px;
+  margin-left:40px;
+  font-weight: 500;
+  font-size:20px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
 `;
 
 export const Icon = styled.i`
@@ -132,7 +162,7 @@ export const Icon = styled.i`
 
 export const Line = styled.div`
   height: 1px;
-  width: 700px;
+  width: 800px;
   background-color: black;
   position: absolute;
   top: 19%;
@@ -150,15 +180,13 @@ export const List = styled.ul`
 `;
 
 export const ListItem = styled.div`
-  justify-content: space-around;
   align-items: center;
   border-radius: 10px;
   display: flex;
   background-color: #ffffff;
   margin-top: 10px;
   margin-right: 10px;
-  margin-left: 10px;
-  width: 700px;
+  width: 800px;
   height: 50px;
 `;
 

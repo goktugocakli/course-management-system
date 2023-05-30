@@ -13,28 +13,10 @@ export default function AddSemesterContainer() {
   // states for semester addition inputs
   const [semesterName, setSemesterName] = useState("Fall");
   // these states used to pick start and end dates
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
+  const [year, setYear] = useState();
 
   // this state used to show/hide add new course window
   const [courseDiv, setCourseDiv] = useState(false);
-
-  // this function used to check if dates picked correctly
-  const checkDates = (start, end) => {
-    let date1 = new Date(start).getTime();
-    let date2 = new Date(end).getTime();
-
-    if (date1 < date2) {
-      return true;
-    } else if (date1 > date2) {
-    } else if (start === undefined) {
-      console.log(`Please pick a start date.`);
-    } else if (end === undefined) {
-      console.log(`Please pick an end date.`);
-    } else if (date1 === date2) {
-      ShowToast("Start and End Dates are equal!", { success: false });
-    }
-  };
 
   const saveSemester = () => {
     const options = {
@@ -45,29 +27,35 @@ export default function AddSemesterContainer() {
     };
     GetAllCoursesWithSemester(
       semesterName,
-      +startDate.split("-")[0],
+      +year,
       options
     );
   };
 
   // this function checks all test cases for semester addition
-  const checkSemesterInputs = (start, end) => {
+  const checkSemesterInputs = (year) => {
+    let thisYear = new Date().getFullYear();
+
     if (semesterName === undefined) {
       console.log("Please enter a name for semester.");
-    } else if (checkDates(start, end)) {
+    }else if (year === undefined) {
+      //ShowToast("Please enter a year!", { success: false });
+    }else if(year > thisYear){
+      ShowToast("Please enter a correct year!", { success: false });
+    } else{
       saveSemester();
     }
   };
 
   useEffect(() => {
-    checkSemesterInputs(startDate, endDate);
-  }, [startDate, endDate, semesterName, courseDiv]);
+    checkSemesterInputs(year);
+  }, [year, semesterName, courseDiv]);
 
   // this function used to open add new course window
   const handleClick = function addNewCourse() {
-    const today = new Date();
-    const start = new Date(startDate);
-    if (today.getTime() > start.getTime()) {
+    const thisYear = new Date().getFullYear();
+  
+    if (thisYear > year) {
       ShowToast("Start date must be present!", { success: false });
     } else {
       setCourseDiv(!courseDiv);
@@ -86,43 +74,34 @@ export default function AddSemesterContainer() {
                 <AddSemester.Option value={"Spring"}>Spring</AddSemester.Option>
               </AddSemester.Select>
             </AddSemester.InputColumn>
-            <AddSemester.DateRow>
-              <AddSemester.InputColumn>
-                <AddSemester.InputLabel>Start Date</AddSemester.InputLabel>
+            <AddSemester.InputColumn>
+                <AddSemester.InputLabel>Year</AddSemester.InputLabel>
                 <AddSemester.Input
-                  type={"date"}
-                  onChange={(evn) => setStartDate(evn.target.value)}
+                  type={"number"}
+                  onChange={(evn) => setYear(evn.target.value)}
                 />
               </AddSemester.InputColumn>
-              <AddSemester.InputColumn>
-                <AddSemester.InputLabel>End Date</AddSemester.InputLabel>
-                <AddSemester.Input
-                  type={"date"}
-                  onChange={(evn) => setEndDate(evn.target.value)}
-                />
-              </AddSemester.InputColumn>
-            </AddSemester.DateRow>
           </AddSemester.InputRow>
 
           <AddSemester.Label>Courses</AddSemester.Label>
           <AddSemester.LabelDiv>
-            <AddSemester.Text>Course Name</AddSemester.Text>
-            <AddSemester.Text>Code</AddSemester.Text>
-            <AddSemester.Text>Credit</AddSemester.Text>
-            <AddSemester.Text>Type</AddSemester.Text>
+            <AddSemester.NameText>Course Name</AddSemester.NameText>
+            <AddSemester.CodeText>Code</AddSemester.CodeText>
+            <AddSemester.CreditText>Credit</AddSemester.CreditText>
+            <AddSemester.TypeText>Type</AddSemester.TypeText>
           </AddSemester.LabelDiv>
           <AddSemester.Line />
           <AddSemester.List>
             {courses.map((course) => (
               <AddSemester.ListItem key={course.code}>
-                <AddSemester.Text>
-                  {course.name.slice(0, 15) + "..."}
-                </AddSemester.Text>
-                <AddSemester.Text>{course.code}</AddSemester.Text>
-                <AddSemester.Text>{course.credit}</AddSemester.Text>
-                <AddSemester.Text>
+                <AddSemester.NameText title={course.name}>
+                  {course.name}
+                </AddSemester.NameText>
+                <AddSemester.CodeText title={course.code}>{course.code}</AddSemester.CodeText>
+                <AddSemester.CreditText title={course.credit}>{course.credit}</AddSemester.CreditText>
+                <AddSemester.TypeText>
                   {course.course_type === 0 ? "M" : "E"}
-                </AddSemester.Text>
+                </AddSemester.TypeText>
               </AddSemester.ListItem>
             ))}
           </AddSemester.List>
@@ -137,7 +116,7 @@ export default function AddSemesterContainer() {
           <AddCourseContainer
             key={0}
             semester={semesterName}
-            year={+startDate.split("-")[0]}
+            year={year}
             setIsVisible={setCourseDiv}
           />
         ) : null}
@@ -155,22 +134,13 @@ export default function AddSemesterContainer() {
                 <AddSemester.Option value={"Spring"}>Spring</AddSemester.Option>
               </AddSemester.Select>
             </AddSemester.InputColumn>
-            <AddSemester.DateRow>
-              <AddSemester.InputColumn>
-                <AddSemester.InputLabel>Start Date</AddSemester.InputLabel>
+            <AddSemester.InputColumn>
+                <AddSemester.InputLabel>Year</AddSemester.InputLabel>
                 <AddSemester.Input
-                  type={"date"}
-                  onChange={(evn) => setStartDate(evn.target.value)}
+                  type={"number"}
+                  onChange={(evn) => setYear(evn.target.value)}
                 />
               </AddSemester.InputColumn>
-              <AddSemester.InputColumn>
-                <AddSemester.InputLabel>End Date</AddSemester.InputLabel>
-                <AddSemester.Input
-                  type={"date"}
-                  onChange={(evn) => setEndDate(evn.target.value)}
-                />
-              </AddSemester.InputColumn>
-            </AddSemester.DateRow>
           </AddSemester.InputRow>
 
           <AddSemester.Label>Courses</AddSemester.Label>
@@ -189,7 +159,7 @@ export default function AddSemesterContainer() {
           <AddCourseContainer
             key={0}
             semester={semesterName}
-            year={+startDate?.split("-")[0]}
+            year={year}
             setIsVisible={setCourseDiv}
           />
         ) : null}

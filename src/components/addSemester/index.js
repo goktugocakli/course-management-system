@@ -2,7 +2,10 @@ import React from "react";
 import {
   Label,
   AlertText,
-  Text,
+  NameText,
+  CodeText,
+  CreditText,
+  TypeText,
   Icon,
   AddButton,
   StartButton,
@@ -12,13 +15,11 @@ import {
   LabelDiv,
   InputRow,
   InputColumn,
-  DateRow,
   Input,
   InputLabel,
   Line,
   List,
   ListItem,
-  SemesterContainer,
 } from "./styles/addSemester";
 
 export default function AddSemester({ children, ...restProps }) {
@@ -39,10 +40,6 @@ AddSemester.InputRow = function inputRow({ children, ...restPorps }) {
 
 AddSemester.InputColumn = function inputColumn({ children, ...restPorps }) {
   return <InputColumn>{children}</InputColumn>;
-};
-
-AddSemester.DateRow = function dateRow({ children, ...restPorps }) {
-  return <DateRow>{children}</DateRow>;
 };
 
 AddSemester.Input = function input({ ...restProps }) {
@@ -68,8 +65,20 @@ AddSemester.AlertText = function semestersAlertText({
   return <AlertText>{children}</AlertText>;
 };
 
-AddSemester.Text = function semestersText({ children, ...restPorps }) {
-  return <Text>{children}</Text>;
+AddSemester.NameText = function courseNameText({ children, ...restPorps }) {
+  return <NameText {...restPorps}>{children}</NameText>;
+};
+
+AddSemester.CodeText = function courseCodeText({ children, ...restPorps }) {
+  return <CodeText {...restPorps}>{children}</CodeText>;
+};
+
+AddSemester.CreditText = function courseCreditText({ children, ...restPorps }) {
+  return <CreditText {...restPorps}>{children}</CreditText>;
+};
+
+AddSemester.TypeText = function courseTypeText({ children, ...restPorps }) {
+  return <TypeText {...restPorps}>{children}</TypeText>;
 };
 
 AddSemester.Label = function semestersLabel({ children, ...restPorps }) {
