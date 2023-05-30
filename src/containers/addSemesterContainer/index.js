@@ -11,10 +11,7 @@ export default function AddSemesterContainer() {
 
   const navigate = useNavigate();
   // states for semester addition inputs
-  const [semesterName, setSemesterName] = useState({
-    expanded: false,
-    semester: "Fall",
-  });
+  const [semesterName, setSemesterName] = useState("Fall");
   // these states used to pick start and end dates
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -47,7 +44,7 @@ export default function AddSemesterContainer() {
       onError: (err) => {},
     };
     GetAllCoursesWithSemester(
-      semesterName.semester,
+      semesterName,
       +startDate.split("-")[0],
       options
     );
@@ -83,43 +80,11 @@ export default function AddSemesterContainer() {
         <AddSemester.Div>
           <AddSemester.InputRow>
             <AddSemester.InputColumn>
-              <AddSemester.InputLabel
-                onClick={() => {
-                  setSemesterName({
-                    ...semesterName,
-                    expanded: !semesterName.expanded,
-                  });
-                }}
-                style={{ fontWeight: 700 }}
-              >
-                {semesterName.semester}
-              </AddSemester.InputLabel>
-              <AddSemester.SemesterContainer
-                style={{ display: semesterName.expanded ? "flex" : "none" }}
-              >
-                <AddSemester.InputLabel
-                  onClick={() => {
-                    setSemesterName({
-                      ...semesterName,
-                      expanded: false,
-                      semester: "Fall",
-                    });
-                  }}
-                >
-                  Fall
-                </AddSemester.InputLabel>
-                <AddSemester.InputLabel
-                  onClick={() => {
-                    setSemesterName({
-                      ...semesterName,
-                      expanded: false,
-                      semester: "Spring",
-                    });
-                  }}
-                >
-                  Spring
-                </AddSemester.InputLabel>
-              </AddSemester.SemesterContainer>
+              <AddSemester.InputLabel>Semester</AddSemester.InputLabel>
+              <AddSemester.Select  onChange={(evn) => setSemesterName(evn.target.value)}>
+                <AddSemester.Option value={"Fall"}>Fall</AddSemester.Option>
+                <AddSemester.Option value={"Spring"}>Spring</AddSemester.Option>
+              </AddSemester.Select>
             </AddSemester.InputColumn>
             <AddSemester.DateRow>
               <AddSemester.InputColumn>
@@ -171,7 +136,7 @@ export default function AddSemesterContainer() {
         {courseDiv ? (
           <AddCourseContainer
             key={0}
-            semester={semesterName.semester}
+            semester={semesterName}
             year={+startDate.split("-")[0]}
             setIsVisible={setCourseDiv}
           />
@@ -183,44 +148,12 @@ export default function AddSemesterContainer() {
       <>
         <AddSemester.Div>
           <AddSemester.InputRow>
-            <AddSemester.InputColumn>
-              <AddSemester.InputLabel
-                onClick={() => {
-                  setSemesterName({
-                    ...semesterName,
-                    expanded: !semesterName.expanded,
-                  });
-                }}
-                style={{ fontWeight: 700 }}
-              >
-                {semesterName.semester}
-              </AddSemester.InputLabel>
-              <AddSemester.SemesterContainer
-                style={{ display: semesterName.expanded ? "flex" : "none" }}
-              >
-                <AddSemester.InputLabel
-                  onClick={() => {
-                    setSemesterName({
-                      ...semesterName,
-                      expanded: false,
-                      semester: "Fall",
-                    });
-                  }}
-                >
-                  Fall
-                </AddSemester.InputLabel>
-                <AddSemester.InputLabel
-                  onClick={() => {
-                    setSemesterName({
-                      ...semesterName,
-                      expanded: false,
-                      semester: "Spring",
-                    });
-                  }}
-                >
-                  Spring
-                </AddSemester.InputLabel>
-              </AddSemester.SemesterContainer>
+          <AddSemester.InputColumn>
+              <AddSemester.InputLabel>Semester</AddSemester.InputLabel>
+              <AddSemester.Select  onChange={(evn) => setSemesterName(evn.target.value)}>
+                <AddSemester.Option value={"Fall"}>Fall</AddSemester.Option>
+                <AddSemester.Option value={"Spring"}>Spring</AddSemester.Option>
+              </AddSemester.Select>
             </AddSemester.InputColumn>
             <AddSemester.DateRow>
               <AddSemester.InputColumn>
@@ -255,7 +188,7 @@ export default function AddSemesterContainer() {
         {courseDiv ? (
           <AddCourseContainer
             key={0}
-            semester={semesterName?.semester}
+            semester={semesterName}
             year={+startDate?.split("-")[0]}
             setIsVisible={setCourseDiv}
           />

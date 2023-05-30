@@ -5,7 +5,8 @@ import {
   Input,
   Div,
   Text,
-  DepartmentContainer,
+  Select,
+  Option,
 } from "./styles/signup";
 
 export default function SignUp({ children, ...restPorps }) {
@@ -36,9 +37,12 @@ SignUp.Department = function signupDepartment({ children, ...restPorps }) {
   return <p {...restPorps}>{children}</p>;
 };
 
-SignUp.DepartmentContainer = function signupDepartmentCont({
-  children,
-  ...restPorps
-}) {
-  return <DepartmentContainer {...restPorps}>{children}</DepartmentContainer>;
-};
+
+SignUp.Select = function selectType({children, ...restProps}){
+  return <Select{...restProps}>{children}</Select>
+}
+
+SignUp.Option = function typeOption({children, ...restProps}){
+  return <Option{...restProps}>{children}</Option>
+}
+

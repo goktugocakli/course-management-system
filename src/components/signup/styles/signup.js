@@ -46,10 +46,17 @@ export const Text = styled.p`
   font-size: 16px;
 `;
 
-export const DepartmentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 275px;
-  font-size: 1.25rem;
+export const Select = styled.select`
+  width: 265px;
+  height:45px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: Verdana;
+  padding-left:15px;
+  margin-left: auto;
+  margin-top: 20px;
+`;
+
+export const Option = styled.option`
+    
 `;
