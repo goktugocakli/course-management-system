@@ -68,6 +68,7 @@ export const Div = styled.div`
 export const InputRow = styled.div`
   display:flex;
   flex-direction: row;
+  align-items:center;
   width: calc(70%);
   margin-left: 65px;
   margin-top:30px;

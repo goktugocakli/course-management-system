@@ -6,6 +6,7 @@ import { GetAllDepartments, ShowToast } from "../../constants/api";
 export default function AddAccountContainer({ setIsVisible }) {
   //states for account addition inputs
   const [accountName, setAccountName] = useState();
+  const [accountSurname, setAccountSurname] = useState();
   const [accountId, setAccountId] = useState();
   const [accountEmail, setAccountEmail] = useState();
   const [accountDepartment, setAccountDepartment] = useState("");
@@ -30,6 +31,7 @@ export default function AddAccountContainer({ setIsVisible }) {
   const saveAccount = () => {
     const account = {
       name: accountName,
+      surname: accountSurname,
       id: accountId,
       email: accountEmail,
       department: accountDepartment,
@@ -69,6 +71,13 @@ export default function AddAccountContainer({ setIsVisible }) {
           <AddAccount.InputLabel>Name</AddAccount.InputLabel>
           <AddAccount.Input
             onChange={(evn) => setAccountName(evn.target.value)}
+          />
+        </AddAccount.InputRow>
+
+        <AddAccount.InputRow>
+          <AddAccount.InputLabel>Surname</AddAccount.InputLabel>
+          <AddAccount.Input
+            onChange={(evn) => setAccountSurname(evn.target.value)}
           />
         </AddAccount.InputRow>
 
