@@ -1,10 +1,12 @@
 package com.CodeOfDuty.CourseEvaluation.model;
 
 import lombok.Builder;
+import lombok.Data;
 
 import java.io.Serializable;
 
 @Builder
+@Data
 public class CourseKey implements Serializable {
     public CourseKey() {
     }
@@ -21,13 +23,4 @@ public class CourseKey implements Serializable {
         this.year = year;
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
 }

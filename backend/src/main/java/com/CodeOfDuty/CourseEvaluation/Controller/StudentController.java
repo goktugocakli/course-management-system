@@ -2,6 +2,7 @@ package com.CodeOfDuty.CourseEvaluation.Controller;
 
 import com.CodeOfDuty.CourseEvaluation.DTO.StudentCreateRequest;
 import com.CodeOfDuty.CourseEvaluation.Service.StudentService;
+import com.CodeOfDuty.CourseEvaluation.model.Course;
 import com.CodeOfDuty.CourseEvaluation.model.Student;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,12 @@ public class StudentController {
         );
 
         return ResponseEntity.ok(student);
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<Student> update(@RequestBody Student student){
+        Student student1 = studentService.update(student);
+        return ResponseEntity.ok(student1);
     }
 
     @DeleteMapping("/delete/{studentNo}")

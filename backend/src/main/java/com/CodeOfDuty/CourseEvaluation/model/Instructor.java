@@ -1,9 +1,6 @@
 package com.CodeOfDuty.CourseEvaluation.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIncludeProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import org.hibernate.engine.internal.Cascade;
 
@@ -45,8 +42,10 @@ public class Instructor {
             inverseJoinColumns = {@JoinColumn(name = "code"), @JoinColumn(name = "semester"), @JoinColumn(name = "year")})
     private List<Course> courses;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "addedBy")
     private List<Question> questions;
+
 
     @OneToMany(mappedBy = "createdBy")
     private List<Survey> surveys;

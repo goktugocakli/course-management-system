@@ -16,6 +16,7 @@ public interface ISurveyDao extends JpaRepository<Survey, Integer> {
 
     Optional<Survey> findByCourseAndCreatedBy(Course course, Instructor instructor);
 
+    Optional<Survey> findByCourse(Course course);
     @Query(value = "SELECT COUNT(a.student) FROM Survey s INNER JOIN StudentAnswer a ON s.id = a.survey.id WHERE s.id = :surveyId GROUP BY a.survey.id ")
     Long countStudentsBySurvey(@Param("surveyId") Integer surveyid);
 

@@ -67,6 +67,10 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
+    public Student update(Student student){
+        return studentRepository.save(student);
+    }
+
     public boolean forgetPass(String studentNo){
         Student student =  this.findById(studentNo);
         String password = student.getPassword();
@@ -105,6 +109,9 @@ public class StudentService {
     public void enrollCourse(String course_code, String semester, Integer year, String studentNo){
         Course course = courseService.findById(course_code, semester, year);
         Student student = findById(studentNo);
+        if(student.getCourses().contains(course)){
+            return;
+        }
         student.addCourses(course);
         studentRepository.save(student);
     }

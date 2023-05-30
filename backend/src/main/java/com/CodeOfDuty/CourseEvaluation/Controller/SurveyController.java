@@ -46,6 +46,12 @@ public class SurveyController {
         return ResponseEntity.ok(survey);
     }
 
+    @DeleteMapping("/delete/{surveyId}")
+    public ResponseEntity<String> deleteSurveyById(@PathVariable String surveyId){
+        surveyManager.deleteSurveyById(Integer.valueOf(surveyId));
+        return ResponseEntity.ok("Anket Silindi.");
+    }
+
     @GetMapping("/countStudent{surveyId}")
     public ResponseEntity<Long> countStudentBySurvey(@PathVariable String surveyId){
         return ResponseEntity.ok(surveyManager.countStudentsBySurvey(Integer.valueOf(surveyId)));
@@ -75,7 +81,12 @@ public class SurveyController {
                 instructor_username
         );
         return ResponseEntity.ok(survey);
+    }
 
+    @GetMapping("/findAllByStudent/{studentNo}")
+    public ResponseEntity<List<Survey>> findAllByStudent(@PathVariable String studentNo){
+        List<Survey> surveys=surveyManager.findAllByStudent(studentNo);
+        return ResponseEntity.ok(surveys);
     }
 
 }
