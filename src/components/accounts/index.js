@@ -1,5 +1,5 @@
 import React from "react";
-import {Label, AlertText, Text, Icon , Button, Div, LabelDiv, Line, List, ListItem} from "./styles/accounts"
+import {Label, AlertText, TypeText, NameText, IdText, EmailText, DepartmentText, Icon , Button, Div, LabelDiv, Line, List, ListItem} from "./styles/accounts"
 
 export default function Accounts({children, ...restProps}) {
     return
@@ -29,9 +29,27 @@ Accounts.AlertText = function accountsAlertText({ children, ...restPorps }) {
     return <AlertText>{children}</AlertText>;
 };
 
-Accounts.Text = function accountsText({ children, ...restPorps }) {
-    return <Text>{children}</Text>;
+
+Accounts.NameText = function accountsNameText({ children, ...restPorps }) {
+    return <NameText {...restPorps}>{children}</NameText>;
 };
+
+Accounts.IdText = function accountsIdText({ children, ...restPorps }) {
+    return <IdText {...restPorps}>{children}</IdText>;
+};
+
+Accounts.EmailText = function accountsEmailText({ children, ...restPorps }) {
+    return <EmailText {...restPorps}>{children}</EmailText>;
+};
+
+Accounts.DepartmentText = function accountsDepartmentText({ children, ...restPorps }) {
+    return <DepartmentText {...restPorps}>{children}</DepartmentText>;
+};
+
+Accounts.TypeText = function accountsTypeText({ children, ...restPorps }) {
+    return <TypeText {...restPorps}>{children}</TypeText>;
+};
+
 
 Accounts.Label = function accountsLabel({ children, ...restPorps }) {
     return <Label>{children}</Label>;

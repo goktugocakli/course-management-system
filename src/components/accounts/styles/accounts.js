@@ -34,10 +34,10 @@ export const Div = styled.div`
 `;
 
 export const LabelDiv = styled.div`
-  justify-content:space-around;
   display:flex;
   background-color: #f4f4f4;
-  width:700px;
+  padding-left:60px;
+  width:930px;
 
   position: absolute;
     top:15%;
@@ -62,9 +62,59 @@ export const AlertText = styled.p`
     transform: translate(-50%, -50%);
 `;
 
-export const Text = styled.p`
+export const NameText = styled.p`
+  width:150px;
   font-weight: 500;
   font-size:20px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+`;
+
+export const IdText = styled.p`
+  width:100px;
+  margin-left:40px;
+  font-weight: 500;
+  font-size:20px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+`;
+
+export const EmailText = styled.p`
+  width:220px;
+  margin-left:40px;
+  font-weight: 500;
+  font-size:20px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+`;
+
+export const DepartmentText = styled.p`
+  width:200px;
+  margin-left:40px;
+  font-weight: 500;
+  font-size:20px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+`;
+
+export const TypeText = styled.p`
+  width:110px;
+  margin-left:40px;
+  margin-right:30px;
+  font-weight: 500;
+  font-size:20px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
 `;
 
 export const Icon = styled.i`
@@ -76,7 +126,7 @@ export const Icon = styled.i`
 
 export const Line = styled.div`
   height:1px;
-  width:700px;
+  width:910px;
   background-color: black;
   position: absolute;
   top:19%;
@@ -90,18 +140,17 @@ export const List = styled.ul`
   position: absolute;
   top:16%;
   left:50%;
-  transform: translate(-51%, 0%);
+  transform: translate(-50%, 0%);
 `;
 
 export const ListItem = styled.div`
-  justify-content:space-around;
   align-items:center;
   border-radius:10px;
   display:flex;
   background-color: #ffffff;
   margin-top:10px;
   margin-right:10px;
-  margin-left:10px;
-  width:700px;
+  padding-left:50px;
+  width:930px;
   height:50px;
 `;

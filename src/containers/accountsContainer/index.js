@@ -4,53 +4,53 @@ import { Accounts } from "../../components";
 export default function AccountsContainer() {
   const accounts = [
     {
-      name: "Ahmet Yildiz",
-      id: "131231",
-      email: "12/10/2023",
+      name: "Ahmet Yildizzzzzzzzzzzzzzzzzzzzz",
+      id: "13123196",
+      email: "ahmetyildiz@email.com",
       department: "Computer Engineering",
-      type:"S"
+      type:"Student"
     },
     {
       name: "Ahmet Yildiz",
-      id: "131231",
-      email: "12/10/2023",
+      id: "13123196",
+      email: "ahmetyildiz@email.com",
       department: "Computer Engineering",
-      type:"S"
+      type:"Student"
     },
     {
       name: "Ahmet Yildiz",
-      id: "131231",
-      email: "12/10/2023",
+      id: "13123196",
+      email: "ahmetyildiz@email.com",
       department: "Computer Engineering",
-      type:"S"
+      type:"Student"
     },
     {
       name: "Ahmet Yildiz",
-      id: "131231",
-      email: "12/10/2023",
+      id: "13123196",
+      email: "ahmetyildiz@email.com",
       department: "Computer Engineering",
-      type:"S"
+      type:"Student"
     },
     {
       name: "Ahmet Yildiz",
-      id: "131231",
-      email: "12/10/2023",
+      id: "13123196",
+      email: "ahmetyildiz@email.com",
       department: "Computer Engineering",
-      type:"S"
+      type:"Student"
     },
     {
       name: "Ahmet Yildiz",
-      id: "131231",
-      email: "12/10/2023",
+      id: "13123196",
+      email: "ahmetyildiz@email.com",
       department: "Computer Engineering",
-      type:"S"
+      type:"Student"
     },
     {
       name: "Ahmet Yildiz",
-      id: "131231",
-      email: "12/10/2023",
+      id: "13123196",
+      email: "ahmetyildiz@email.com",
       department: "Computer Engineering",
-      type:"S"
+      type:"Student Manager"
     },
   ];
   if (Accounts.length > 0) {
@@ -58,21 +58,21 @@ export default function AccountsContainer() {
       <Accounts.Div>
         <Accounts.Label>Accounts</Accounts.Label>
         <Accounts.LabelDiv>
-          <Accounts.Text>Name</Accounts.Text>
-          <Accounts.Text>Id</Accounts.Text>
-          <Accounts.Text>Email</Accounts.Text>
-          <Accounts.Text>Department</Accounts.Text>
-          <Accounts.Text>Type</Accounts.Text>
+          <Accounts.NameText>Name</Accounts.NameText>
+          <Accounts.IdText>Id</Accounts.IdText>
+          <Accounts.EmailText>Email</Accounts.EmailText>
+          <Accounts.DepartmentText>Department</Accounts.DepartmentText>
+          <Accounts.TypeText>Type</Accounts.TypeText>
         </Accounts.LabelDiv>
         <Accounts.Line />
         <Accounts.List>
           {accounts.map((account) => (
             <Accounts.ListItem>
-              <Accounts.Text>{account.name}</Accounts.Text>
-              <Accounts.Text>{account.id}</Accounts.Text>
-              <Accounts.Text>{account.email}</Accounts.Text>
-              <Accounts.Text>{account.department}</Accounts.Text>
-              <Accounts.Text>{account.type}</Accounts.Text>
+              <Accounts.NameText title={account.name}>{account.name}</Accounts.NameText>
+              <Accounts.IdText title={account.id}>{account.id}</Accounts.IdText>
+              <Accounts.EmailText title={account.email}>{account.email}</Accounts.EmailText>
+              <Accounts.DepartmentText title={account.department}>{account.department}</Accounts.DepartmentText>
+              <Accounts.TypeText title={account.type}>{account.type}</Accounts.TypeText>
             </Accounts.ListItem>
           ))}
         </Accounts.List>
