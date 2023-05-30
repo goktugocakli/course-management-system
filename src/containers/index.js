@@ -8,8 +8,9 @@ export { default as CreateEvaluationFormContainer } from "./createevaluationform
 export { default as HomeContainer } from "./homecontainer";
 export { default as EnrollContainer } from "./enrollcontainer";
 export { default as SeeCoursesContainer } from "./seecoursecontainer";
-export { default as SemestersContainer } from "./semestersContainer";
+export { default as AccountsContainer } from "./accountsContainer";
 export { default as AddSemesterContainer } from "./addSemesterContainer";
 export { default as AddCourseContainer } from "./addCourseContainer";
 export { default as ForgetPasswordContainer } from "./forgetPasswordContainer";
 export { default as AnswerEvaluationContainer } from "./answerevaluationcontainer";
+export { default as AddAccountContainer } from "./addAccountContainer";
