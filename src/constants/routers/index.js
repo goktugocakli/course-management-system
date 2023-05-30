@@ -10,6 +10,7 @@ import {
   AddSemesterPage,
   ForgetPasswordPage,
   EditPage,
+  AsnwerEvaluation,
 } from "../../pages";
 
 export const MainRouter = createBrowserRouter([
@@ -66,6 +67,12 @@ export const MainRouter = createBrowserRouter([
   {
     path: "/editUser",
     element: <EditPage />,
+    errorElement: <h1>404</h1>,
+  },
+
+  {
+    path: "/answerEval/:surveyId",
+    element: <AsnwerEvaluation />,
     errorElement: <h1>404</h1>,
   },
 ]);
