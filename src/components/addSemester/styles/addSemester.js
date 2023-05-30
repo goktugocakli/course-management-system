@@ -162,9 +162,15 @@ export const ListItem = styled.div`
   height: 50px;
 `;
 
-export const SemesterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  gap: 0.25rem;
+export const Select = styled.select`
+  width: 270px;
+  height:45px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: Verdana;
+  padding-left:15px;
+`;
+
+export const Option = styled.option`
+    
 `;

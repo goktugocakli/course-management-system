@@ -7,6 +7,8 @@ import {
   AddButton,
   StartButton,
   Div,
+  Select,
+  Option,
   LabelDiv,
   InputRow,
   InputColumn,
@@ -101,9 +103,11 @@ AddSemester.ListItem = function semestersListItem({ children, ...restPorps }) {
   return <ListItem>{children}</ListItem>;
 };
 
-AddSemester.SemesterContainer = function semesterContainer({
-  children,
-  ...restPorps
-}) {
-  return <SemesterContainer {...restPorps}>{children}</SemesterContainer>;
-};
+AddSemester.Select = function selectType({children, ...restProps}){
+  return <Select{...restProps}>{children}</Select>
+}
+
+AddSemester.Option = function typeOption({children, ...restProps}){
+  return <Option{...restProps}>{children}</Option>
+}
+

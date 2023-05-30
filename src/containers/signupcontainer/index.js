@@ -20,8 +20,8 @@ const options = {
 export default function SignUpContainer() {
   const navigate = useNavigate();
 
-  const [departments, setDepatments] = useState([]);
-  const [selected, setSelected] = useState({ expanded: false, depName: "" });
+  const [departments, setDepatments] = useState(["Deneme1", "deneme2"]);
+  const [selected, setSelected] = useState();
 
   const [user, setUser] = useState({
     student_no: null,
@@ -101,44 +101,12 @@ export default function SignUpContainer() {
           </Global.Row>
 
           <Global.Row>
-            <SignUp.InputLabel
-              onClick={() => {
-                setSelected({ ...selected, expanded: !selected.expanded });
-              }}
-            >
-              {selected.depName === "" ? "Department" : selected.depName}
-            </SignUp.InputLabel>
-            <SignUp.DepartmentContainer
-              style={{ display: selected.expanded ? "flex" : "none" }}
-            >
-              {departments.map((dep) => {
-                return (
-                  <SignUp.InputLabel
-                    onClick={() => {
-                      setSelected({
-                        ...selected,
-                        depName: dep.name,
-                        expanded: false,
-                      });
-
-                      setUser({ ...user, department: dep.name });
-                    }}
-                    key={dep.name}
-                  >
-                    {dep.name}
-                  </SignUp.InputLabel>
-                );
-              })}
-            </SignUp.DepartmentContainer>
+            <SignUp.InputLabel>Department</SignUp.InputLabel>
+            <SignUp.Select onChange={(evn) => setSelected(evn.target.value)}>
+                {departments.map((department) => <SignUp.Option>{department}</SignUp.Option>)}
+            </SignUp.Select>
           </Global.Row>
 
-          <SignUp.Button
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            I have an Account
-          </SignUp.Button>
           <SignUp.Button
             onClick={() => {
               SignUpStudent(user, options);
