@@ -21,7 +21,9 @@ export const Events = styled.div`
 
 `;
 
-export const EventTitle = styled.h1``;
+export const EventTitle = styled.h1`
+  margin-left:10px;
+`;
 
 export const EventInner = styled.div`
   display: flex;
@@ -34,7 +36,40 @@ export const EventInner = styled.div`
 export const EventItem = styled.div`
   display: flex;
   flex-direction: row;
-  width: 700px;
+  width: 800px;
+  height:50px;
+  padding:30px;
+  border-radius:10px;
   align-items: center;
-  justify-content: space-between;
+  background:gray;
+`;
+
+export const EventLabel = styled.p`
+  font-size:18px;
+  font-weight: bold;
+`;
+
+export const EventText = styled.p`
+  font-size:18px;
+  margin-left:5px;
+  margin-right:20px;
+`;
+
+export const ButtonRow = styled.div`
+  display: flex;
+  margin-left:auto;
+  flex-direction: row;
+  background:gray;
+`;
+
+export const Button = styled.button`
+
+  margin-left:15px;
+  border-radius:10px;
+  width: 150px;
+  height:40px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size:16px;
+
 `;

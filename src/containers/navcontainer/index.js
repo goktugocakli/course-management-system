@@ -14,15 +14,15 @@ const renderLinks = (user) => {
     return (
       <>
         <NavBar.Link>
-          <Link to={"/"}>Home</Link>
+          <Link to={"/"} style={{ textDecoration: 'none' }}>Home</Link>
         </NavBar.Link>
 
         <NavBar.Link>
-          <Link to={"/addsemester"}>Semesters</Link>
+          <Link to={"/addsemester"} style={{ textDecoration: 'none' }}>Semesters</Link>
         </NavBar.Link>
 
         <NavBar.Link>
-          <Link to={"/accounts"}>Accounts</Link>
+          <Link to={"/accounts"} style={{ textDecoration: 'none' }}>Accounts</Link>
         </NavBar.Link>
       </>
     );
