@@ -103,7 +103,7 @@ public class StudentService {
 
     public boolean isValidStudent(String user_name, String password) {
         Student student = studentRepository.findById(user_name).orElse(null);
-        return student != null && student.getPassword().equals(password);
+        return student != null && student.getPassword().equals(password) && student.isActive();
     }
 
     public void enrollCourse(String course_code, String semester, Integer year, String studentNo){

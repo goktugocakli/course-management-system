@@ -42,7 +42,18 @@ public class SurveyController {
                 surveyRequest.getYear(),
                 surveyRequest.getQuestionsId()
         );
+        return ResponseEntity.ok(survey);
+    }
 
+    @PostMapping("/addNewQuestion")
+    public ResponseEntity<Survey> addNewQuestion(@RequestParam Integer surveyId, @RequestParam Integer questionId){
+        Survey survey = surveyManager.addNewQuestion(surveyId,questionId);
+        return ResponseEntity.ok(survey);
+    }
+
+    @PostMapping("/extractQuestion")
+    public ResponseEntity<Survey> extractQuestion(@RequestParam Integer surveyId, @RequestParam Integer questionId){
+        Survey survey = surveyManager.extractQuestion(surveyId, questionId);
         return ResponseEntity.ok(survey);
     }
 

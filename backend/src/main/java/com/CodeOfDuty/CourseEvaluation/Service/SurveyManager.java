@@ -56,6 +56,20 @@ public class SurveyManager {
         return surveyRepository.save(survey);
     }
 
+    public Survey addNewQuestion(Integer surveyId, Integer questionId){
+        Survey survey = findById(surveyId);
+        Question question = questionManager.findById(questionId);
+        survey.getQuestions().add(question);
+        return surveyRepository.save(survey);
+    }
+
+    public Survey extractQuestion(Integer surveyId, Integer questionId){
+        Survey survey = findById(surveyId);
+        Question question = questionManager.findById(questionId);
+        survey.getQuestions().remove(question);
+        return surveyRepository.save(survey);
+    }
+
     public List<Survey> getAllSurveys(){
         return surveyRepository.findAll();
     }
