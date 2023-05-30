@@ -7,6 +7,10 @@ import {
   EventTitle,
   EventInner,
   EventItem,
+  Button,
+  ButtonRow,
+  EventLabel,
+  EventText,
 } from "./styles/home";
 
 let Theme = null;
@@ -34,5 +38,22 @@ Home.EventInner = function HomeEventsInner({ children, ...restProps }) {
 Home.EventItem = function HomeEventsItem({ children, ...restProps }) {
   return <EventItem {...restProps}>{children}</EventItem>;
 };
+
+Home.Button = function homeButton({ children, ...restPorps }) {
+  return <Button {...restPorps}>{children}</Button>;
+};
+
+Home.ButtonRow = function homeButtonROw({ children, ...restPorps }) {
+  return <ButtonRow {...restPorps}>{children}</ButtonRow>;
+};
+
+Home.EventLabel = function homeEventLabel({ children, ...restPorps }) {
+  return <EventLabel {...restPorps}>{children}</EventLabel>;
+};
+
+Home.EventText = function homeEventText({ children, ...restPorps }) {
+  return <EventText {...restPorps}>{children}</EventText>;
+};
+
 
 //TODO: Add aditional properties for event item

@@ -31,21 +31,38 @@ const renderEvents = (user, data) => {
   if (user?.userType === "admin") {
     return (
       <>
-        <Home.EventTitle>Pending Requests...</Home.EventTitle>
+        
         <Home.Events>
           <Home.EventInner>
+          <Home.EventTitle>Pending Requests...</Home.EventTitle>
             {/* for loop through events as eventitem here  or map them*/}
             {data?.map((student) => {
               return (
                 <Home.EventItem key={student.student_no}>
-                  {`Student No: ${student.student_no}   Student Name: ${student.first_name}`}
-                  <button
-                    onClick={() => {
-                      ShowToast("Access Granted Successfully", { success: true });
-                    }}
-                  >
-                    Grant Request
-                  </button>
+                  
+                  <Home.EventLabel>Student No:</Home.EventLabel>
+                  <Home.EventText>{student.student_no}</Home.EventText>
+                  <Home.EventLabel>Student Name:</Home.EventLabel>
+                  <Home.EventText>{student.first_name}</Home.EventText>
+                  <Home.ButtonRow>
+                      <Home.Button
+                        onClick={() => {
+                          ShowToast("Access Granted Successfully", { success: true });
+                        }}
+                      >
+                        Grant
+                      </Home.Button>
+
+                      <Home.Button
+                        onClick={() => {
+                          ShowToast("Access Granted Successfully", { success: true });
+                        }}
+                      >
+                        Deny
+                      </Home.Button>
+
+                  </Home.ButtonRow>
+                  
                 </Home.EventItem>
               );
             })}
