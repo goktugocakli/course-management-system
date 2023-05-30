@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components/macro";
 
-import {Themes} from "../../../constants/globalStyle";
+import {Themes , Colors} from "../../../constants/globalStyle";
 
 /*
 Themes has this form {
@@ -11,8 +11,8 @@ Themes has this form {
 */
 
 export const Container = styled.div`
-  background: ${({ white }) => Themes[white].background};
-  color: ${({ white }) => Themes[white].color};
+  background: ${Colors.light.primarycolor};
+  color: white;
   transition: background 500ms;
   position: relative;
   display: flex;
@@ -54,18 +54,19 @@ const ApperAnimation = keyframes`
 export const LinkContainer = styled.div.attrs((props) => ({
   "aria-expanded": props.expanded,
 }))`
-  background: ${({ white }) => Themes[white].background};
-  color: ${({ white }) => Themes[white].color};
+  background: ${({ white }) => Themes[!white].background};
+  color: ${({ white }) => Themes[!white].color};
   transition: background 500ms;
 
   position: absolute;
-  top: 4rem;
+  width:140px;
+  height:1000px;
+  top: 5.5rem;
   left: 0;
   display: flex;
   flex-direction: column;
   z-index: 1;
   align-items: center;
-  justify-content: space-evenly;
   gap: 3rem;
   font-size: 1.25rem;
   font-weight: 700;
@@ -98,7 +99,7 @@ export const Hamburger = styled.div.attrs((props) => ({
 
   & svg {
     fill: none;
-    stroke: ${({ white }) => Themes[white].color};
+    stroke: white;
     width: 3rem;
     height: 3.5rem;
   }
@@ -198,10 +199,12 @@ export const Dark = ({ white = true }) => {
 
 export const Name = styled.p`
   margin:10px;
+  font-size:20px;
 `;
 
 export const Role = styled.p`
   margin:10px;
+  font-size:20px;
 `;
 
 export const Picture = styled.img`
