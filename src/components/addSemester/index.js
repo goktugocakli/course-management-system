@@ -15,13 +15,11 @@ import {
   LabelDiv,
   InputRow,
   InputColumn,
-  DateRow,
   Input,
   InputLabel,
   Line,
   List,
   ListItem,
-  SemesterContainer,
 } from "./styles/addSemester";
 
 export default function AddSemester({ children, ...restProps }) {
@@ -42,10 +40,6 @@ AddSemester.InputRow = function inputRow({ children, ...restPorps }) {
 
 AddSemester.InputColumn = function inputColumn({ children, ...restPorps }) {
   return <InputColumn>{children}</InputColumn>;
-};
-
-AddSemester.DateRow = function dateRow({ children, ...restPorps }) {
-  return <DateRow>{children}</DateRow>;
 };
 
 AddSemester.Input = function input({ ...restProps }) {

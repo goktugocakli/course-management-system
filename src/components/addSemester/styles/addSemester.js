@@ -63,7 +63,7 @@ export const InputRow = styled.div`
   display: flex;
   flex-direction: row;
   width: calc(95%);
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: #ffffff;
   position: absolute;
   top: -18%;
@@ -74,14 +74,6 @@ export const InputColumn = styled.div`
   flex-direction: column;
   background-color: #ffffff;
   margin-left: 15px;
-`;
-
-export const DateRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  background-color: #ffffff;
-  margin-left: auto;
 `;
 
 export const Input = styled.input`
