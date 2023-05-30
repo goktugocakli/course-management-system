@@ -18,6 +18,7 @@ export const Events = styled.div`
   justify-content: center;
   align-items: center;
   gap: 2rem;
+
 `;
 
 export const EventTitle = styled.h1``;
