@@ -52,21 +52,21 @@ public class SurveyController {
         return ResponseEntity.ok("Anket Silindi.");
     }
 
+    @GetMapping("/{surveyId}")
+    public ResponseEntity<Survey> findById(@PathVariable String surveyId){
+        return ResponseEntity.ok(surveyManager.findById(Integer.valueOf(surveyId)));
+    }
+
     @GetMapping("/countStudent{surveyId}")
-    public ResponseEntity<Long> countStudentBySurvey(@PathVariable String surveyId){
+    public ResponseEntity<Map<String,Long>> countStudentBySurvey(@PathVariable String surveyId){
         return ResponseEntity.ok(surveyManager.countStudentsBySurvey(Integer.valueOf(surveyId)));
 
     }
 
-    @GetMapping("/countAnswer{surveyId}")
-    public ResponseEntity<SurveyDTO> countAnswerBySurvey(@PathVariable String surveyId){
-        return ResponseEntity.ok(surveyManager.countAnswersBySurvey(Integer.valueOf(surveyId)));
-    }
 
-
-    @GetMapping("/deneme{surveyId}")
-    public ResponseEntity<List<Object[]>> deneme2(@PathVariable String surveyId){
-        return ResponseEntity.ok(surveyManager.deneme2(Integer.valueOf(surveyId)));
+    @GetMapping("/countAnswers/{surveyId}")
+    public ResponseEntity<SurveyDTO> countAnswersBySurvey(@PathVariable String surveyId){
+        return ResponseEntity.ok(surveyManager.countAnswerBySurvey(Integer.valueOf(surveyId)));
     }
 
     @GetMapping("/findByCourseAndInstructor")

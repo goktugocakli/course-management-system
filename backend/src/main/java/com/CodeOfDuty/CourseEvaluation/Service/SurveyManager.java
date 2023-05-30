@@ -74,56 +74,56 @@ public class SurveyManager {
     }
 
 
-    public Long countStudentsBySurvey(Integer surveyId){
+    public Map<String, Long> countStudentsBySurvey(Integer surveyId){
+        Map<String,Long> answer = new HashMap<>();
+        Long total_student= (long) findById(surveyId).getCourse().getStudent().size();
         Long result = surveyRepository.countStudentsBySurvey(surveyId);
-        return result;
+        answer.put("Derse Kayıtlı Öğrenci Sayısı",total_student);
+        answer.put("Cevap Veren Öğreci Sayısı", result);
+        return answer;
     }
 
-    public SurveyDTO countAnswersBySurvey(Integer surveyId){
-        SurveyDTO surveyDTO = new SurveyDTO();
-
-
+    public SurveyDTO countAnswerBySurvey(Integer surveyId){
         Survey survey = findById(surveyId);
-        surveyDTO.setDescription(survey.getDescription());
-        surveyDTO.setQuestions(new ArrayList<>());
 
-        List<Object[]> results = surveyRepository.countAnswerBySurvey(surveyId);
-        for(Object[] result: results){
-            String question = (String) result[0];
-            String answer = (String) result[1];
-            Long count = (Long) result[2];
+        List<Object[]> studentAnswers = surveyRepository.countAnswerBySurvey(surveyId);
 
-            SurveyAnswerDTO answerDTO = new SurveyAnswerDTO();
+        List<SurveyQuestionDTO> surveyQuestionDTOS = survey.getQuestions().stream()
+                .map(question -> new SurveyQuestionDTO(question.getId(),
+                        question.getText(),
+                        question.getAnswers().stream()
+                                .map(answerChoice -> new SurveyAnswerDTO(answerChoice.getId(),
+                                        answerChoice.getAnswerText(),
+                                        0L))
+                                .collect(Collectors.toList())
+                ))
+                .toList();
 
-            SurveyQuestionDTO questionDTO = null;
 
-            answerDTO.setAnswer(answer);
-            answerDTO.setCount(count);
-            boolean flag=false;
-            for(SurveyQuestionDTO surveyQuestion: surveyDTO.getQuestions()){
-                if(surveyQuestion.getQuestionText().equals(question)){
-                    flag=true;
-                    questionDTO = surveyQuestion;
-                    break;
-                }
-            }
+        studentAnswers
+                .forEach(studentAnswer -> {
+                    Optional<SurveyQuestionDTO> foundItem = surveyQuestionDTOS.stream()
+                            .filter(surveyQuestionDTO -> surveyQuestionDTO.getQuestionId().equals(studentAnswer[0]))
+                            .findFirst();
+                    foundItem.ifPresent( found -> {
+                        Optional<SurveyAnswerDTO> foundAnswer = found.getAnswers().stream()
+                                .filter(surveyAnswerDTO -> surveyAnswerDTO.getAnswerId().equals(studentAnswer[1]))
+                                .findFirst();
+                        foundAnswer.ifPresent( found2 -> {
+                            found2.setCount((Long) studentAnswer[2]);
+                        }
+                        );
+                    });
+                });
 
-            if(questionDTO==null){
-                questionDTO = new SurveyQuestionDTO();
-                questionDTO.setQuestionText(question);
-                questionDTO.setAnswers(new ArrayList<>());
-            }
-            questionDTO.addAnswer(answerDTO);
-            if(!flag){
-                surveyDTO.addSurveyQuestionDTO(questionDTO);
-            }
+        SurveyDTO surveyDTO = SurveyDTO.builder()
+                .id(surveyId)
+                .description(survey.getDescription())
+                .questions(surveyQuestionDTOS)
+                .build();
 
-        }
         return surveyDTO;
-    }
 
-    public List<Object[]> deneme2(Integer surveyId){
-        return surveyRepository.deneme2(surveyId);
     }
 
     public List<Survey> findAllByStudent(String studentNo){
