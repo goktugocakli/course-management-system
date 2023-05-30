@@ -100,13 +100,12 @@ export const InputLabel = styled.p`
 `;
 
 export const Select = styled.select`
-  width: 370px;
+  width: 270px;
   height:45px;
   border-radius: 10px;
   font-size: 16px;
   font-family: Verdana;
   padding-left:15px;
-  margin-left:20px;
 `;
 
 export const Option = styled.option`

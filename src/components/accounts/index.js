@@ -22,7 +22,7 @@ Accounts.LabelDiv = function accountsLabelDiv({ children, ...restPorps }) {
 };
 
 Accounts.Button = function accountsButton({children,...restPorps}){
-    return <Button>{children}</Button>
+    return <Button {...restPorps}>{children}</Button>
 }
   
 Accounts.AlertText = function accountsAlertText({ children, ...restPorps }) {

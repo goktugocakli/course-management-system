@@ -11,4 +11,5 @@ export {default as SeeCoursesContainer} from './seecoursecontainer';
 export { default as AccountsContainer } from "./accountsContainer";
 export { default as AddSemesterContainer } from "./addSemesterContainer"; 
 export { default as AddCourseContainer } from "./addCourseContainer"; 
-export { default as ForgetPasswordContainer } from "./forgetPasswordContainer"; 
+export { default as ForgetPasswordContainer } from "./forgetPasswordContainer";
+export { default as AddAccountContainer } from "./addAccountContainer";  

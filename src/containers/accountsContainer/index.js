@@ -1,5 +1,7 @@
 import React from "react";
+import { useState } from "react";
 import { Accounts } from "../../components";
+import AddAccountContainer from "../addAccountContainer";
 
 export default function AccountsContainer() {
   const accounts = [
@@ -53,9 +55,19 @@ export default function AccountsContainer() {
       type:"Student Manager"
     },
   ];
-  if (Accounts.length > 0) {
+
+
+  const [addAccountDiv, setAddAccountDiv] = useState(false);
+
+  // this function used to open add new course window
+  const openAddAccountDiv = function addNewAccount() {
+      setAddAccountDiv(!addAccountDiv)
+  };
+
+  if (accounts.length > 0) {
     return (
-      <Accounts.Div>
+      <>
+        <Accounts.Div>
         <Accounts.Label>Accounts</Accounts.Label>
         <Accounts.LabelDiv>
           <Accounts.NameText>Name</Accounts.NameText>
@@ -77,9 +89,17 @@ export default function AccountsContainer() {
           ))}
         </Accounts.List>
         
-        <Accounts.Button>Add new account</Accounts.Button>
+        <Accounts.Button onClick={openAddAccountDiv}>Add new account</Accounts.Button>
        
-      </Accounts.Div>
+        </Accounts.Div>
+
+        {addAccountDiv ? (
+          <AddAccountContainer
+            setIsVisible={setAddAccountDiv}
+          />
+        ) : null}
+      
+      </>
     );
   } else {
     return (
@@ -90,7 +110,7 @@ export default function AccountsContainer() {
           You haven't added any account yet
         </Accounts.AlertText>
         
-        <Accounts.Button>Add new account</Accounts.Button>
+        <Accounts.Button onClick={openAddAccountDiv}>Add new account</Accounts.Button>
       
       </Accounts.Div>
     );
