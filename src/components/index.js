@@ -13,3 +13,4 @@ export {default as Accounts} from './accounts';
 export {default as AddSemester} from './addSemester';
 export {default as AddCourse} from './addCourse';
 export {default as ForgetPassword} from './forgetPassword';
+export {default as AddAccount} from './addAccount';

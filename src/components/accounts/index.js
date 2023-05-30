@@ -1,5 +1,5 @@
 import React from "react";
-import {Label, AlertText, Text, Icon , Button, Div, LabelDiv, Line, List, ListItem} from "./styles/Accounts"
+import {Label, AlertText, Text, Icon , Button, Div, LabelDiv, Line, List, ListItem} from "./styles/accounts"
 
 export default function Accounts({children, ...restProps}) {
     return
