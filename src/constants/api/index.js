@@ -236,7 +236,7 @@ export const GetAllDepartments = (options) => {
 /*
 
   course = {
-    id: "BBM-406",
+    code: "BBM-406",
     semester: "Spring",
     year: 2023,
   }
@@ -257,7 +257,7 @@ export const FetchEnrollCourse = (student_no, course, options) => {
   var res = axios
     .post(
       BASE_URL +
-        `/api/students/enrollcourse?student_no=${student_no}&course_id=${course.id}&semester=${course.semester}&year=${course.year}`
+        `/api/students/enrollcourse?student_no=${student_no}&course_id=${course.code}&semester=${course.semester}&year=${course.year}`
     )
     .then(
       (response) => {
@@ -275,12 +275,12 @@ export const FetchEnrollCourse = (student_no, course, options) => {
 export const useFetchCourses = (options) => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios.get(BASE_URL + "/courses").then(
+    axios.get(BASE_URL + "/v1/course").then(
       (response) => {
         options?.onSuccess?.();
-        setData({ ...response.data, success: true });
+        setData({ courses: response.data, success: true });
       },
-      (err) => setData({ ...err, success: false })
+      (err) => setData({ error: err, success: false })
     );
   }, []);
 
@@ -380,7 +380,6 @@ export const FetchAssignIntructorToCourse = (
 
   return res;
 };
-
 
 /*
 
@@ -540,5 +539,3 @@ export const FetchForgetPassword = (student_no, options) => {
     }
   );
 };
-
-  

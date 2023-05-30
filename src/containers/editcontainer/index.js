@@ -4,7 +4,7 @@ import { Global } from "../../components";
 
 import { useDispatch, useSelector } from "react-redux";
 import { user, fetchUser } from "../../features/user";
-import { EditUser } from "../../constants/api";
+import { EditUser, ShowToast } from "../../constants/api";
 
 /*
 
@@ -48,11 +48,11 @@ const options = {
         password: user.password,
       };
     }
-    console.log(response);
+    ShowToast("Informations updated successfully", { success: true });
     dispatch(fetchUser(logininfo));
   },
   onError: (err) => {
-    console.log(err);
+    ShowToast("There is an error", { success: false });
   },
 };
 
@@ -64,17 +64,18 @@ export default function EditContainer() {
   const [name, setName] = useState(userState.data.first_name);
   const [surname, setSurname] = useState(userState.data.surname);
   const [email, setEmail] = useState(userState.data.e_mail);
+  const [password, setPassword] = useState(userState.data.password);
 
   return (
     <Global.Row>
-      <Global.Column>
+      {/*<Global.Column>
         <Edit.Photo
           src={
             "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
           }
         />
         <Edit.PhotoButton>Change Photo</Edit.PhotoButton>
-      </Global.Column>
+      </Global.Column> */}
 
       <Edit.Form>
         <Global.Column>
@@ -111,6 +112,16 @@ export default function EditContainer() {
             />
           </Global.Row>
 
+          <Global.Row>
+            <Edit.InputLabel>Password</Edit.InputLabel>
+            <Edit.Input
+              type="password"
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
+            />
+          </Global.Row>
+
           <Edit.Button
             onClick={(e) => {
               e.preventDefault();
@@ -120,6 +131,7 @@ export default function EditContainer() {
                 surname: surname,
                 e_mail: email,
                 userType: userState.userType,
+                password: password,
               };
 
               EditUser(data, dispatch, options);

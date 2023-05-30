@@ -83,6 +83,7 @@ public class StudentController {
         return ResponseEntity.ok(students);
     }
 
+
     @GetMapping("/confirmStudent")
     public ResponseEntity<String> confirmStudent(@RequestParam String studentNo){
         studentService.confirmStudent(studentNo);
