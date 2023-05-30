@@ -1,15 +1,23 @@
 package com.CodeOfDuty.CourseEvaluation.DTO;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SurveyQuestionDTO {
 
+    private Integer questionId;
     private String questionText;
-    private List<SurveyAnswerDTO> answers;
+    private List<SurveyAnswerDTO> answers = new ArrayList<>();
 
     public void addAnswer(SurveyAnswerDTO surveyAnswerDTO){
         answers.add(surveyAnswerDTO);
@@ -25,6 +33,6 @@ public class SurveyQuestionDTO {
 
     @Override
     public int hashCode() {
-        return Objects.hash(questionText);
+        return Objects.hash(questionId);
     }
 }
