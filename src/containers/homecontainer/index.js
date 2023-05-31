@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { Home } from "../../components";
 import {
   FetchPendingRequests,
+  FetchonGoingEvaluations,
   GrantRequestToStudent,
   ShowToast,
 } from "../../constants/api";
+import { useNavigate } from "react-router-dom";
 
 /*
 
@@ -27,42 +29,42 @@ const GrantReq = (student_no) => {
   };
   GrantRequestToStudent(student_no, options);
 };
-const renderEvents = (user, data) => {
+const renderEvents = (user, data, navigate) => {
   if (user?.userType === "admin") {
     return (
       <>
-        
         <Home.Events>
           <Home.EventInner>
-          <Home.EventTitle>Pending Requests...</Home.EventTitle>
+            <Home.EventTitle>Pending Requests...</Home.EventTitle>
             {/* for loop through events as eventitem here  or map them*/}
             {data?.map((student) => {
               return (
                 <Home.EventItem key={student.student_no}>
-                  
                   <Home.EventLabel>Student No:</Home.EventLabel>
                   <Home.EventText>{student.student_no}</Home.EventText>
                   <Home.EventLabel>Student Name:</Home.EventLabel>
                   <Home.EventText>{student.first_name}</Home.EventText>
                   <Home.ButtonRow>
-                      <Home.Button
-                        onClick={() => {
-                          ShowToast("Access Granted Successfully", { success: true });
-                        }}
-                      >
-                        Grant
-                      </Home.Button>
+                    <Home.Button
+                      onClick={() => {
+                        ShowToast("Access Granted Successfully", {
+                          success: true,
+                        });
+                      }}
+                    >
+                      Grant
+                    </Home.Button>
 
-                      <Home.Button
-                        onClick={() => {
-                          ShowToast("Access Granted Successfully", { success: true });
-                        }}
-                      >
-                        Deny
-                      </Home.Button>
-
+                    <Home.Button
+                      onClick={() => {
+                        ShowToast("Access Granted Successfully", {
+                          success: true,
+                        });
+                      }}
+                    >
+                      Deny
+                    </Home.Button>
                   </Home.ButtonRow>
-                  
                 </Home.EventItem>
               );
             })}
@@ -89,7 +91,29 @@ const renderEvents = (user, data) => {
         <Home.Events>
           <Home.EventInner>
             {/* for loop through events as eventitem here  or map them*/}
-            <Home.EventItem>Form 1</Home.EventItem>
+            {data?.map((evalu) => {
+              const today = new Date();
+              const endDate = new Date(evalu.dueDate);
+
+              if (today < endDate) {
+                return (
+                  <Home.EventItem
+                    key={evalu.id}
+                    onClick={() => {
+                      navigate?.(`/answerEval/${evalu.id}`);
+                    }}
+                  >
+                    {evalu.course.name +
+                      " " +
+                      evalu.description +
+                      ". Due Date: " +
+                      evalu.dueDate +
+                      " Evaluation ID: " +
+                      evalu.id}
+                  </Home.EventItem>
+                );
+              }
+            })}
           </Home.EventInner>
         </Home.Events>
       </>
@@ -103,6 +127,7 @@ const renderEvents = (user, data) => {
 
 export default function HomeContainer({ user }) {
   const [data, setData] = useState(null);
+  const navigate = useNavigate();
   const options = {
     onSuccess: (response) => {
       setData(response.data);
@@ -112,8 +137,10 @@ export default function HomeContainer({ user }) {
   useEffect(() => {
     if (user?.userType === "admin") {
       FetchPendingRequests(options);
+    } else if (user?.userType === "student") {
+      FetchonGoingEvaluations(options);
     }
   }, []);
 
-  return <Home>{renderEvents(user, data)}</Home>;
+  return <Home>{renderEvents(user, data, navigate)}</Home>;
 }

@@ -44,7 +44,7 @@ const options = {
       };
     } else {
       logininfo = {
-        username: user.username,
+        username: user.user_name,
         password: user.password,
       };
     }
