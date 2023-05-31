@@ -59,7 +59,7 @@ public class InstructorService {
 
     public boolean isValidDepartmentManager(String username, String password) {
         Instructor instructor = instructorRepository.findById(username).orElse(null);
-        return instructor != null && instructor.getPassword().equals(password) && instructor.getDepartment().getManager() == instructor;
+        return instructor != null && instructor.getPassword().equals(password) && instructor.getDepartment().getManager() != null && instructor.getDepartment().getManager().getUser_name().equals(instructor.getUser_name());
     }
 
     public List<Course> findAllCourseTeachByInstructor(String username){

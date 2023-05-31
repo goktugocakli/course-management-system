@@ -42,7 +42,7 @@ export default function AddAccountContainer({ setIsVisible }) {
       },
     };
 
-    AddUser(accountType, account, options);
+    AddUser(accountType, account, account.department, options);
   };
 
   const checkAccountInputs = () => {

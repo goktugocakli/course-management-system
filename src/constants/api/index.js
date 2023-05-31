@@ -59,7 +59,7 @@ user = {
 
 //TODO:: in options onSuccess method relogin the user to fetch the newly added informations
 
-export const EditUser = async (user, dispatch, options) => {
+export const EditUser = (user, dispatch, options) => {
   if (user.userType === "student") {
     const data = { ...user };
     axios.post(BASE_URL + "/api/students/update", data).then(
@@ -146,7 +146,7 @@ user = {
 
 */
 
-export const AddUser = (userType, user, options) => {
+export const AddUser = (userType, user, dep, options) => {
   if (userType === "student") {
     axios.post(BASE_URL + "/api/students/add", user).then(
       (response) => {
@@ -160,6 +160,28 @@ export const AddUser = (userType, user, options) => {
     axios.post(BASE_URL + "/instructors/add", user).then(
       (response) => {
         options?.onSuccess?.(response);
+      },
+      (err) => {
+        options?.onError?.(err);
+      }
+    );
+  } else if (userType === "department manager") {
+    axios.post(BASE_URL + "/instructors/add", user).then(
+      (response) => {
+        axios
+          .post(
+            BASE_URL +
+              `/v1/departments/changeInstructor?dept_name=${dep}&username=${user.user_name}`
+          )
+          .then(
+            (responsep) => {
+              console.log(responsep);
+              options?.onSuccess?.(responsep);
+            },
+            (err) => {
+              options?.onError?.(err);
+            }
+          );
       },
       (err) => {
         options?.onError?.(err);
@@ -593,5 +615,16 @@ export const FetchonGoingEvaluations = (options) => {
       options?.onSuccess?.(response);
     },
     (err) => {}
+  );
+};
+
+export const FetchonGoingEvaluationsWithStudentNo = (student_no, options) => {
+  axios.get(BASE_URL + `/v1/survey/findAllByStudent/${student_no}`).then(
+    (response) => {
+      options?.onSuccess?.(response);
+    },
+    (err) => {
+      options?.onError?.(err);
+    }
   );
 };
