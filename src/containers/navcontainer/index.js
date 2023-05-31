@@ -14,15 +14,21 @@ const renderLinks = (user) => {
     return (
       <>
         <NavBar.Link>
-          <Link to={"/"} style={{ textDecoration: 'none' }}>Home</Link>
+          <Link to={"/"} style={{ textDecoration: "none" }}>
+            Home
+          </Link>
         </NavBar.Link>
 
         <NavBar.Link>
-          <Link to={"/addsemester"} style={{ textDecoration: 'none' }}>Semesters</Link>
+          <Link to={"/addsemester"} style={{ textDecoration: "none" }}>
+            Semesters
+          </Link>
         </NavBar.Link>
 
         <NavBar.Link>
-          <Link to={"/accounts"} style={{ textDecoration: 'none' }}>Accounts</Link>
+          <Link to={"/accounts"} style={{ textDecoration: "none" }}>
+            Accounts
+          </Link>
         </NavBar.Link>
       </>
     );
@@ -35,9 +41,6 @@ const renderLinks = (user) => {
         </NavBar.Link>
         <NavBar.Link>
           <Link to={"/createEva"}>Create Evaluation Form</Link>
-        </NavBar.Link>
-        <NavBar.Link>
-          <Link to={"/seeEvares"}>See Evaluation Result</Link>
         </NavBar.Link>
       </>
     );

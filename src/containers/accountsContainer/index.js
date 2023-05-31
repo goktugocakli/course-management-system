@@ -3,9 +3,12 @@ import { useState } from "react";
 import { Accounts } from "../../components";
 import AddAccountContainer from "../addAccountContainer";
 import { GetUser } from "../../constants/api";
+import { useNavigate } from "react-router-dom";
 
 export default function AccountsContainer() {
   const [accounts, setAccounts] = useState([]);
+
+  const navigate = useNavigate();
 
   const options = {
     onSuccess: (response) => {
@@ -41,7 +44,18 @@ export default function AccountsContainer() {
           <Accounts.Line />
           <Accounts.List>
             {accounts.map((account) => (
-              <Accounts.ListItem key={account.id}>
+              <Accounts.ListItem
+                key={account.id}
+                onClick={() => {
+                  navigate(
+                    `/maniplate/${account.type}/${
+                      account.type === "student"
+                        ? account.student_no
+                        : account.user_name
+                    }`
+                  );
+                }}
+              >
                 <Accounts.NameText title={account.first_name}>
                   {account.first_name}
                 </Accounts.NameText>

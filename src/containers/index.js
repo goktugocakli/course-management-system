@@ -14,3 +14,4 @@ export { default as AddCourseContainer } from "./addCourseContainer";
 export { default as ForgetPasswordContainer } from "./forgetPasswordContainer";
 export { default as AnswerEvaluationContainer } from "./answerevaluationcontainer";
 export { default as AddAccountContainer } from "./addAccountContainer";
+export { default as ManiplateAccountContainer } from "./manipulateAccountContainer";

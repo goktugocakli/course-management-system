@@ -47,9 +47,7 @@ const renderEvents = (user, data, navigate) => {
                   <Home.ButtonRow>
                     <Home.Button
                       onClick={() => {
-                        ShowToast("Access Granted Successfully", {
-                          success: true,
-                        });
+                        GrantReq(student.student_no);
                       }}
                     >
                       Grant
@@ -57,8 +55,8 @@ const renderEvents = (user, data, navigate) => {
 
                     <Home.Button
                       onClick={() => {
-                        ShowToast("Access Granted Successfully", {
-                          success: true,
+                        ShowToast("Access Denied ", {
+                          success: false,
                         });
                       }}
                     >
@@ -75,11 +73,28 @@ const renderEvents = (user, data, navigate) => {
   } else if (user?.userType === "instructor") {
     return (
       <>
-        <Home.EventTitle>Finished Forms</Home.EventTitle>
+        <Home.EventTitle>My Evaluation Forms</Home.EventTitle>
         <Home.Events>
           <Home.EventInner>
             {/* for loop through events as eventitem here  or map them*/}
-            <Home.EventItem>Item 1</Home.EventItem>
+            {data?.map((evaluation) => {
+              return (
+                <Home.EventItem
+                  key={evaluation.id}
+                  onClick={() => {
+                    navigate?.(`/seeEvares/${evaluation.id}`);
+                  }}
+                >
+                  {evaluation.course.name +
+                    " " +
+                    evaluation.description +
+                    ". Due Date: " +
+                    evaluation.dueDate +
+                    " Evaluation ID: " +
+                    evaluation.id}
+                </Home.EventItem>
+              );
+            })}
           </Home.EventInner>
         </Home.Events>
       </>
@@ -130,7 +145,7 @@ export default function HomeContainer({ user }) {
   const navigate = useNavigate();
   const options = {
     onSuccess: (response) => {
-      setData(response.data);
+      setData([].concat(response.data));
     },
     onError: (err) => {},
   };
@@ -139,6 +154,8 @@ export default function HomeContainer({ user }) {
       FetchPendingRequests(options);
     } else if (user?.userType === "student") {
       FetchonGoingEvaluations(options);
+    } else if (user?.userType === "instructor") {
+      setData(user.data.surveys);
     }
   }, []);
 

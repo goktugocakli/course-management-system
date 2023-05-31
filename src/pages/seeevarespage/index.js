@@ -1,7 +1,13 @@
+import { useParams } from "react-router-dom";
 import { NavContainer, SeeEvaResContainer } from "../../containers";
 
 export default function SeeEvaResPage() {
-  return <>
-  <NavContainer/>
-  <SeeEvaResContainer /></>;
+  const { surveyId } = useParams();
+
+  return (
+    <>
+      <NavContainer />
+      <SeeEvaResContainer surveyId={surveyId} />
+    </>
+  );
 }

@@ -103,7 +103,9 @@ export default function SignUpContainer() {
           <Global.Row>
             <SignUp.InputLabel>Department</SignUp.InputLabel>
             <SignUp.Select onChange={(evn) => setSelected(evn.target.value)}>
-                {departments.map((department) => <SignUp.Option>{department}</SignUp.Option>)}
+              {departments.map((department) => (
+                <SignUp.Option>{department.name}</SignUp.Option>
+              ))}
             </SignUp.Select>
           </Global.Row>
 

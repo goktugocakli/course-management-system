@@ -11,6 +11,7 @@ import {
   ForgetPasswordPage,
   EditPage,
   AsnwerEvaluation,
+  ManiplateAccountPage,
 } from "../../pages";
 
 export const MainRouter = createBrowserRouter([
@@ -39,8 +40,9 @@ export const MainRouter = createBrowserRouter([
     element: <EnrollPage />,
     errorElement: <h1>404</h1>,
   },
+
   {
-    path: "/seeEvares",
+    path: "/seeEvares/:surveyId",
     element: <SeeEvaResPage />,
     errorElement: <h1>404</h1>,
   },
@@ -73,6 +75,12 @@ export const MainRouter = createBrowserRouter([
   {
     path: "/answerEval/:surveyId",
     element: <AsnwerEvaluation />,
+    errorElement: <h1>404</h1>,
+  },
+
+  {
+    path: "/maniplate/:userType/:userId",
+    element: <ManiplateAccountPage />,
     errorElement: <h1>404</h1>,
   },
 ]);

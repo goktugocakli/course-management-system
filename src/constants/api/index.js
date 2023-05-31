@@ -146,8 +146,8 @@ user = {
 
 */
 
-export const AddUser = async (user, options) => {
-  if (user.type === "student") {
+export const AddUser = (userType, user, options) => {
+  if (userType === "student") {
     axios.post(BASE_URL + "/api/students/add", user).then(
       (response) => {
         options?.onSuccess?.(response);
@@ -156,7 +156,7 @@ export const AddUser = async (user, options) => {
         options?.onError?.(err);
       }
     );
-  } else if (user.type === "instructor") {
+  } else if (userType === "instructor") {
     axios.post(BASE_URL + "/instructors/add", user).then(
       (response) => {
         options?.onSuccess?.(response);
@@ -550,6 +550,18 @@ export const GetSurveyWithId = (surveyId, options) => {
     (err) => {
       options?.onError?.(err);
     }
+  );
+};
+
+export const GetStdeuntPercentWithId = (surveyId, options) => {
+  axios.get(BASE_URL + `/v1/survey/countStudent${surveyId}`).then(
+    (response) => {
+      const enrolled = response.data["Cevap Veren Öğreci Sayısı"];
+      const answered = response.data["Derse Kayıtlı Öğrenci Sayısı"];
+
+      options?.onSuccess?.(Math.floor((enrolled / answered) * 100));
+    },
+    (err) => {}
   );
 };
 
