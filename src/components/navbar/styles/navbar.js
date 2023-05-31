@@ -60,7 +60,7 @@ export const LinkContainer = styled.div.attrs((props) => ({
 
   position: absolute;
   width:140px;
-  height:1000px;
+  height:80vh;
   top: 5.5rem;
   left: 0;
   display: flex;

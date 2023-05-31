@@ -60,8 +60,8 @@ export const Div = styled.div`
   flex-direction: column;
   background-color: #f0f0f0;
   border-radius:40px;
-  width: calc(30%);
-  height: calc(83%);
+  width: calc(40%);
+  height: calc(92%);
 `;
 
 
