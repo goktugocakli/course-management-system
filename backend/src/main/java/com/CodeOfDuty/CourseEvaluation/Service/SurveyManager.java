@@ -77,9 +77,9 @@ public class SurveyManager {
     public Survey findById(Integer id){return surveyRepository.findById(id).orElse(null);}
 
 
-    public Survey findByCourse(String course_code, String semester, Integer year){
+    public List<Survey> findByCourse(String course_code, String semester, Integer year){
         Course course = courseService.findById(course_code,semester,year);
-        return surveyRepository.findByCourse(course).orElse(null);
+        return surveyRepository.findByCourse(course);
     }
     public Survey findByCourseAndInstructor(String course_code, String semester, Integer year, String instructor_username){
         Course course = courseService.findById(course_code,semester,year);
@@ -145,6 +145,7 @@ public class SurveyManager {
                 .getCourses()
                 .stream()
                 .map(course -> findByCourse(course.getCode(),course.getSemester(),course.getYear()))
+                .flatMap(Collection::stream)
                 .collect(Collectors.toList());
         return surveys;
     }
