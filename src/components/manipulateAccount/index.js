@@ -1,30 +1,33 @@
 import React from "react";
 
 import {
-  Text1,
-  Text,
+  Label,
+  InputLabel,
   Input,
   Button,
+  OutlineButton,
   Select,
   Option,
+  Div,
+  ButtonRow,
 } from "./styles/manipulateAccount";
 
 export default function ManipulateAccount({ children, ...restPorps }) {
-  return <div {...restPorps}>{children}</div>;
+  return <Div {...restPorps}>{children}</Div>;
 }
 
-ManipulateAccount.Text1 = function manipulateAccountmainText({
+ManipulateAccount.Label = function manipulateAccountmainText({
   children,
   ...restPorps
 }) {
-  return <Text1 {...restPorps}>{children}</Text1>;
+  return <Label {...restPorps}>{children}</Label>;
 };
 
-ManipulateAccount.Text = function manipulateAccountText({
+ManipulateAccount.InputLabel = function manipulateAccountText({
   children,
   ...restPorps
 }) {
-  return <Text {...restPorps}>{children}</Text>;
+  return <InputLabel {...restPorps}>{children}</InputLabel>;
 };
 
 ManipulateAccount.Input = function manipulateAccountInput({
@@ -41,6 +44,13 @@ ManipulateAccount.Button = function manipulateAccountButton({
   return <Button {...restPorps}>{children}</Button>;
 };
 
+ManipulateAccount.OutlineButton = function manipulateAccountButton({
+  children,
+  ...restPorps
+}) {
+  return <OutlineButton {...restPorps}>{children}</OutlineButton>;
+};
+
 ManipulateAccount.Select = function manipulateAccountSelect({
   children,
   ...restPorps
@@ -54,3 +64,11 @@ ManipulateAccount.Option = function manipulateAccountOption({
 }) {
   return <Option {...restPorps}>{children}</Option>;
 };
+
+ManipulateAccount.ButtonRow = function buttonRow({
+  children,
+  ...restPorps
+}) {
+  return <ButtonRow {...restPorps}>{children}</ButtonRow>;
+};
+
