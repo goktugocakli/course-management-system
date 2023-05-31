@@ -19,7 +19,7 @@ public class Department {
 
     @OneToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name="manager", referencedColumnName = "user_name")
-    @JsonIncludeProperties("{user_name}")
+    @JsonIncludeProperties({"user_name"})
     private Instructor manager;
 
 

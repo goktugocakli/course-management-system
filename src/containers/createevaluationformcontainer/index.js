@@ -1,7 +1,7 @@
 import { CreateEvaluationForm } from "../../components";
 import { useEffect, useState } from "react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { user } from "../../features/user";
 
 import {
@@ -10,6 +10,7 @@ import {
   UploadEvaluationForm,
   UploadEvaluationFormQuestions,
 } from "../../constants/api";
+import { fetchUser } from "../../features/user";
 
 const AddAutomaticQuestion = function (
   questionAndAnswerJson,
@@ -312,6 +313,8 @@ export default function CreateEvaluationFormContainer() {
 
   const userState = useSelector(user).user;
 
+  const dispatch = useDispatch();
+
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
@@ -538,6 +541,13 @@ userState = {
                 ShowToast("The Evaluation form uploaded sucessfully", {
                   success: true,
                 });
+
+                dispatch(
+                  fetchUser({
+                    username: userState.data.user_name,
+                    password: userState.data.password,
+                  })
+                );
               },
               onError: (err) => {
                 ShowToast("There is an error", { success: false });

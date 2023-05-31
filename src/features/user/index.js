@@ -79,6 +79,8 @@ const UserSlice = createSlice({
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.status = "done";
+
+
         var userr = {
           userType: action.payload.type,
           data: action.payload.data,

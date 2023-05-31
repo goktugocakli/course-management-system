@@ -57,6 +57,22 @@ const renderLinks = (user) => {
         </NavBar.Link>
       </>
     );
+  }
+  if (user.userType === "department manager") {
+    return (
+      <>
+        <NavBar.Link>
+          <Link to={"/"}>Home</Link>
+        </NavBar.Link>
+
+        <NavBar.Link>
+          <Link to={"/assignIns"}>Assing Instructor To Course</Link>
+        </NavBar.Link>
+        <NavBar.Link>
+          <Link to={"/createEva"}>Create Evaluation Form</Link>
+        </NavBar.Link>
+      </>
+    );
   } else {
     return null;
   }
