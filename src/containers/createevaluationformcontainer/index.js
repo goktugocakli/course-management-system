@@ -6,6 +6,7 @@ import { user } from "../../features/user";
 
 import {
   FetchQuestionAddedByInstructor,
+  ShowToast,
   UploadEvaluationForm,
   UploadEvaluationFormQuestions,
 } from "../../constants/api";
@@ -250,7 +251,6 @@ const column = {
 const input_grow = 140; // this is a ridiculus thing to have
 //TODO: change this stupid thing in the future
 
-var courses;
 var data;
 
 /*
@@ -305,27 +305,18 @@ const options = {
   },
 };
 
-const options2 = {
-  onSuccess: (response) => {
-    courses = { data: response.data, success: true };
-  },
-  onError: (err) => {
-    courses = { data: err.message, success: false };
-  },
-};
 export default function CreateEvaluationFormContainer() {
   //to be able to get the relevant data only once when page loaded we need to use this mechanic
   // using useEffect inside api makes things a lot easier but for this paticular case
   // useEffect inside api runs every time this component state changes and that makes a lot of requests to backend
 
-
-
   const userState = useSelector(user).user;
+
+  const [courses, setCourses] = useState([]);
+
   useEffect(() => {
     FetchQuestionAddedByInstructor(userState.data.user_name, options);
-    courses = userState.data.courses;
-
-    //FetchGetCourseOfInstructor(userState.data.user_name,options2);
+    setCourses(userState.data.courses);
   }, []);
 
   /*
@@ -503,31 +494,36 @@ userState = {
       <CreateEvaluationForm.FloatingContainer>
         <CreateEvaluationForm.DropDownCourse
           onClick={() => {
-            setDropDown({ ...dropDown, expanded: !dropDown.expanded });
+            setDropDown({ ...dropDown, expanded: true });
             setExistingExpanded(false);
           }}
         >
           {dropDown.content}
-          <CreateEvaluationForm.DropDownContainer
-            style={{ display: dropDown.expanded ? "flex" : "none" }}
-          >
-            {
-              //TODO:: render courses and add onclick to them to set the course
-            }
-            {courses?.map((c) => {
-              return (
-                <p
-                  key={c.code}
-                  onClick={() => {
-                    setDropDown({ ...dropDown, expanded: false, courses: c });
-                  }}
-                >
-                  {c.name}
-                </p>
-              );
-            })}
-          </CreateEvaluationForm.DropDownContainer>
         </CreateEvaluationForm.DropDownCourse>
+
+        <CreateEvaluationForm.DropDownContainer
+          style={{ display: dropDown.expanded ? "flex" : "none" }}
+        >
+          {
+            //TODO:: render courses and add onclick to them to set the course
+          }
+          {courses?.map((c) => {
+            return (
+              <p
+                key={c.code}
+                onClick={() => {
+                  setDropDown({
+                    ...dropDown,
+                    expanded: false,
+                    course: c,
+                  });
+                }}
+              >
+                {c.code}
+              </p>
+            );
+          })}
+        </CreateEvaluationForm.DropDownContainer>
 
         <CreateEvaluationForm.UploadButton
           onClick={async () => {
@@ -537,6 +533,16 @@ userState = {
               semester: dropDown.course?.semester,
             };
 
+            const op = {
+              onSuccess: (response) => {
+                ShowToast("The Evaluation form uploaded sucessfully", {
+                  success: true,
+                });
+              },
+              onError: (err) => {
+                ShowToast("There is an error", { success: false });
+              },
+            };
             let due_date = "2023-06-15 23:59:59";
 
             //TODO: get todays date and add 7 days to it
@@ -555,8 +561,11 @@ userState = {
                 res,
                 userState.data.user_name,
                 course,
-                due_date
+                due_date,
+                op
               );
+            } else {
+              ShowToast("Please select a course", { success: false });
             }
           }}
         >

@@ -5,9 +5,11 @@ import { useSelector } from "react-redux";
 import { user } from "../../features/user";
 
 import {
+  AnswerEvaluation,
   FetchQuestionAddedByInstructor,
   GetStudentAnswers,
   GetSurveyWithId,
+  ShowToast,
   UploadEvaluationForm,
   UploadEvaluationFormQuestions,
 } from "../../constants/api";
@@ -54,7 +56,7 @@ const AddAutomaticQuestion = function (
       ]),
     };
 
-    setQuestions(newQ);
+    return newQ;
   } else {
     //TODO: add new columns to all questions based on the length of the answers of that paticular question
 
@@ -125,7 +127,7 @@ const AddAutomaticQuestion = function (
       ]),
     };
 
-    setQuestions(newQ);
+    return newQ;
   }
 };
 
@@ -253,7 +255,6 @@ const column = {
 const input_grow = 140; // this is a ridiculus thing to have
 //TODO: change this stupid thing in the future
 
-var courses;
 var data;
 
 /*
@@ -314,15 +315,37 @@ export default function AnswerEvaluationContainer({ surveyId }) {
     const options = {
       onSuccess: (response) => {
         const survey = response.data;
+
+        let qq = questions;
+
         survey.questions.map((q) => {
-          AddAutomaticQuestion(q, questions, setQuestions);
+          qq = AddAutomaticQuestion(q, qq, setQuestions);
         });
+
+        const op2 = {
+          onSuccess: (response) => {
+            response.map((res) => {
+              qq.items.map((ques) => {
+                if (res.id.questionId === ques.questionOwnId) {
+                  ques.column.map((col) => {
+                    if (col.answerOwnId === res.id.answerId) {
+                      col.selected = true;
+                    }
+                  });
+                }
+              });
+            });
+
+            setQuestions(qq);
+          },
+          onError: (err) => {},
+        };
+        GetStudentAnswers(surveyId, userState.data.student_no, op2);
       },
       onError: (err) => {},
     };
 
     GetSurveyWithId(surveyId, options);
-    GetStudentAnswers(surveyId, userState.data.student_no);
   }, []);
 
   /*
@@ -372,87 +395,41 @@ userState = {
 
       <CreateEvaluationForm.FloatingContainer>
         <CreateEvaluationForm.UploadButton
-        /*onClick={async () => {
-            let course = {
-              course_code: dropDown.course?.code,
-              year: dropDown.course?.year,
-              semester: dropDown.course?.semester,
+          onClick={() => {
+            // addanswer to database
+
+            let error = false;
+            const options = {
+              onSuccess: (response) => {
+                error = false;
+              },
+              onError: (err) => {
+                error = true;
+                ShowToast("There was an error", { success: false });
+              },
             };
 
-            let due_date = "2023-06-15 23:59:59";
+            questions.items.map((ques) => {
+              ques.column.map((ans) => {
+                if (ans.selected) {
+                  const data = {
+                    studentNo: userState.data.student_no,
+                    surveyId: surveyId,
+                    questionId: ques.questionOwnId,
+                    answerId: ans.answerOwnId,
+                  };
+                  AnswerEvaluation(data, options);
+                }
+              });
+            });
 
-            //TODO: get todays date and add 7 days to it
-
-            ////////////////////////////////////////////// Here is a little bit complicated
-            if (dropDown.course !== null) {
-              let res = await Promise.all(
-                //TODOO: very important here understand this
-                UploadEvaluationFormQuestions(
-                  questions,
-                  userState.data.user_name
-                )
-              );
-
-              UploadEvaluationForm(
-                res,
-                userState.data.user_name,
-                course,
-                due_date
-              );
+            if (!error) {
+              ShowToast("Answers submitted successfully", { success: true });
             }
-          }}*/
+          }}
         >
-          Upload
+          Submit
         </CreateEvaluationForm.UploadButton>
-
-        <CreateEvaluationForm.AddExistingQuestion
-        /* onClick={() => {
-            setExistingExpanded(!exitingQExpanded);
-            setDropDown({ ...dropDown, expanded: false });
-          }}*/
-        >
-          Add Existing Question
-          <CreateEvaluationForm.ExistingQuestionContainer
-            style={{ display: exitingQExpanded ? "flex" : "none" }}
-          >
-            {data?.data.map((ques) => {
-              return (
-                <p
-                  key={ques.id}
-                  onClick={() => {
-                    AddAutomaticQuestion(
-                      /* {
-                      id: 100,
-                      text: "asdasda",
-                      answers: [
-                        {
-                          id: 0,
-                          answerText: "adasd0",
-                        },
-                        {
-                          id: 1,
-                          answerText: "adasd1",
-                        },
-                        {
-                          id: 2,
-                          answerText: "adasd2",
-                        },
-                      ],
-                    },*/
-                      ques,
-                      questions,
-                      setQuestions
-                    );
-
-                    setExistingExpanded(false);
-                  }}
-                >
-                  {ques.text}
-                </p>
-              );
-            })}
-          </CreateEvaluationForm.ExistingQuestionContainer>
-        </CreateEvaluationForm.AddExistingQuestion>
       </CreateEvaluationForm.FloatingContainer>
     </CreateEvaluationForm>
   );

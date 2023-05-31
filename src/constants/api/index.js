@@ -73,7 +73,7 @@ export const EditUser = async (user, dispatch, options) => {
   } else if (user.userType === "instructor") {
     const data = { ...user };
 
-    axios.post(BASE_URL + "/instructors/update", data).then(
+    axios.post(BASE_URL + "/instructors/instructors/update", data).then(
       (response) => {
         options?.onSuccess?.(response, user, dispatch);
       },
@@ -334,28 +334,6 @@ user= {
 }
 */
 
-export const useFetchOnGoingEvaluation = (user, options) => {
-  const [data, setData] = useState([]);
-
-  //TODO: get user by no and get its course id and join the courses of that user with evaluation table
-
-  useEffect(() => {
-    axios.get(BASE_URL + `/api/evaluations?user_id=${user.id}`).then(
-      (response) => {
-        options?.onSuccess?.();
-        setData({ ...response.data, success: true });
-      },
-      (err) => {
-        setData({ ...err, success: false });
-      }
-    );
-
-    return {
-      data,
-    };
-  }, []);
-};
-
 export const FetchPendingRequests = (options) => {
   //TODO: add users an attribute called active and banned so we can easily filter pending requests and banned users etc.
 
@@ -578,7 +556,29 @@ export const GetSurveyWithId = (surveyId, options) => {
 export const GetStudentAnswers = (surveyId, student_no, options) => {
   axios.get(BASE_URL + `/v1/answer/${surveyId}/${student_no}`).then(
     (response) => {
-      console.log(response);
+      options?.onSuccess?.(response.data);
+    },
+    (err) => {
+      options?.onError?.(err);
+    }
+  );
+};
+
+export const AnswerEvaluation = (data, options) => {
+  axios.post(BASE_URL + "/v1/answer/add", data).then(
+    (response) => {
+      options?.onSuccess?.(response);
+    },
+    (err) => {
+      options?.onError?.(err);
+    }
+  );
+};
+
+export const FetchonGoingEvaluations = (options) => {
+  axios.get(BASE_URL + "/v1/survey").then(
+    (response) => {
+      options?.onSuccess?.(response);
     },
     (err) => {}
   );
