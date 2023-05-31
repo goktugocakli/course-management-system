@@ -36,7 +36,7 @@ public class StudentAnswerController {
         return ResponseEntity.ok(answers);
     }
 
-    @GetMapping("/{studentNo}/{surveyId}/{questionId}")
+    @GetMapping("/{studentNo}/{surveyId}/{questionId}") 
     public ResponseEntity<StudentAnswer> findStudentAndSurveyAndQuestion(@PathVariable String studentNo, @PathVariable String surveyId, @PathVariable String questionId){
         StudentAnswer answer = studentAnswerManager.findByStudentAndSurveyAndQuestion(studentNo, Integer.valueOf(surveyId), Integer.valueOf(questionId));
         return ResponseEntity.ok(answer);

@@ -6,19 +6,12 @@ import { user } from "../../features/user";
 
 import {
   AnswerEvaluation,
-  FetchQuestionAddedByInstructor,
   GetStudentAnswers,
   GetSurveyWithId,
   ShowToast,
-  UploadEvaluationForm,
-  UploadEvaluationFormQuestions,
 } from "../../constants/api";
 
-const AddAutomaticQuestion = function (
-  questionAndAnswerJson,
-  questions,
-  setQuestions
-) {
+const AddAutomaticQuestion = function (questionAndAnswerJson, questions) {
   if (questions.columns.length >= questionAndAnswerJson.answers.length) {
     let ans = [];
     for (let i = 0; i < questions.columns.length; i++) {
@@ -355,8 +348,6 @@ userState = {
 }
 */
 
-  const [exitingQExpanded, setExistingExpanded] = useState(false);
-
   return (
     <CreateEvaluationForm
       style={{ paddingTop: "5rem" }}
@@ -400,9 +391,7 @@ userState = {
 
             let error = false;
             const options = {
-              onSuccess: (response) => {
-                error = false;
-              },
+              onSuccess: (response) => {},
               onError: (err) => {
                 error = true;
                 ShowToast("There was an error", { success: false });
