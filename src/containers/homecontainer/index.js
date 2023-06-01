@@ -156,7 +156,10 @@ export default function HomeContainer({ user }) {
     } else if (user?.userType === "student") {
       FetchonGoingEvaluationsWithStudentNo(user.data.student_no, options);
       //FetchonGoingEvaluations(options);
-    } else if (user?.userType === "instructor") {
+    } else if (
+      user?.userType === "instructor" ||
+      user?.userType === "department manager"
+    ) {
       setData(user.data.surveys);
     }
   }, []);
