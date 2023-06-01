@@ -80,19 +80,33 @@ const renderEvents = (user, data, navigate) => {
             {/* for loop through events as eventitem here  or map them*/}
             {data?.map((evaluation) => {
               return (
-                <Home.EventItem
-                  key={evaluation.id}
-                  onClick={() => {
-                    navigate?.(`/seeEvares/${evaluation.id}`);
-                  }}
-                >
-                  {evaluation.course.name +
-                    " " +
-                    evaluation.description +
-                    ". Due Date: " +
-                    evaluation.dueDate +
-                    " Evaluation ID: " +
-                    evaluation.id}
+                <Home.EventItem>
+                  <Home.Column>
+                      <Home.EventLabel>Name:</Home.EventLabel>
+                      <Home.EventLabel>Description:</Home.EventLabel>
+                    </Home.Column>
+
+                    <Home.Column>
+                      <Home.EventText>{evaluation.course.name}</Home.EventText>
+                      <Home.EventText>{evaluation.description}</Home.EventText>
+                    </Home.Column>
+
+                    <Home.Column>
+                      <Home.EventLabel>Due Date:</Home.EventLabel>
+                      <Home.EventLabel>Evaluation ID:</Home.EventLabel>
+                    </Home.Column>
+                    
+                    
+                    <Home.Column>
+                      <Home.EventText>{evaluation.dueDate}</Home.EventText>
+                      <Home.EventText>{evaluation.id}</Home.EventText>
+                    </Home.Column>
+
+                    <Home.ShowIcon 
+                      key={evaluation.id}
+                      onClick={() => {
+                        navigate?.(`/seeEvares/${evaluation.id}`);
+                      }}/>
                 </Home.EventItem>
               );
             })}
