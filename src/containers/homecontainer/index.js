@@ -103,9 +103,9 @@ const renderEvents = (user, data, navigate) => {
   } else if (user?.userType === "student") {
     return (
       <>
-        <Home.EventTitle>Last days of...</Home.EventTitle>
         <Home.Events>
           <Home.EventInner>
+          <Home.EventTitle>Last days of...</Home.EventTitle>
             {/* for loop through events as eventitem here  or map them*/}
             {data?.map((evalu) => {
               const today = new Date();
@@ -113,19 +113,35 @@ const renderEvents = (user, data, navigate) => {
 
               if (today < endDate) {
                 return (
-                  <Home.EventItem
-                    key={evalu.id}
-                    onClick={() => {
-                      navigate?.(`/answerEval/${evalu.id}`);
-                    }}
-                  >
-                    {evalu.course.name +
-                      " " +
-                      evalu.description +
-                      ". Due Date: " +
-                      evalu.dueDate +
-                      " Evaluation ID: " +
-                      evalu.id}
+                  <Home.EventItem> 
+                    <Home.Column>
+                      <Home.EventLabel>Name:</Home.EventLabel>
+                      <Home.EventLabel>Description:</Home.EventLabel>
+                    </Home.Column>
+
+                    <Home.Column>
+                      <Home.EventText>{evalu.course.name}</Home.EventText>
+                      <Home.EventText>{evalu.description}</Home.EventText>
+                    </Home.Column>
+
+                    <Home.Column>
+                      <Home.EventLabel>Due Date:</Home.EventLabel>
+                      <Home.EventLabel>Evaluation ID:</Home.EventLabel>
+                    </Home.Column>
+                    
+                    
+                    <Home.Column>
+                      <Home.EventText>{evalu.dueDate}</Home.EventText>
+                      <Home.EventText>{evalu.id}</Home.EventText>
+                    </Home.Column>
+
+                    <Home.Icon 
+                      key={evalu.id}
+                      onClick={() => {
+                        navigate?.(`/answerEval/${evalu.id}`);
+                    }}/>
+                    
+                    
                   </Home.EventItem>
                 );
               }

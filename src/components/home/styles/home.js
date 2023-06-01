@@ -37,9 +37,15 @@ export const EventItem = styled.div`
   flex-direction: row;
   width: 800px;
   height:50px;
-  padding:30px;
+  padding:40px;
   border-radius:10px;
   align-items: center;
+  background:${Colors.bg_lightgray};
+`;
+
+export const Column= styled.div`
+  display: flex;
+  flex-direction: column;
   background:${Colors.bg_lightgray};
 `;
 
@@ -93,4 +99,8 @@ export const DenyButton = styled.button`
   color:white;
 
 
+`;
+
+export const Icon = styled.i`
+    margin-left:auto;
 `;
