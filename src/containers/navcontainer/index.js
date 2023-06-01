@@ -72,10 +72,10 @@ const renderLinks = (user) => {
         </NavBar.Link>
 
         <NavBar.Link>
-          <Link to={"/assignIns"} style={{ textDecoration: "none" , color:"white" }}>Assing Instructor To Course</Link>
+          <Link to={"/assignIns"} style={{ textDecoration: "none" , color:"white" }}>Assing Instructor</Link>
         </NavBar.Link>
         <NavBar.Link>
-          <Link to={"/createEva"} style={{ textDecoration: "none" , color:"white" }}>Create Evaluation Form</Link>
+          <Link to={"/createEva"} style={{ textDecoration: "none" , color:"white" }}>Create Form</Link>
         </NavBar.Link>
       </>
     );

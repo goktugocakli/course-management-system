@@ -50,13 +50,13 @@ export const Column= styled.div`
 `;
 
 export const EventLabel = styled.p`
-  font-size:18px;
+  font-size:17px;
   font-weight: bold;
   font-family: Arial, Verdana, sans-serif;
 `;
 
 export const EventText = styled.p`
-  font-size:18px;
+  font-size:17px;
   margin-left:5px;
   margin-right:20px;
   font-family: Arial, Verdana, sans-serif;
