@@ -2,7 +2,9 @@ import React from "react";
 
 import {
   TableRow,
-  TableColumn,
+  Div,
+  List,
+  Label,
   CourseId,
   CourseName,
   LabelDiv,
@@ -27,11 +29,18 @@ AssignInstructor.TableRow = function AssignInstructorTableRow({
   return <TableRow {...restPorps}>{children}</TableRow>;
 };
 
-AssignInstructor.TableColumn = function AssignInstructorTableColumn({
+AssignInstructor.Div = function AssignInstructorTableDiv({
   children,
   ...restPorps
 }) {
-  return <TableColumn {...restPorps}>{children}</TableColumn>;
+  return <Div {...restPorps}>{children}</Div>;
+};
+
+AssignInstructor.List = function AssignInstructorList({
+  children,
+  ...restPorps
+}) {
+  return <List {...restPorps}>{children}</List>;
 };
 
 AssignInstructor.CourseId = function AssignInstructorCourseId({
@@ -47,6 +56,14 @@ AssignInstructor.CourseName = function AssignInstructorCourseName({
 }) {
   return <CourseName {...restPorps}>{children}</CourseName>;
 };
+
+AssignInstructor.Label = function AssignInstructorLabel({
+  children,
+  ...restPorps
+}) {
+  return <Label {...restPorps}>{children}</Label>;
+};
+
 
 AssignInstructor.LabelDiv = function AssignInstructorLabelDiv({
   children,
