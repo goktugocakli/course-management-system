@@ -1,10 +1,8 @@
 import styled from "styled-components/macro";
 
-import { Themes } from "../../../constants/globalStyle";
+import { Colors } from "../../../constants/globalStyle";
 
 export const Container = styled.div`
-    --bg-color = ${({ white }) => Themes[white].background};
-    --clr-color: ${({ white }) => Themes[white].color};
 
     display: flex;
     flex-direction: column;

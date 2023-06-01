@@ -1,14 +1,10 @@
 import styled from "styled-components/macro";
 
-import { Themes } from "../../../constants/globalStyle";
-
-import { ToastContainer } from "react-toastify";
+import { Colors } from "../../../constants/globalStyle";
 
 export const Container = styled.div`
-  --bg-color: ${({ white }) => Themes[white].background};
-  --c-color: ${({ white }) => Themes[white].color};
-  background: var(--bg-color);
-  color: var(--c-color);
+  background: white;
+  color: ${Colors.onWhite};
   display: flex;
   flex-direction: column;
 `;
@@ -21,8 +17,11 @@ export const Events = styled.div`
 
 `;
 
-export const EventTitle = styled.h1`
+export const EventTitle = styled.p`
   margin-left:10px;
+  font-weight:200;
+  font-size:26px;
+  font-family: Arial, Verdana, sans-serif;
 `;
 
 export const EventInner = styled.div`
@@ -38,31 +37,39 @@ export const EventItem = styled.div`
   flex-direction: row;
   width: 800px;
   height:50px;
-  padding:30px;
+  padding:40px;
   border-radius:10px;
   align-items: center;
-  background:gray;
+  background:${Colors.bg_lightgray};
+`;
+
+export const Column= styled.div`
+  display: flex;
+  flex-direction: column;
+  background:${Colors.bg_lightgray};
 `;
 
 export const EventLabel = styled.p`
-  font-size:18px;
+  font-size:17px;
   font-weight: bold;
+  font-family: Arial, Verdana, sans-serif;
 `;
 
 export const EventText = styled.p`
-  font-size:18px;
+  font-size:17px;
   margin-left:5px;
   margin-right:20px;
+  font-family: Arial, Verdana, sans-serif;
 `;
 
 export const ButtonRow = styled.div`
   display: flex;
   margin-left:auto;
   flex-direction: row;
-  background:gray;
+  background:${Colors.bg_lightgray};
 `;
 
-export const Button = styled.button`
+export const GrantButton = styled.button`
 
   margin-left:15px;
   border-radius:10px;
@@ -71,5 +78,29 @@ export const Button = styled.button`
   padding-top: 5px;
   padding-bottom: 5px;
   font-size:16px;
+  border-width:0px;
+  background: ${Colors.successcolor};
+  color:white;
 
+
+`;
+
+export const DenyButton = styled.button`
+
+  margin-left:15px;
+  border-radius:10px;
+  width: 150px;
+  height:40px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-size:16px;
+  border-width:0px;
+  background: #F15A59;
+  color:white;
+
+
+`;
+
+export const Icon = styled.i`
+    margin-left:auto;
 `;

@@ -50,41 +50,44 @@ export default function AssignInstructorContainer() {
   }, []);
 
   return (
-    <AssignInstructor.TableColumn>
+    <>
+      <AssignInstructor.Div>
+      <AssignInstructor.Label>Assign Instructor</AssignInstructor.Label>
       <AssignInstructor.LabelDiv>
         <AssignInstructor.CourseId>Course ID</AssignInstructor.CourseId>
         <AssignInstructor.CourseName>Course Name</AssignInstructor.CourseName>
-        <AssignInstructor.CourseName>
-          Course Instructor
-        </AssignInstructor.CourseName>
+        <AssignInstructor.CourseName>Course Instructor</AssignInstructor.CourseName>
       </AssignInstructor.LabelDiv>
-      <AssignInstructor.Line />
-      {cors.map((course) => (
-        <AssignInstructor.TableRow key={course.code}>
-          <AssignInstructor.CourseId>{course.code}</AssignInstructor.CourseId>
-          <AssignInstructor.CourseName>
-            {course.name}
-          </AssignInstructor.CourseName>
-          <AssignInstructor.Select
-            onChange={(evn) => {
-              let c = cors.at(course.id);
-              c.selected = evn.target.value;
-              let cc = [...cors];
-              cc[course.id] = c;
-              setCors(cc);
-            }}
-          >
-            {ins.map((instructor) => (
-              <AssignInstructor.Option
-                key={instructor.user_name}
-                value={instructor.user_name}
+      <AssignInstructor.List>
+          {cors.map((course) => (
+            <AssignInstructor.TableRow key={course.code}>
+              <AssignInstructor.CourseId>{course.code}</AssignInstructor.CourseId>
+              <AssignInstructor.CourseName>
+                {course.name}
+              </AssignInstructor.CourseName>
+              <AssignInstructor.Select
+                onChange={(evn) => {
+                  let c = cors.at(course.id);
+                  c.selected = evn.target.value;
+                  let cc = [...cors];
+                  cc[course.id] = c;
+                  setCors(cc);
+                }}
               >
-                {instructor.first_name + " " + instructor.surname}
-              </AssignInstructor.Option>
-            ))}
-          </AssignInstructor.Select>
-        </AssignInstructor.TableRow>
-      ))}
+                {ins.map((instructor) => (
+                  <AssignInstructor.Option
+                    key={instructor.user_name}
+                    value={instructor.user_name}
+                  >
+                    {instructor.first_name + " " + instructor.surname}
+                  </AssignInstructor.Option>
+                ))}
+              </AssignInstructor.Select>
+            </AssignInstructor.TableRow>
+          ))}
+      </AssignInstructor.List>
+      <AssignInstructor.Line />
+      
       <AssignInstructor.Button
         onClick={() => {
           let error = false;
@@ -112,6 +115,8 @@ export default function AssignInstructorContainer() {
       >
         Save Changes
       </AssignInstructor.Button>
-    </AssignInstructor.TableColumn>
+    </AssignInstructor.Div>
+    </>
+    
   );
 }

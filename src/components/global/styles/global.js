@@ -1,4 +1,5 @@
 import styled from "styled-components/macro";
+import {Colors} from "../../../constants/globalStyle";
 
 
 export const Row = styled.div`
@@ -40,7 +41,7 @@ export const Header = styled.div`
   flex-direction: row;
   align-items: center;
   height:100px;
-  background:gray;
+  background:${Colors.primarycolor};
 
 
 
@@ -52,16 +53,18 @@ export const Header = styled.div`
 `;
 
 export const HeaderBold = styled.p`
-  margin-left:20px;
-  font-size:24px;
+  margin-left:40px;
+  font-size:22px;
   color:#FFFFFF;
-  font-weight:bold;
+  font-weight:600;
+  font-family: Arial, Verdana, sans-serif;
 `;
 
 export const HeaderNormal = styled.p`
-  margin-right:20px;
+  margin-right:40px;
   color:#FFFFFF;
-  font-size:24px;
+  font-size:20px;
+  font-family: Arial, Verdana, sans-serif;
 `;
 
 

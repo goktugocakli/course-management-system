@@ -1,9 +1,13 @@
 import styled from "styled-components";
+import {Colors} from "../../../constants/globalStyle";
 
 export const AddButton = styled.button`
   border-radius: 10px;
   width: 260px;
   height: 45px;
+  color:${Colors.onDark};
+  background:${Colors.primarycolor};
+  border-width:0px;
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 18px;
@@ -21,11 +25,15 @@ export const StartButton = styled.button`
   border-radius: 10px;
   width: 260px;
   height: 45px;
+  color:${Colors.errorcolor};
+  border-color:${Colors.errorcolor};
+  border-width:1px;
+  background:white;
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 18px;
   position: absolute;
-  bottom: -25%;
+  bottom: -20%;
   left: 50%;
   transform: translate(-50%, -50%);
 

@@ -44,7 +44,7 @@ export default function SignUpContainer() {
   return (
     <Global.Column>
       <Global.Header>
-        <Global.HeaderBold>Example University</Global.HeaderBold>
+        <Global.HeaderBold>Hacettepe University</Global.HeaderBold>
         <Global.Space />
         <Global.HeaderNormal>Information System</Global.HeaderNormal>
       </Global.Header>

@@ -29,7 +29,7 @@ export const OutlineButton = styled.button`
   width: 150px;
   height: 45px;
   border-radius: 10px;
-  margin-left:30px;
+  margin-left:280px;
   font-size: 15px;
   border-width:1px;
   color: ${props => props.color || 'red'};
@@ -42,7 +42,7 @@ export const Button = styled.button`
   width: 270px;
   height: 45px;
   border-radius: 10px;
-  margin-left:125px;
+  margin-left:50px;
   margin-inline-end: 30px;
   font-size: 15px;
   color: white;
