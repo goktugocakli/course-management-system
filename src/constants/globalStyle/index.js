@@ -1,7 +1,8 @@
 export const Colors = {
     primarycolor: "rgba(72, 12, 168, 1)",
 
-    bg_gray: "rgba(243, 243, 243, 1)",
+    bg_lightgray:"rgba(244, 244, 244, 1)",
+    bg_gray: "rgba(223, 223, 223, 1)",
     bg_dark: "rgba(52,53,65,1)",
 
     successcolor: "rgba(87, 204, 153, 1)",

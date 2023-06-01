@@ -46,15 +46,15 @@ const renderEvents = (user, data, navigate) => {
                   <Home.EventLabel>Student Name:</Home.EventLabel>
                   <Home.EventText>{student.first_name}</Home.EventText>
                   <Home.ButtonRow>
-                    <Home.Button
+                    <Home.GrantButton
                       onClick={() => {
                         GrantReq(student.student_no);
                       }}
                     >
                       Grant
-                    </Home.Button>
+                    </Home.GrantButton>
 
-                    <Home.Button
+                    <Home.DenyButton
                       onClick={() => {
                         ShowToast("Access Denied ", {
                           success: false,
@@ -62,7 +62,7 @@ const renderEvents = (user, data, navigate) => {
                       }}
                     >
                       Deny
-                    </Home.Button>
+                    </Home.DenyButton>
                   </Home.ButtonRow>
                 </Home.EventItem>
               );

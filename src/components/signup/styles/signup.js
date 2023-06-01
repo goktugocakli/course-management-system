@@ -1,4 +1,5 @@
 import styled from "styled-components/macro";
+import {Colors} from "../../../constants/globalStyle";
 
 export const Button = styled.button`
   margin-top: 30px;
@@ -9,6 +10,8 @@ export const Button = styled.button`
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 18px;
+  background:${Colors.primarycolor};
+  color:${Colors.onDark};
 
   &:hover {
     outline: 2px solid green;
@@ -35,9 +38,10 @@ export const Input = styled.input`
 
 export const Div = styled.div`
   display: flex;
-  background-color: #f4f4f4;
+  background-color: ${Colors.bg_lightgray};
   padding: 100px;
   border-radius: 5px;
+  height: 550px;
 `;
 
 export const Text = styled.p`

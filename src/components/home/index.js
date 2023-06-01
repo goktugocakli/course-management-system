@@ -7,7 +7,8 @@ import {
   EventTitle,
   EventInner,
   EventItem,
-  Button,
+  GrantButton,
+  DenyButton,
   ButtonRow,
   EventLabel,
   EventText,
@@ -39,8 +40,12 @@ Home.EventItem = function HomeEventsItem({ children, ...restProps }) {
   return <EventItem {...restProps}>{children}</EventItem>;
 };
 
-Home.Button = function homeButton({ children, ...restPorps }) {
-  return <Button {...restPorps}>{children}</Button>;
+Home.GrantButton = function homeGrantButton({ children, ...restPorps }) {
+  return <GrantButton {...restPorps}>{children}</GrantButton>;
+};
+
+Home.DenyButton = function homeDenyButton({ children, ...restPorps }) {
+  return <DenyButton {...restPorps}>{children}</DenyButton>;
 };
 
 Home.ButtonRow = function homeButtonROw({ children, ...restPorps }) {

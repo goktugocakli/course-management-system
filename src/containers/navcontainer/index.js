@@ -14,25 +14,25 @@ const renderLinks = (user) => {
     return (
       <>
         <NavBar.Link>
-          <Link to={"/"} style={{ textDecoration: "none" }}>
+          <Link to={"/"} style={{ textDecoration: "none", color:"white"  }}>
             Home
           </Link>
         </NavBar.Link>
 
         <NavBar.Link>
-          <Link to={"/addsemester"} style={{ textDecoration: "none" }}>
+          <Link to={"/addsemester"} style={{ textDecoration: "none", color:"white"  }}>
             Semesters
           </Link>
         </NavBar.Link>
 
         <NavBar.Link>
-          <Link to={"/accounts"} style={{ textDecoration: "none" }}>
+          <Link to={"/accounts"} style={{ textDecoration: "none", color:"white"  }}>
             Accounts
           </Link>
         </NavBar.Link>
 
         <NavBar.Link>
-          <Link to={"/sendemail"} style={{ textDecoration: "none" }}>
+          <Link to={"/sendemail"} style={{ textDecoration: "none" , color:"white" }}>
             Send Email
           </Link>
         </NavBar.Link>
@@ -43,10 +43,10 @@ const renderLinks = (user) => {
     return (
       <>
         <NavBar.Link>
-          <Link to={"/"}>Home</Link>
+          <Link to={"/"} style={{ textDecoration: "none" , color:"white" }}>Home</Link>
         </NavBar.Link>
         <NavBar.Link>
-          <Link to={"/createEva"}>Create Evaluation Form</Link>
+          <Link to={"/createEva"} style={{ textDecoration: "none" , color:"white" }}>Create Evaluation Form</Link>
         </NavBar.Link>
       </>
     );
@@ -56,10 +56,10 @@ const renderLinks = (user) => {
     return (
       <>
         <NavBar.Link>
-          <Link to={"/"}>Home</Link>
+          <Link to={"/"} style={{ textDecoration: "none" , color:"white" }}>Home</Link>
         </NavBar.Link>
         <NavBar.Link>
-          <Link to={"/enrollCourse"}>Enroll Course</Link>
+          <Link to={"/enrollCourse"} style={{ textDecoration: "none" , color:"white" }}>Enroll Course</Link>
         </NavBar.Link>
       </>
     );
@@ -68,14 +68,14 @@ const renderLinks = (user) => {
     return (
       <>
         <NavBar.Link>
-          <Link to={"/"}>Home</Link>
+          <Link to={"/"} style={{ textDecoration: "none" , color:"white" }}>Home</Link>
         </NavBar.Link>
 
         <NavBar.Link>
-          <Link to={"/assignIns"}>Assing Instructor To Course</Link>
+          <Link to={"/assignIns"} style={{ textDecoration: "none" , color:"white" }}>Assing Instructor To Course</Link>
         </NavBar.Link>
         <NavBar.Link>
-          <Link to={"/createEva"}>Create Evaluation Form</Link>
+          <Link to={"/createEva"} style={{ textDecoration: "none" , color:"white" }}>Create Evaluation Form</Link>
         </NavBar.Link>
       </>
     );
@@ -162,9 +162,9 @@ export default function NavBarContainer() {
         <NavBar.Name>
           {userState?.userType === "admin"
             ? "System " + userState?.data.user_name
-            : userState?.data.first_name}
+            : userState?.data.first_name.charAt(0).toUpperCase() + userState?.data.first_name.slice(1)}
         </NavBar.Name>
-        <NavBar.Role>{userState?.userType}</NavBar.Role>
+        <NavBar.Role>{userState?.userType.charAt(0).toUpperCase() + userState?.userType.slice(1)}</NavBar.Role>
         {/*        <NavBar.Picture
           src={
             "https://www.citypng.com/public/uploads/preview/profile-user-round-white-icon-symbol-png-11639594348fn8rlcxrqo.png"

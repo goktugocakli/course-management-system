@@ -59,7 +59,7 @@ export const LinkContainer = styled.div.attrs((props) => ({
   transition: background 500ms;
 
   position: absolute;
-  width:140px;
+  width:160px;
   height:80vh;
   top: 5.5rem;
   left: 0;
@@ -200,11 +200,13 @@ export const Dark = ({ white = true }) => {
 export const Name = styled.p`
   margin:10px;
   font-size:20px;
+  font-family: Arial, Verdana, sans-serif;
 `;
 
 export const Role = styled.p`
   margin:10px;
   font-size:20px;
+  font-family: Arial, Verdana, sans-serif;
 `;
 
 export const Picture = styled.img`
