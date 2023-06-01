@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Colors} from "../../../constants/globalStyle";
 
 export const SaveButton = styled.button`
   border-radius: 10px;
@@ -7,14 +8,14 @@ export const SaveButton = styled.button`
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 18px;
+  background:${Colors.primarycolor};
+  color:${Colors.onDark};
+  border-width:0px;
   position: absolute;
   bottom: 15%;
   left: 55%;
   transform: translate(-50%, -50%);
 
-  &:hover {
-    outline: 2px solid green;
-  }
 `;
 
 export const CancelButton = styled.button`
@@ -24,14 +25,16 @@ export const CancelButton = styled.button`
   padding-top: 5px;
   padding-bottom: 5px;
   font-size: 18px;
+
+  border-color:${Colors.errorcolor};
+  color:${Colors.errorcolor};
+  border-width:1px;
+
   position: absolute;
   bottom: 5%;
   left: 55%;
   transform: translate(-50%, -50%);
 
-  &:hover {
-    outline: 2px solid green;
-  }
 `;
 
 export const Background = styled.div`
@@ -56,7 +59,7 @@ export const Div = styled.div`
   background-color: #f0f0f0;
   border-radius: 40px;
   width: calc(40%);
-  height: 100%;
+  height: 90%;
 `;
 
 export const InputRow = styled.div`

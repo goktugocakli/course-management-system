@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Colors} from "../../../constants/globalStyle";
 
 export const SaveButton = styled.button`
 
@@ -8,14 +9,15 @@ export const SaveButton = styled.button`
   padding-top: 5px;
   padding-bottom: 5px;
   font-size:18px;
+  background:${Colors.primarycolor};
+  color:${Colors.onDark};
+  border-width:0px;
+
   position: absolute;
     bottom:15%;
     left:55%;
     transform: translate(-50%, -50%);
   
-  &:hover {
-      outline: 2px solid green;
-  }
 
 `;
 
@@ -27,14 +29,15 @@ export const CancelButton = styled.button`
   padding-top: 5px;
   padding-bottom: 5px;
   font-size:18px;
+  border-color:${Colors.errorcolor};
+  color:${Colors.errorcolor};
+  border-width:1px;
+
   position: absolute;
     bottom:5%;
     left:55%;
     transform: translate(-50%, -50%);
   
-  &:hover {
-      outline: 2px solid green;
-  }
 
 `;
 
