@@ -1,4 +1,5 @@
 import styled from "styled-components/macro";
+import { Colors } from "../../../constants/globalStyle";
 
 export const Button = styled.button`
 
@@ -10,6 +11,8 @@ export const Button = styled.button`
   padding-top: 5px;
   padding-bottom: 5px;
   font-size:18px;
+  background:${Colors.primarycolor};
+  color:${Colors.onDark};
   
   &:hover {
       outline: 2px solid green;
@@ -43,6 +46,8 @@ export const InputLabel = styled.label`
 export const Input = styled.input`
   width: 250px;
   height:40px;
+  font-size:16px;
+  padding-left:10px;
   margin-left: auto; 
   margin-right: 0;
   margin-top:20px;
