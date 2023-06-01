@@ -3,6 +3,10 @@ package com.CodeOfDuty.CourseEvaluation.Service;
 import com.CodeOfDuty.CourseEvaluation.DAO.InstructorRepository;
 import com.CodeOfDuty.CourseEvaluation.model.Course;
 import com.CodeOfDuty.CourseEvaluation.model.Instructor;
+import com.CodeOfDuty.CourseEvaluation.model.Student;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +15,9 @@ import java.util.List;
 public class InstructorService {
     private final InstructorRepository instructorRepository;
     private final CourseService courseService;
+
+    @Autowired
+    private JavaMailSender mailSender;
 
     public InstructorService(InstructorRepository instructorRepository, CourseService courseService) {
         this.instructorRepository = instructorRepository;
@@ -22,6 +29,17 @@ public class InstructorService {
     }
 
     public Instructor createInstructor(Instructor instructor) {
+
+        String email = instructor.getE_mail();
+        String subject = "Your 3B User name and Password as an Instructor";
+        String userName = "Your 3B Username is: " + instructor.getUser_name();
+        String password = "Your 3B Password is: " + instructor.getPassword();
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        message.setSubject(subject);
+        message.setText(userName + "\n" + password);
+        mailSender.send(message);
+
         return instructorRepository.save(instructor);
     }
 

@@ -126,6 +126,8 @@ export const DropDownContainer = styled.div`
 
 export const UploadButton = styled.div`
   cursor: pointer;
+  outline: 1px solid red;
+  padding: 1rem;
 `;
 
 export const AddExistingQuestion = styled.div`
