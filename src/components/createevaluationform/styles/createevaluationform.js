@@ -1,11 +1,8 @@
 import styled from "styled-components/macro";
-import { Themes } from "../../../constants/globalStyle";
+import { Colors } from "../../../constants/globalStyle";
 
 export const Container = styled.div`
-  --bg-color: ${({ white }) => Themes[white].background};
-  --clr-color: ${({ white }) => Themes[white].color};
-  color: var(--clr-color);
-
+  color: ${Colors.onWhite};
   display: flex;
   flex-direction: column;
   margin-left: 2rem;
@@ -33,7 +30,7 @@ export const EvaluationItem = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: var(--clr-color);
+  color: ${Colors.onWhite};
   width: max-content;
   min-width: 1300px;
 `;
@@ -147,6 +144,6 @@ export const ExistingQContainer = styled.div`
   padding: 1rem;
   align-items: center;
   outline: 1px solid #d0d4e4;
-  background: var(--bg-color);
+  background: white;
   overflow-y: scroll;
 `;

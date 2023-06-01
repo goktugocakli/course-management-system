@@ -1,14 +1,10 @@
 import styled from "styled-components/macro";
 
-import { Themes } from "../../../constants/globalStyle";
-
-import { ToastContainer } from "react-toastify";
+import { Colors } from "../../../constants/globalStyle";
 
 export const Container = styled.div`
-  --bg-color: ${({ white }) => Themes[white].background};
-  --c-color: ${({ white }) => Themes[white].color};
-  background: var(--bg-color);
-  color: var(--c-color);
+  background: white;
+  color: ${Colors.onWhite};
   display: flex;
   flex-direction: column;
 `;
