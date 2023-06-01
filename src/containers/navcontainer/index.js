@@ -46,7 +46,7 @@ const renderLinks = (user) => {
           <Link to={"/"} style={{ textDecoration: "none" , color:"white" }}>Home</Link>
         </NavBar.Link>
         <NavBar.Link>
-          <Link to={"/createEva"} style={{ textDecoration: "none" , color:"white" }}>Create Evaluation Form</Link>
+          <Link to={"/createEva"} style={{ textDecoration: "none" , color:"white" }}>Create Form</Link>
         </NavBar.Link>
       </>
     );

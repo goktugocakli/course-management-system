@@ -74,9 +74,9 @@ const renderEvents = (user, data, navigate) => {
   } else if (user?.userType === "instructor") {
     return (
       <>
-        <Home.EventTitle>My Evaluation Forms</Home.EventTitle>
         <Home.Events>
           <Home.EventInner>
+          <Home.EventTitle>My Evaluation Forms</Home.EventTitle>
             {/* for loop through events as eventitem here  or map them*/}
             {data?.map((evaluation) => {
               return (
