@@ -62,6 +62,7 @@ user = {
 export const EditUser = (user, dispatch, options) => {
   if (user.userType === "student") {
     const data = { ...user };
+
     axios.post(BASE_URL + "/api/students/update", data).then(
       (response) => {
         options?.onSuccess?.(response, user, dispatch);
@@ -81,9 +82,9 @@ export const EditUser = (user, dispatch, options) => {
         options?.onError?.(err);
       }
     );
-  } else if (user.userType === "depManager") {
+  } else if (user.userType === "department manager") {
     const data = { ...user };
-    axios.post(BASE_URL + "/api/departments/update", data).then(
+    axios.post(BASE_URL + "/instructors/instructors/update", data).then(
       (response) => {
         options?.onSuccess?.(response);
       },
@@ -92,6 +93,56 @@ export const EditUser = (user, dispatch, options) => {
       }
     );
   }
+};
+
+export const DeleteUser = (user, options) => {
+  if (user.userType === "student") {
+    axios.delete(BASE_URL + `/api/students/delete/${user.student_no}`).then(
+      (response) => {
+        options?.onSuccess?.(response);
+      },
+      (err) => {
+        options?.onError?.(err);
+      }
+    );
+  } else if (user.userType === "instructor") {
+    const data = { ...user };
+
+    axios.delete(BASE_URL + `/instructors/delete/${user.user_name}`).then(
+      (response) => {
+        options?.onSuccess?.(response);
+      },
+      (err) => {
+        options?.onError?.(err);
+      }
+    );
+  } else if (user.userType === "department manager") {
+    const data = { ...user };
+    axios.post(BASE_URL + "/instructors/instructors/update", data).then(
+      (response) => {
+        options?.onSuccess?.(response);
+      },
+      (err) => {
+        options?.onError?.(err);
+      }
+    );
+  }
+};
+
+export const ChangeDepManager = (depName, userName, options) => {
+  axios
+    .post(
+      BASE_URL +
+        `/v1/departments/changeInstructor?dept_name=${depName}&username=${userName}`
+    )
+    .then(
+      (responsep) => {
+        options?.onSuccess?.(responsep);
+      },
+      (err) => {
+        options?.onError?.(err);
+      }
+    );
 };
 
 /*
@@ -190,6 +241,28 @@ export const AddUser = (userType, user, dep, options) => {
   }
 };
 
+export const GetSpecificUser = (userType, userId, options) => {
+  if (userType === "student") {
+    axios.get(BASE_URL + `/api/students/${userId}`).then(
+      (response) => {
+        options?.onSuccess?.(response);
+      },
+      (err) => {
+        options?.onError?.(err);
+      }
+    );
+  } else {
+    axios.get(BASE_URL + `/instructors/${userId}`).then(
+      (response) => {
+        options?.onSuccess?.(response);
+      },
+      (err) => {
+        options?.onError?.(err);
+      }
+    );
+  }
+};
+
 export const GetUser = (options) => {
   axios.get(BASE_URL + "/api/students").then(
     (response) => {
@@ -207,6 +280,17 @@ export const GetUser = (options) => {
         },
         (err) => {}
       );
+    },
+    (err) => {
+      options?.onError?.(err);
+    }
+  );
+};
+
+export const GetSpecificDepartment = (depName, options) => {
+  axios.get(BASE_URL + `/v1/departments/${depName}`).then(
+    (response) => {
+      options?.onSuccess?.(response);
     },
     (err) => {
       options?.onError?.(err);

@@ -30,6 +30,12 @@ const renderLinks = (user) => {
             Accounts
           </Link>
         </NavBar.Link>
+
+        <NavBar.Link>
+          <Link to={"/sendemail"} style={{ textDecoration: "none" }}>
+            Send Email
+          </Link>
+        </NavBar.Link>
       </>
     );
   }
@@ -140,14 +146,14 @@ export default function NavBarContainer() {
           Logout
         </NavBar.Link>
 
-        <NavBar.ChangeTheme
+        {/*<NavBar.ChangeTheme
           onClick={() => {
             //dispacth is for set the theme for redux state to change the theme of the app
             //local storage for suppling that theme option for future visits.
             dispatch(changeTheme(!whiteTheme));
             localStorage.setItem("Theme", !whiteTheme);
           }}
-        ></NavBar.ChangeTheme>
+        ></NavBar.ChangeTheme> */}
       </NavBar.NavLinkContainer>
 
       <NavBar.Logo>3B</NavBar.Logo>
