@@ -1,38 +1,49 @@
 import React, { useState } from "react";
 import { SendEmail } from "../../components";
+import { SendEmailToAllStudents, ShowToast } from "../../constants/api";
 export default function SendEmailContainer() {
+  const [recipientEmail, setRecipientEmail] = useState("");
+  const [mailContent, setMailContent] = useState("");
 
-    const [recipientEmail, setRecipientEmail] = useState('');
-    const [mailContent, setMailContent] = useState('');
+  const handleRecipientEmailChange = (event) => {
+    setRecipientEmail(event.target.value);
+  };
 
+  const handleMailContentChange = (event) => {
+    setMailContent(event.target.value);
+  };
 
-    const handleRecipientEmailChange = (event) => {
-        setRecipientEmail(event.target.value);
-      };
-    
-    const handleMailContentChange = (event) => {
-        setMailContent(event.target.value);
-      };
-    
-    const handleSendEmail = () => {
-        console.log('Sending email...');
-        console.log('Recipient Email:', recipientEmail);
-        console.log('Mail Content:', mailContent);
+  const handleSendEmail = () => {
+    const options = {
+      onSuccess: (response) => {
+        ShowToast("Emails sent", { success: true });
+      },
+      onError: (err) => {
+        ShowToast("There is an error", { success: false });
+      },
+    };
 
-        // Clear the input fields after sending the email
-        setRecipientEmail('');
-        setMailContent('');
-      };
-    return(
-        <SendEmail>
-            <SendEmail.Text>Recipient E-Mail :</SendEmail.Text>
-            <SendEmail.Input value={recipientEmail} onChange={handleRecipientEmailChange} />
+    SendEmailToAllStudents(recipientEmail, mailContent, options);
 
-            <SendEmail.Text>Write your mail here :</SendEmail.Text>
-            <SendEmail.Input2 value={mailContent} onChange={handleMailContentChange} />
+    // Clear the input fields after sending the email
+    setRecipientEmail("");
+    setMailContent("");
+  };
+  return (
+    <SendEmail>
+      <SendEmail.Text>Title :</SendEmail.Text>
+      <SendEmail.Input
+        value={recipientEmail}
+        onChange={handleRecipientEmailChange}
+      />
 
-            <SendEmail.Button onClick={handleSendEmail}>Send</SendEmail.Button>
-        </SendEmail>
-    );
+      <SendEmail.Text>Write your mail here :</SendEmail.Text>
+      <SendEmail.Input2
+        value={mailContent}
+        onChange={handleMailContentChange}
+      />
 
+      <SendEmail.Button onClick={handleSendEmail}>Send</SendEmail.Button>
+    </SendEmail>
+  );
 }

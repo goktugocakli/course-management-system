@@ -86,7 +86,7 @@ export const EditUser = (user, dispatch, options) => {
     const data = { ...user };
     axios.post(BASE_URL + "/instructors/instructors/update", data).then(
       (response) => {
-        options?.onSuccess?.(response);
+        options?.onSuccess?.(response, user, dispatch);
       },
       (err) => {
         options?.onError?.(err);
@@ -138,6 +138,19 @@ export const ChangeDepManager = (depName, userName, options) => {
     .then(
       (responsep) => {
         options?.onSuccess?.(responsep);
+      },
+      (err) => {
+        options?.onError?.(err);
+      }
+    );
+};
+
+export const SendEmailToAllStudents = (title, content, options) => {
+  axios
+    .post(BASE_URL + `/api/admins/sendEmail?title=${title}&content=${content}`)
+    .then(
+      (response) => {
+        options?.onSuccess?.(response);
       },
       (err) => {
         options?.onError?.(err);
@@ -419,6 +432,15 @@ export const useFetchCourses = (options) => {
   };
 };
 
+export const GetAllCourses = (options) => {
+  axios.get(BASE_URL + "/v1/course").then(
+    (response) => {
+      options?.onSuccess?.(response);
+    },
+    (err) => options?.onError?.(err)
+  );
+};
+
 export const FetchQuestionAddedByInstructor = (
   instructor_user_name,
   options
@@ -471,11 +493,11 @@ export const FetchAssignIntructorToCourse = (
   course,
   options
 ) => {
-  var res = axios
+  axios
     .post(
       //add /api
       BASE_URL +
-        `/instructors/teach?user_name=${instructor_user_name}&course_id=${course.id}&semester=${course.semester}&year=${course.year}`
+        `/instructors/teach?user_name=${instructor_user_name}&course_id=${course.code}&semester=${course.semester}&year=${course.year}`
     )
     .then(
       (response) => {
@@ -485,8 +507,6 @@ export const FetchAssignIntructorToCourse = (
         options?.onError?.(err);
       }
     );
-
-  return res;
 };
 
 /*
@@ -704,6 +724,17 @@ export const FetchonGoingEvaluations = (options) => {
 
 export const FetchonGoingEvaluationsWithStudentNo = (student_no, options) => {
   axios.get(BASE_URL + `/v1/survey/findAllByStudent/${student_no}`).then(
+    (response) => {
+      options?.onSuccess?.(response);
+    },
+    (err) => {
+      options?.onError?.(err);
+    }
+  );
+};
+
+export const GetAllInstructors = (options) => {
+  axios.get(BASE_URL + "/instructors").then(
     (response) => {
       options?.onSuccess?.(response);
     },

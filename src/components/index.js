@@ -15,3 +15,5 @@ export { default as AddCourse } from "./addCourse";
 export { default as ForgetPassword } from "./forgetPassword";
 export { default as AddAccount } from "./addAccount";
 export { default as ManipulateAccount } from "./manipulateAccount";
+export { default as SendEmail } from "./sendEmail";
+export { default as AssignInstructor } from "./assignInstructor";
