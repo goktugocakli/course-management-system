@@ -1,9 +1,9 @@
 import React from "react";
 
-import { Text, Input, Button, Input2 } from "./styles/sendEmail";
+import { Text, Input, Button, Input2, Div } from "./styles/sendEmail";
 
 export default function SendEmail({ children, ...restPorps }) {
-  return <div {...restPorps}>{children}</div>;
+  return <Div {...restPorps}>{children}</Div>;
 }
 
 SendEmail.Text = function sendEmailText({ children, ...restPorps }) {
