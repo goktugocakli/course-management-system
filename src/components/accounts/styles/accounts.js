@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Colors} from "../../../constants/globalStyle";
 
 export const Button = styled.button`
 
@@ -8,6 +9,9 @@ export const Button = styled.button`
   padding-top: 5px;
   padding-bottom: 5px;
   font-size:18px;
+  color:${Colors.onDark};
+  background:${Colors.primarycolor};
+  border-width:0px;
   position: absolute;
     bottom:3%;
     left:50%;

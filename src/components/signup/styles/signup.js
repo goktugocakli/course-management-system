@@ -12,6 +12,7 @@ export const Button = styled.button`
   font-size: 18px;
   background:${Colors.primarycolor};
   color:${Colors.onDark};
+  border-width:0px;
 
   &:hover {
     outline: 2px solid green;
