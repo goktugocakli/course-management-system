@@ -10,3 +10,5 @@ export { default as ForgetPasswordPage } from "./forgetpasswordpage";
 export { default as EditPage } from "./editpage";
 export { default as AsnwerEvaluation } from "./answerevaluationpage";
 export { default as ManiplateAccountPage } from "./maniplateaccountpage";
+export { default as SendEmail } from "./sendemail";
+export { default as AssignInstructorToCourse } from "./assingisntructortocourse";

@@ -1,6 +1,7 @@
 package com.CodeOfDuty.CourseEvaluation.Controller;
 
 import com.CodeOfDuty.CourseEvaluation.Service.AdminService;
+import com.CodeOfDuty.CourseEvaluation.Service.StudentService;
 import com.CodeOfDuty.CourseEvaluation.model.Admin;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +12,11 @@ import java.util.List;
 public class AdminController {
 
     private final AdminService adminService;
+    private final StudentService studentService;
 
-    public AdminController(AdminService adminService) {
+    public AdminController(AdminService adminService, StudentService studentService) {
         this.adminService = adminService;
+        this.studentService = studentService;
     }
 
     @GetMapping()
@@ -27,7 +30,10 @@ public class AdminController {
         adminService.add(admin);
     }
 
-
+    @PostMapping("/sendEmail")
+    public void sendMail(@RequestParam String title, @RequestParam String content){
+        adminService.sendEmail(studentService.findAll(),title,content);
+    }
 
     @PostMapping("/update")
     public void update(@RequestBody Admin admin){

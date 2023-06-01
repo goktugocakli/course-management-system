@@ -12,6 +12,8 @@ import {
   EditPage,
   AsnwerEvaluation,
   ManiplateAccountPage,
+  SendEmail,
+  AssignInstructorToCourse,
 } from "../../pages";
 
 export const MainRouter = createBrowserRouter([
@@ -81,6 +83,18 @@ export const MainRouter = createBrowserRouter([
   {
     path: "/maniplate/:userType/:userId",
     element: <ManiplateAccountPage />,
+    errorElement: <h1>404</h1>,
+  },
+
+  {
+    path: "/sendemail",
+    element: <SendEmail />,
+    errorElement: <h1>404</h1>,
+  },
+
+  {
+    path: "/assignIns",
+    element: <AssignInstructorToCourse />,
     errorElement: <h1>404</h1>,
   },
 ]);
