@@ -11,41 +11,13 @@ export const Container = styled.div`
     align-items: center;
     width: 100vw;
     height: 80vh;
-    background: #146C94;
 
 `;
-
-export const SearchContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 40%;
-
-  justify-content: space-around;
-  position: relative;
-`;
-
-export const SearchInput = styled.input`
-  width: 100%;
-  height: 120%;
-`;
-
-export const SearchButton = styled.div`
-  position: absolute;
-  right: 1rem;
-  cursor: pointer;
-
-  &:hover {
-    background: red;
-  }
-`; //this is going to be a button
 
 export const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 40%;
-
 `;
 
 export const ListItem = styled.div`
@@ -53,9 +25,13 @@ export const ListItem = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
-  border-radius: 1rem;
-  background: #F6F1F1;
+  padding: 10px;
+  border-radius: 10px;
+  background: ${Colors.bg_lightgray};
+  height:100px;
+  width:700px;
+  margin-left:auto;
+  margin-right:auto;
 `;
 
 export const ItemInfo = styled.div`
@@ -66,21 +42,21 @@ export const ItemInfo = styled.div`
 
 export const Name = styled.p`
   font-size: 1.25rem;
+  margin-left:40px;
+  font-family: Arial, Verdana, sans-serif;
 `;
 
 export const Instructors = styled.p`
-  font-size: 0.75rem;
+  font-size: 1.25rem;
 `;
 
-export const EnrollButton = styled.div`
-  cursor: pointer;
-  padding: 1rem;
-  border-radius: 1rem;
+export const EnrollButton = styled.button`
+  border-radius: 10px;
+  width:120px;
+  height:40px;
+  border-width:0px;
+  margin-right:20px;
 
-  background-color: #AD7BE9;
+  background-color: ${Colors.successcolor};
   color: white;
-
-  &:hover {
-    background: green;
-  }
 `;

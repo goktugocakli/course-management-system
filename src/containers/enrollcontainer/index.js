@@ -41,16 +41,8 @@ const renderCourses = (courses, student) => {
           <EnrollCourse.ListItem key={course.code}>
             <EnrollCourse.ItemInfo>
               <EnrollCourse.Name>
-                {course.name + " " + course.code}
+                {course.name + " - " + course.code}
               </EnrollCourse.Name>
-
-              {course.instructors.map((ins) => {
-                return (
-                  <EnrollCourse.Instructors key={ins.id}>
-                    {ins.user_name}
-                  </EnrollCourse.Instructors>
-                );
-              })}
             </EnrollCourse.ItemInfo>
 
             <EnrollCourse.EnrollButton

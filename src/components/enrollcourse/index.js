@@ -3,9 +3,6 @@ import { ThemeState } from "../../features/theme";
 
 import {
   Container,
-  SearchContainer,
-  SearchInput,
-  SearchButton,
   ListContainer,
   ListItem,
   ItemInfo,
@@ -22,29 +19,6 @@ export default function EnrollCourse({ children, ...restProps }) {
     </Container>
   );
 }
-
-EnrollCourse.SearchContainer = function EnrollCourseSearchContainer({
-  children,
-  ...restProps
-}) {
-  return <SearchContainer {...restProps}>{children}</SearchContainer>;
-};
-
-EnrollCourse.SearchInput = function EnrollCourseSearchInput({ ...restProps }) {
-  return <SearchInput {...restProps} />;
-};
-
-EnrollCourse.SearchButton = function EnrollCourseSearchButton({
-  onClick,
-  children,
-  ...restProps
-}) {
-  return (
-    <SearchButton onClick={onClick} {...restProps}>
-      {children}
-    </SearchButton>
-  );
-};
 
 EnrollCourse.ListContainer = function EnrollCourseListContainer({
   children,
