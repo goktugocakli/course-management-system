@@ -27,15 +27,21 @@ export default function SeeEvaResContainer({ surveyId }) {
   return (
     <SeeEvaRes>
       <SeeEvaRes.InputLabel>{survey?.course.name}</SeeEvaRes.InputLabel>
-      <br></br>
-      <SeeEvaRes.Text>Start Date : {survey?.submitDate}</SeeEvaRes.Text>
-      <SeeEvaRes.Text>End Date : {survey?.dueDate}</SeeEvaRes.Text>
-      <SeeEvaRes.Text>Answered : {answered} %</SeeEvaRes.Text>
-      <br></br>
-      <br></br>
-      <br></br>
-      <SeeEvaRes.Button>Download</SeeEvaRes.Button>
-      {/**<SeeEvaRes.Button>Re-Evaluate</SeeEvaRes.Button> */}
+      <SeeEvaRes.Row>
+        <SeeEvaRes.Label>Start Date:</SeeEvaRes.Label>
+        <SeeEvaRes.Text>{survey?.submitDate}</SeeEvaRes.Text>
+      </SeeEvaRes.Row>
+
+      <SeeEvaRes.Row>
+        <SeeEvaRes.Label>End Date:</SeeEvaRes.Label>
+        <SeeEvaRes.Text>{survey?.dueDate}</SeeEvaRes.Text>
+      </SeeEvaRes.Row>
+      
+      <SeeEvaRes.Row>
+        <SeeEvaRes.Label>Answered :</SeeEvaRes.Label>
+        <SeeEvaRes.Text>{answered} %</SeeEvaRes.Text>
+      </SeeEvaRes.Row>
+      
     </SeeEvaRes>
   );
 }
