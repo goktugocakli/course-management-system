@@ -497,7 +497,7 @@ userState = {
       <CreateEvaluationForm.FloatingContainer>
         <CreateEvaluationForm.DropDownCourse
           onClick={() => {
-            setDropDown({ ...dropDown, expanded: true });
+            setDropDown({ ...dropDown, expanded: !dropDown.expanded });
             setExistingExpanded(false);
           }}
         >

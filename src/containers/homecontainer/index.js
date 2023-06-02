@@ -71,12 +71,15 @@ const renderEvents = (user, data, navigate) => {
         </Home.Events>
       </>
     );
-  } else if (user?.userType === "instructor") {
+  } else if (
+    user?.userType === "instructor" ||
+    user?.userType === "department manager"
+  ) {
     return (
       <>
         <Home.Events>
           <Home.EventInner>
-          <Home.EventTitle>My Evaluation Forms</Home.EventTitle>
+            <Home.EventTitle>My Evaluation Forms</Home.EventTitle>
             {/* for loop through events as eventitem here  or map them*/}
             {data?.map((evaluation) => {
               return (
@@ -119,7 +122,7 @@ const renderEvents = (user, data, navigate) => {
       <>
         <Home.Events>
           <Home.EventInner>
-          <Home.EventTitle>Last days of...</Home.EventTitle>
+            <Home.EventTitle>Last days of...</Home.EventTitle>
             {/* for loop through events as eventitem here  or map them*/}
             {data?.map((evalu) => {
               const today = new Date();
@@ -127,7 +130,7 @@ const renderEvents = (user, data, navigate) => {
 
               if (today < endDate) {
                 return (
-                  <Home.EventItem> 
+                  <Home.EventItem>
                     <Home.Column>
                       <Home.EventLabel>Name:</Home.EventLabel>
                       <Home.EventLabel>Description:</Home.EventLabel>
@@ -142,20 +145,18 @@ const renderEvents = (user, data, navigate) => {
                       <Home.EventLabel>Due Date:</Home.EventLabel>
                       <Home.EventLabel>Evaluation ID:</Home.EventLabel>
                     </Home.Column>
-                    
-                    
+
                     <Home.Column>
                       <Home.EventText>{evalu.dueDate}</Home.EventText>
                       <Home.EventText>{evalu.id}</Home.EventText>
                     </Home.Column>
 
-                    <Home.Icon 
+                    <Home.Icon
                       key={evalu.id}
                       onClick={() => {
                         navigate?.(`/answerEval/${evalu.id}`);
-                    }}/>
-                    
-                    
+                      }}
+                    />
                   </Home.EventItem>
                 );
               }
@@ -190,6 +191,7 @@ export default function HomeContainer({ user }) {
       user?.userType === "instructor" ||
       user?.userType === "department manager"
     ) {
+      console.log(user);
       setData(user.data.surveys);
     }
   }, []);

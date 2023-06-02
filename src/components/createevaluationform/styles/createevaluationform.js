@@ -108,11 +108,15 @@ export const FloatingContainer = styled.div`
 export const DropDownCourse = styled.div`
   position: relative;
   cursor: pointer;
+  color: ${Colors.errorcolor};
+  outline: 1px solid ${Colors.errorcolor};
+  border-radius: 1rem;
+  padding: 0.75rem;
 `;
 
 export const DropDownContainer = styled.div`
   position: absolute;
-  bottom: 3rem;
+  bottom: 5rem;
   left: 0;
   width: 200px;
   gap: 1rem;
@@ -126,18 +130,25 @@ export const DropDownContainer = styled.div`
 
 export const UploadButton = styled.div`
   cursor: pointer;
-  outline: 1px solid red;
-  padding: 1rem;
+  color: ${Colors.errorcolor};
+  outline: 1px solid ${Colors.errorcolor};
+  border-radius: 1rem;
+  padding: 0.75rem;
 `;
 
 export const AddExistingQuestion = styled.div`
   position: relative;
   cursor: pointer;
+  color: ${Colors.errorcolor};
+  outline: 1px solid ${Colors.errorcolor};
+  border-radius: 1rem;
+  padding: 0.75rem;
 `;
 
 export const ExistingQContainer = styled.div`
+  color:black;
   position: absolute;
-  bottom: 3rem;
+  bottom: 5rem;
   right: 0;
   width: 400px;
   max-height: 500px;

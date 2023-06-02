@@ -95,17 +95,22 @@ export default function AccountsContainer() {
     );
   } else {
     return (
-      <Accounts.Div>
-        <Accounts.Label>Accounts</Accounts.Label>
-        <Accounts.Icon />
-        <Accounts.AlertText>
-          You haven't added any account yet
-        </Accounts.AlertText>
+      <>
+        <Accounts.Div>
+          <Accounts.Label>Accounts</Accounts.Label>
+          <Accounts.Icon />
+          <Accounts.AlertText>
+            You haven't added any account yet
+          </Accounts.AlertText>
 
-        <Accounts.Button onClick={openAddAccountDiv}>
-          Add new account
-        </Accounts.Button>
-      </Accounts.Div>
+          <Accounts.Button onClick={openAddAccountDiv}>
+            Add new account
+          </Accounts.Button>
+        </Accounts.Div>
+        {addAccountDiv ? (
+          <AddAccountContainer setIsVisible={setAddAccountDiv} />
+        ) : null}
+      </>
     );
   }
 }
