@@ -10,6 +10,7 @@ import {
   GetSurveyWithId,
   ShowToast,
 } from "../../constants/api";
+import Colors from "../../constants/globalStyle";
 
 const AddAutomaticQuestion = function (questionAndAnswerJson, questions) {
   if (questions.columns.length >= questionAndAnswerJson.answers.length) {
@@ -129,13 +130,13 @@ const AddAnswer = function (questionId, answerId, questions, setQuestions) {
     <CreateEvaluationForm.EvaluationAnswer
       background={
         questions.items.at(questionId).column.at(answerId).selected
-          ? "green"
+          ? Colors.successcolor
           : "var(--bg-color)"
       }
       style={{
         width: questions.columns[answerId].width + "ch",
         background: questions.items.at(questionId).column.at(answerId).selected
-          ? "green"
+          ? Colors.successcolor
           : "var(--bg-color)",
       }}
       value={questions.items.at(questionId).column.at(answerId).title}
