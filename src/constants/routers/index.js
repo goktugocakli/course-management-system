@@ -16,6 +16,7 @@ import {
   AssignInstructorToCourse,
 } from "../../pages";
 
+
 export const MainRouter = createBrowserRouter([
   {
     path: "/",
